@@ -27,6 +27,7 @@ Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'mbbill/undotree'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 colorscheme gruvbox
@@ -38,8 +39,9 @@ endif
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader=" "
-let g:netrw_browse_split = 2
+let g:netrw_browse_split = 4 " Open in previous window
 let g:netrw_banner = 0
+let g:netrw_liststyle = 3 " hierarchical style
 let g:netrw_winsize = 25
 
 " ag is fast enought that CtrlP doesn't need to cache
