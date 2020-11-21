@@ -30,9 +30,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdcommenter'
+" Auto pairs for '[', '{' and '('
+Plug 'jiangmiao/auto-pairs'
 " Debugging
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 let g:gruvbox_invert_selection='0'
@@ -77,3 +81,7 @@ nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<CR>
 " FZF
 nnoremap <C-p> :Files<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+"let g:fzf_layout = { 'down': '40%' }
+
+" GIT
+nnoremap <leader>gs :G<CR>
