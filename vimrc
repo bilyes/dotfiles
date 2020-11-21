@@ -5,7 +5,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set nu
+set nu rnu
 set nowrap
 set smartcase
 set noswapfile
@@ -24,8 +24,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
-Plug 'git@github.com:kien/ctrlp.vim.git'
-Plug 'git@github.com:Valloric/YouCompleteMe.git'
+"Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdcommenter'
 call plug#end()
@@ -48,6 +50,8 @@ let g:netrw_winsize = 25
 let g:ctrlp_use_caching = 0
 
 :imap jj <Esc>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Windows
 nnoremap <leader>h :wincmd h<CR>
@@ -62,4 +66,10 @@ nnoremap <leader>ps :Rg<SPACE>
 
 " YCM
 nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
+"nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
+nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<CR>
+
+" FZF
+nnoremap <C-p> :Files<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
