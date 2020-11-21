@@ -30,6 +30,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'mbbill/undotree'
 Plug 'preservim/nerdcommenter'
+" Debugging
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
 call plug#end()
 
 colorscheme gruvbox
