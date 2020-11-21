@@ -35,6 +35,7 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 call plug#end()
 
+let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
 set background=dark
 
