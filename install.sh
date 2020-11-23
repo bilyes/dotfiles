@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~ && ln -s configs/vim/.vim . \
+cd ~ && ln -s ~/$CONFIG_FOLDER/vim/.vim . \
     && vim +PlugInstall +qall \
-    && .vim/plugged/YouCompleteMe/install.sh \
-    && ln -s configs/tmux.conf .tmux.conf
+    && .vim/plugged/YouCompleteMe/install.py \
+    && ln -s ~/$CONFIG_FOLDER/tmux.conf .tmux.conf
