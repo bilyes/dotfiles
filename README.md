@@ -1,5 +1,5 @@
 ## Requirements
-Make sure `cmake` is installed.
+Make sure `cmake` and `oh-my-zsh` are installed.
 
 ## Installation
 
