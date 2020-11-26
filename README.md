@@ -1,5 +1,7 @@
 ## Requirements
-Make sure `cmake` and `oh-my-zsh` are installed.
+- `cmake`
+- `oh-my-zsh`
+- `pip`
 
 ## Installation
 
