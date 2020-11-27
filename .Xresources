@@ -1,0 +1,16 @@
+! screen-independent resources
+Xft.dpi:	192
+Xft.antialias:	1
+Xft.hinting:	1
+Xft.hintstyle:	hintslight
+Xft.rgba:	none
+Xcursor.size:	48
+Xcursor.theme:	Adwaita
+
+! screen 0 resources
+#if SCREEN_NUM == 0
+#endif
+
+! screen 1 resources
+#if SCREEN_NUM == 1
+#endif
