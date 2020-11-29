@@ -14,10 +14,12 @@ ln -s ~/.config/dotfiles/oh-my-zsh/autosuggest.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/cu
 sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' .zshrc &
 
 # Alacritty
-ln -s ~/.config/dotfiles/alacritty .config/ &
+ln -s ~/.config/dotfiles/alacritty ~/.config/ &
 
 # Powerline
 (pip install powerline-status && pip install powerline-mem-segment) &
+ls -s ~/.config/dotfiles/powerline ~/.config/
+
 
 wait
 echo "Installation done"
