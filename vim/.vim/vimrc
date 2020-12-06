@@ -18,7 +18,8 @@ set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
@@ -39,8 +40,9 @@ Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-let g:gruvbox_invert_selection='0'
-:silent! colorscheme gruvbox
+"let g:gruvbox_invert_selection='0'
+":silent! colorscheme gruvbox
+colorscheme nord
 set background=dark
 
 if executable('rg')
