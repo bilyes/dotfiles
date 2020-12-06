@@ -17,7 +17,6 @@ sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' .zshrc &
 ln -s ~/.config/dotfiles/alacritty ~/.config/ &
 
 # Powerline
-(pip install powerline-status && pip install powerline-mem-segment) &
 ln -s ~/.config/dotfiles/powerline ~/.config/ &
 echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.zshrc
 
