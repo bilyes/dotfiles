@@ -42,7 +42,7 @@ call plug#end()
 
 "let g:gruvbox_invert_selection='0'
 ":silent! colorscheme gruvbox
-colorscheme nord
+:silent! colorscheme nord
 set background=dark
 
 if executable('rg')
