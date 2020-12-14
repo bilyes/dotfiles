@@ -37,7 +37,7 @@ configuration {
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
     combi-modi: "window,drun,run";
-/*	matching: "normal";*/
+    matching: "fuzzy";
 /*	tokenize: true;*/
 /*	m: "-5";*/
 /*	line-margin: 2;*/
@@ -152,4 +152,4 @@ configuration {
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
 
-@import "./themes/material.rasi"
+@theme "themes/material.rasi"
