@@ -21,6 +21,7 @@ sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' .zshrc &
 link-folder alacritty &
 link-folder tmux &
 link-folder powerline &
+link-folder rofi &
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.zshrc
 
