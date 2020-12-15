@@ -13,7 +13,7 @@ cd ~
 ln -s ~/.config/dotfiles/.xprofile . &
 
 # Vim
-(link-folder vim && vim +PlugInstall +qall && .vim/plugged/YouCompleteMe/install.py) &
+(link-folder vim && vim +PlugInstall +qall && $XDG_DATA_HOME/vim/plugged/YouCompleteMe/install.py) &
 
 # Oh-My-Zsh Auto suggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &
