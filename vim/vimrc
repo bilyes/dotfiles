@@ -113,3 +113,8 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 nnoremap <leader>gs :G<CR>
 
 nnoremap <leader>du :sav %:p:h/
+
+
+" Copy to system register (clipboard)
+" + is the system register
+"nnoremap <leader>y "+y<CR>
