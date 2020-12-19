@@ -12,6 +12,8 @@ cd ~
 
 ln -s ~/.config/dotfiles/.xprofile . &
 
+source ~/.config/dotfiles/.xprofile
+
 # Vim
 (link-folder vim && vim +PlugInstall +qall && $XDG_DATA_HOME/vim/plugged/YouCompleteMe/install.py) &
 
