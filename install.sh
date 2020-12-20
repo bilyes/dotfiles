@@ -22,6 +22,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 ln -s ~/.config/dotfiles/oh-my-zsh/autosuggest.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom} &
 sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' .zshrc &
 
+ln -s ~/.config/dotfiles/oh-my-zsh/0-vi-mode.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom} &
+
 link-folder alacritty &
 link-folder tmux &
 link-folder powerline &
