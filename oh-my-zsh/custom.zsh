@@ -1,8 +1,12 @@
 # vi key bindings
 bindkey -v
 
+# remap Ctrl to Tab
+bindkey '^I[' vi-cmd-mode
+bindkey '^Iu' vi-kill-line
+
 # autosuggest
-bindkey '^ ' autosuggest-accept
+bindkey '^I ' autosuggest-accept
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#536878"
 
 # fzf
