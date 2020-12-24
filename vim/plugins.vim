@@ -1,6 +1,8 @@
 call plug#begin($XDG_DATA_HOME.'/vim/plugged')
+" Themes
 "Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
+
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'

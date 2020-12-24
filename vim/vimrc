@@ -1,73 +1,23 @@
-" XDG support
-
-if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME."/.cache"       | endif
-if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config"      | endif
-if empty($XDG_DATA_HOME)   | let $XDG_DATA_HOME   = $HOME."/.local/share" | endif
-
-set runtimepath^=$XDG_CONFIG_HOME/vim
-set runtimepath+=$XDG_CONFIG_HOME/vim/after
-set runtimepath+=$XDG_DATA_HOME/vim
-
-set packpath^=$XDG_DATA_HOME/vim
-call mkdir($XDG_DATA_HOME."/vim/spell", 'p', 0700)
-
-set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
-set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
-set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
-set viewdir=$XDG_CACHE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
-
-if !has('nvim') " Neovim has its own special location
-  set viminfofile=$XDG_CACHE_HOME/vim/viminfo
-endif
-
-" End XDG support
-
-
-syntax on
-
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-set nu rnu
-set nowrap
-set smartcase
-"set noswapfile
-"set nobackup
-set undofile
-set incsearch
-
-set colorcolumn=100
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-call plug#begin($XDG_DATA_HOME.'/vim/plugged')
-"Plug 'morhetz/gruvbox'
-Plug 'arcticicestudio/nord-vim'
-Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-fugitive'
-Plug 'leafgarland/typescript-vim'
-Plug 'vim-utils/vim-man'
-Plug 'lyuts/vim-rtags'
-"Plug 'kien/ctrlp.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'mbbill/undotree'
-Plug 'preservim/nerdcommenter'
-" Auto pairs for '[', '{' and '('
-Plug 'jiangmiao/auto-pairs'
-" Debugging
-Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
-Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-call plug#end()
+so $XDG_CONFIG_HOME/vim/xdg-support.vim
+so $XDG_CONFIG_HOME/vim/basic.vim
+so $XDG_CONFIG_HOME/vim/plugins.vim
 
 "let g:gruvbox_invert_selection='0'
 ":silent! colorscheme gruvbox
+
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
 :silent! colorscheme nord
-set background=dark
+
+"set background=dark
+
+" Needed for Nord theme to maintain solid background while
+" the terminal emulator has background transparency
+if (has("termguicolors"))
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -83,38 +33,4 @@ let g:netrw_winsize = 25
 " ag is fast enought that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
 
-:imap jj <Esc>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" Windows
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<CR> :Ex <bar> :vertical resize 30 <CR>
-
-" Search
-nnoremap <leader>ps :Rg<SPACE>
-
-" YCM
-nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR>
-"nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
-nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
-nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<CR>
-
-" FZF
-nnoremap <C-p> :Files<CR>
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-"let g:fzf_layout = { 'down': '40%' }
-
-" GIT
-nnoremap <leader>gs :G<CR>
-
-nnoremap <leader>du :sav %:p:h/
-
-
-" Copy to system register (clipboard)
-" + is the system register
-"nnoremap <leader>y "+y<CR>
+so $XDG_CONFIG_HOME/vim/mappings.vim

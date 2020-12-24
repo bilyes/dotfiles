@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+    echo "ERROR: Theme missing. Usage: apply-theme THEME"
+    exit 1;
+fi
+
+config=config
+
+# Delete all lines starting from [colors] to the end of file
+sed -i '/\[colors\]/Q' $config
+
+cat themes/$1 >> $config
+

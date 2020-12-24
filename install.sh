@@ -23,9 +23,10 @@ ln -s ~/.config/dotfiles/oh-my-zsh/custom.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 ln -s ~/.config/dotfiles/oh-my-zsh/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom} &
 
 link-folder alacritty &
-link-folder tmux &
 link-folder powerline &
 link-folder rofi &
+link-folder termite &
+link-folder tmux &
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.zshrc
 
