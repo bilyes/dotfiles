@@ -21,4 +21,5 @@ Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 call plug#end()
