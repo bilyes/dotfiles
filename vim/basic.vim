@@ -27,3 +27,8 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 "Set text width for text and markdown files
 au BufEnter *.txt,*.md setl tw=80
+
+
+"YCM
+let g:ycm_autoclose_preview_window_after_completion = 1
+   

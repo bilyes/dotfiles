@@ -29,7 +29,7 @@ nnoremap <leader>gs :G<CR>
 
 " Change directory to current file's directory
 nnoremap <leader>cd :cd %:p:h<CR> :pwd <CR>
-nnoremap <leader>du :sav expand("%:p:h/")
+nnoremap <leader>du :sav %:p:h/
 
 nnoremap oo o<Esc>k
 nnoremap OO O<Esc>j
@@ -38,3 +38,6 @@ nnoremap Y y$
 " Copy to system register (clipboard)
 " + is the system register
 "nnoremap <leader>y "+y<CR>
+
+"Vimwiki
+nmap <leader>x <Plug>VimwikiToggleListItem h
