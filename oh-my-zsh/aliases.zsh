@@ -12,3 +12,4 @@ alias grm="git rebase master"
 
 alias v=vim
 alias c=clear
+alias chmox="chmod u+x"
