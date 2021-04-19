@@ -12,6 +12,9 @@ set ignorecase
 set undofile
 set incsearch
 
+set foldmethod=syntax
+set foldnestmax=1
+
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
