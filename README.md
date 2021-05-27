@@ -7,7 +7,7 @@
 
 ```
 git clone git@github.com:ilyessbachiri/dotfiles.git ~/.config/dotfiles \
-    && ~/.configs/dotfiles/install.sh
+    && ~/.config/dotfiles/install.sh
 ```
 
 #### Terminal tips
