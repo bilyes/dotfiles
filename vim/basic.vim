@@ -14,6 +14,7 @@ set incsearch
 
 set foldmethod=syntax
 set foldnestmax=1
+set nofoldenable
 
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -25,6 +26,9 @@ filetype plugin on
 let g:vimwiki_list = [{'path': '~/wikis/main', 'syntax': 'markdown', 'ext': '.md'},
             \ {'path': '~/wikis/knowledge', 'syntax': 'markdown', 'ext': '.md'}]
 
+
+# Fugitive git diff orientation
+set diffopt+=vertical
 
 "Set text width for text and markdown files
 au BufEnter *.txt,*.md setl tw=80
