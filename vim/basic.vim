@@ -24,10 +24,11 @@ set nocompatible
 filetype plugin on
 
 let g:vimwiki_list = [{'path': '~/wikis/main', 'syntax': 'markdown', 'ext': '.md'},
-            \ {'path': '~/wikis/knowledge', 'syntax': 'markdown', 'ext': '.md'}]
+            \ {'path': '~/wikis/knowledge', 'syntax': 'markdown', 'ext': '.md'},
+            \ {'path': '~/wikis/blog', 'syntax': 'markdown', 'ext': '.md'}]
 
 
-# Fugitive git diff orientation
+" Fugitive git diff orientation
 set diffopt+=vertical
 
 "Set text width for text and markdown files
