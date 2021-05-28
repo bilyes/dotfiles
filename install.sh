@@ -8,6 +8,14 @@ function link-folder() {
     fi
 }
 
+function link-zsh() {
+    if [ -z "$1" ]; then
+        echo "Error: No file to link. Usage: link-zsh /path/to/file"
+    else
+        ln -s ~/.config/dotfiles/oh-my-zsh/$1 ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+    fi
+}
+
 cd ~
 
 ln -s ~/.config/dotfiles/.xprofile . &
@@ -19,8 +27,9 @@ source ~/.config/dotfiles/.xprofile
 # Oh-My-Zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions &
 sed -i 's/plugins=(/plugins=(zsh-autosuggestions /g' .zshrc &
-ln -s ~/.config/dotfiles/oh-my-zsh/custom.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom} &
-ln -s ~/.config/dotfiles/oh-my-zsh/aliases.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom} &
+link-zsh custom.zsh
+link-zsh aliases.zsh
+link-zsh functions.zsh
 
 link-folder alacritty &
 link-folder powerline &
