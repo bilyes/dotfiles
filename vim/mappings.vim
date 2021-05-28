@@ -26,6 +26,8 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
 " GIT
 nnoremap <leader>gs :G<CR>
+nnoremap <leader>gp :G push<CR>
+nnoremap <leader>gpf :G push -f<CR>
 
 " Change directory to current file's directory
 nnoremap <leader>cd :cd %:p:h<CR> :pwd <CR>
