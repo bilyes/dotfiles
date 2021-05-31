@@ -21,6 +21,9 @@ nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<CR>
 
 " FZF
 nnoremap <C-i>p :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fl :BLines<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 "let g:fzf_layout = { 'down': '40%' }
 
