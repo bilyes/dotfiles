@@ -6,7 +6,8 @@ fe() {
   local IFS=$'\n'
   local files=()
   files=(
-    "$(fzf-tmux \
+    "$(fzf \
+          --height=40% \
           --query="$1" \
           --multi \
           --select-1 \
