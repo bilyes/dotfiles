@@ -11,6 +11,10 @@ set smartcase
 set ignorecase
 set undofile
 set incsearch
+" don't require buffers to be saved before navigating away from them
+set hidden
+set scrolloff=8
+"set signcolumn=yes
 
 set foldmethod=syntax
 set foldnestmax=1

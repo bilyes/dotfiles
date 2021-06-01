@@ -17,3 +17,4 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g "" --depth 10' # req
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 #source /usr/share/fzf/completion.zsh
+

@@ -8,3 +8,4 @@ function drmi() {
 
     docker rmi -f $(docker images --format "{{ .ID  }}" --filter "reference=$1*")
 }
+

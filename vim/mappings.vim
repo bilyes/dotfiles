@@ -9,6 +9,7 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<CR> :Ex <bar> :vertical resize 30 <CR>
+nnoremap <leader>pa :set paste! <CR>
 
 " Search
 nnoremap <leader>ps :Rg<SPACE>
