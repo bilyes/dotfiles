@@ -12,6 +12,7 @@ fe() {
           --multi \
           --select-1 \
           --exit-0 \
+          --layout=reverse \
           --preview="${FZF_PREVIEW_CMD}" \
           --preview-window='right:hidden:wrap' \
           --bind=ctrl-v:toggle-preview \
