@@ -1,0 +1,58 @@
+#!/bin/bash
+
+params=$@
+
+BROWSER_CMD="firefox --private-window"
+declare -A URLS
+
+URLS=(
+    ["dd"]="https://www.duckduckgo.com/?q="
+    ["gh"]="https://github.com/search?q="
+    ["yt"]="https://www.youtube.com/results?search_query="
+    ["rd"]="https://www.reddit.com/search?q="
+    #["google"]="https://www.google.com/search?q="
+    #["bing"]="https://www.bing.com/search?q="
+    #["yahoo"]="https://search.yahoo.com/search?p="
+    #["yandex"]="https://yandex.ru/yandsearch?text="
+    #["goodreads"]="https://www.goodreads.com/search?q="
+    #["stackoverflow"]="http://stackoverflow.com/search?q="
+    #["symbolhound"]="http://symbolhound.com/?q="
+    #["searchcode"]="https://searchcode.com/?q="
+    #["openhub"]="https://www.openhub.net/p?ref=homepage&query="
+    #["superuser"]="http://superuser.com/search?q="
+    #["askubuntu"]="http://askubuntu.com/search?q="
+    #["imdb"]="http://www.imdb.com/find?ref_=nv_sr_fn&q="
+    #["rottentomatoes"]="https://www.rottentomatoes.com/search/?search="
+    #["piratebay"]="https://thepiratebay.org/search/"
+    #["vimawesome"]="http://vimawesome.com/?q="
+)
+
+main() {
+    cmd=$(rofi -dmenu -p "Query > " $params)
+
+    if [[ -n "$cmd" ]]; then
+        parts=( $cmd )
+
+        platform=${parts[0]}
+
+        if [[ -n "${URLS[$platform]}" ]]; then
+            # url = platform url search + all parts - platform
+            url=${URLS[$platform]}${parts[@]/$platform}
+        else
+            url=$cmd
+        fi
+
+        if [[ -n "$url" ]]; then
+            $BROWSER_CMD "$url"
+        else
+            exit
+        fi
+    else
+        exit
+    fi
+}
+
+main
+
+exit 0
+
