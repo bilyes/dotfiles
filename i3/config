@@ -59,11 +59,11 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $alt+space exec --no-startup-id "rofi -dpi 200 -show combi"
-bindsym $mod+c exec --no-startup-id "rofi -dpi 200 -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -in -selection clipboard\""
-bindsym $mod+f exec --no-startup-id "$HOME/.config/rofi/scripts/rfinder -dpi 200"
-bindsym $mod+s exec --no-startup-id "$HOME/.config/rofi/scripts/rsearch -dpi 200"
-bindsym $mod+space exec --no-startup-id "$HOME/.config/rofi/scripts/rwebsearch -dpi 200"
+bindsym $alt+space exec --no-startup-id "rofi -show combi"
+bindsym $mod+c exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -in -selection clipboard"
+bindsym $mod+f exec --no-startup-id "$HOME/.config/rofi/scripts/rfinder"
+bindsym $mod+s exec --no-startup-id "$HOME/.config/rofi/scripts/rsearch"
+bindsym $mod+space exec --no-startup-id "$HOME/.config/rofi/scripts/rwebsearch"
 
 bindsym control+$alt+l exec --no-startup-id "i3lock"
 
@@ -193,10 +193,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -224,7 +224,7 @@ bar {
         tray_output none
         status_command bumblebee-status -m weather network_traffic bluetooth2 nic cpu nvidiagpu \
             memory date time \
-            -p nic.states="^down" \
+            -p interval=2 nic.states="^down" nic.format="{state}" \
                 time.format="%H:%M" date.format="%b %d %Y" \
                 weather.showcity="false" \
             -t nord-powerline
