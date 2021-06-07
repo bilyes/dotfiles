@@ -5,6 +5,7 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export VIMINIT='if !has("nvim") | let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC | endif'
 
 export PATH=$PATH:$HOME/.local/bin
+export EDITOR=vim
 
 # Key repeat
 xset r rate 200 30

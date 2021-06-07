@@ -31,11 +31,13 @@ link-zsh custom.zsh
 link-zsh aliases.zsh
 link-zsh functions.zsh
 
-link-folder alacritty &
+#link-folder alacritty &
 link-folder powerline &
 link-folder rofi &
 link-folder termite &
 link-folder tmux &
+link-folder picom &
+link-folder i3 &
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.zshrc
 
