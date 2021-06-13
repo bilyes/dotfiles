@@ -2,8 +2,6 @@
 alias doc="docker"
 alias di="docker images"
 alias dcls="docker container ls"
-alias dclean="docker rmi -f $(docker images -q -f "dangling=true")"
-alias ddestroy="docker rmi $(docker images -q | xargs)"
 alias dstat="docker stats --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemPerc}}\t{{.NetIO}}'"
 
 # Docker Compose

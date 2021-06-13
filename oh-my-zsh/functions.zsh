@@ -9,3 +9,10 @@ function drmi() {
     docker rmi -f $(docker images --format "{{ .ID  }}" --filter "reference=$1*")
 }
 
+function dclean() {
+    docker rmi -f $(docker images -q -f "dangling=true")
+}
+
+function ddestroy() {
+    docker rmi $(docker images -q | xargs)
+}

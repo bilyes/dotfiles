@@ -44,9 +44,9 @@ wm-restack = i3
 
 # Top modules
 top-left = i3
-#top-center = mpd
+top-center = date
 #top-right = keyboard clipmenu-widget onedrive-widget clash-widget alsa network-short battery date
-top-right = weather alsa network-short network-detail memory cpu temperature battery date
+top-right = weather alsa network-short network-detail memory cpu temperature battery
 
 # Bottom modules
 bottom-left = powermenu info-hackspeed weather
