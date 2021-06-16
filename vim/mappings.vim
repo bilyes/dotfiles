@@ -1,6 +1,8 @@
 inoremap jj <Esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>so :so ~/.config/vim/vimrc<CR>
+nnoremap <leader>sr :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
 
 " Windows
 nnoremap <leader>h :wincmd h<CR>
@@ -29,10 +31,17 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 "let g:fzf_layout = { 'down': '40%' }
 
 " GIT
+function! g:GetCurrentBranch() abort
+    let cur_branch=system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
+    return cur_branch
+endfunction
+
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>ggp :G push<CR>
 nnoremap <leader>gpf :G push -f<CR>
 nnoremap <leader>ggl :G pull<CR>
+nnoremap <leader>gpu :G push -u origin <C-R>=GetCurrentBranch()<CR><CR>
+nnoremap <leader>gcob :G checkout -b 
 
 " Change directory to current file's directory
 nnoremap <leader>cd :cd %:p:h<CR> :pwd <CR>
