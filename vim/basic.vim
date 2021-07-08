@@ -40,4 +40,9 @@ au BufEnter *.txt,*.md setl tw=80
 
 "YCM
 let g:ycm_autoclose_preview_window_after_completion = 1
-   
+"let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion = ['<C-k>']
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<s-tab>"
+"let g:UltiSnipsListSnippets="<c-s-tab>"
