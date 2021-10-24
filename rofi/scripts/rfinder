@@ -1,7 +1,6 @@
 #!/bin/bash
 
-file=$(find $HOME/ -type f | rofi -threads 0 -width 25 -dmenu -i -p "finder:" $@)
+file=$(find $HOME/ -type d \( -name .npm -o -name .cache -o -name .gradle -o -name .cargo \) -prune -o -type f | rofi -threads 0 -width 25 -dmenu -i -p "File:" $@)
 
 [[ -n "$file" ]] && xdg-open $file
-
 
