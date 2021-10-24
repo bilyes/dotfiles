@@ -28,7 +28,7 @@ URLS=(
 )
 
 main() {
-    cmd=$(rofi -dmenu -p "Query > " $params)
+    cmd=$(rofi -dmenu -p "? " $params)
 
     if [[ -n "$cmd" ]]; then
         parts=( $cmd )
@@ -36,10 +36,11 @@ main() {
         platform=${parts[0]}
 
         if [[ -n "${URLS[$platform]}" ]]; then
-            # url = platform url search + all parts - platform
-            url=${URLS[$platform]}${parts[@]/$platform}
+            # Remove the platform from the parts
+            unset 'parts[0]'
+            url=${URLS[$platform]}${parts[@]}
         else
-            url=$cmd
+            url=${URLS["dd"]}${cmd}
         fi
 
         if [[ -n "$url" ]]; then
