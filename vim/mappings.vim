@@ -50,6 +50,8 @@ nnoremap <leader>du :sav %:p:h/
 nnoremap oo o<Esc>k
 nnoremap OO O<Esc>j
 nnoremap Y y$
+vnoremap cy "+y
+nnoremap cp "+p
 
 " Copy to system register (clipboard)
 " + is the system register
