@@ -50,6 +50,7 @@ nnoremap <leader>du :sav %:p:h/
 nnoremap oo o<Esc>k
 nnoremap OO O<Esc>j
 nnoremap Y y$
+nnoremap cY "+Y
 vnoremap cy "+y
 nnoremap cp "+p
 
