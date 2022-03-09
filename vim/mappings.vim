@@ -58,5 +58,14 @@ nnoremap cp "+p
 " + is the system register
 "nnoremap <leader>y "+y<CR>
 
-"Vimwiki
+" Vimwiki
 nmap <leader>x <Plug>VimwikiToggleListItem h
+
+" Vimspector
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dx :VimspectorReset<CR>
+nnoremap <leader>db :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>dlb :call vimspector#ListBreakpoints()<CR>
+nnoremap <leader>dsn :call vimspector#StepOver()<CR>
+nnoremap <leader>dsi :call vimspector#StepInto()<CR>
+nnoremap <leader>dso :call vimspector#StepOut()<CR>
