@@ -46,3 +46,6 @@ let g:ycm_key_list_previous_completion = ['<C-k>']
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<s-tab>"
 "let g:UltiSnipsListSnippets="<c-s-tab>"
+
+" Vimspector
+let g:vimspector_install_gadgets = [ 'vscode-go' ]
