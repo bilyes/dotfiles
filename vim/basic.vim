@@ -48,4 +48,4 @@ let g:UltiSnipsExpandTrigger="<s-tab>"
 "let g:UltiSnipsListSnippets="<c-s-tab>"
 
 " Vimspector
-let g:vimspector_install_gadgets = [ 'vscode-go' ]
+let g:vimspector_install_gadgets = [ 'delve' ]
