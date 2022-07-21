@@ -8,32 +8,36 @@ font:
   normal:
     #family: Fira Mono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
-    family: RobotoMono Nerd Font
+    #family: RobotoMono Nerd Font
     #family: mononoki Nerd Font
     #family: Inconsolata
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
+    family: Roboto Mono
     style: Regular
 
   bold:
     #family: monospace
     #family: FiraCode Nerd Font Mono
-    family: RobotoMono Nerd Font
+    #family: RobotoMono Nerd Font
+    family: Roboto Mono
     style: Bold
 
   italic:
     #family: monospace
     #family: FiraCode Nerd Font Mono
-    family: RobotoMono Nerd Font
+    #family: RobotoMono Nerd Font
+    family: Roboto Mono
     style: Italic
 
   bold_italic:
     #family: monospace
     #family: FiraCode Nerd Font Mono
-    family: RobotoMono Nerd Font
+    #family: RobotoMono Nerd Font
+    family: Roboto Mono
     style: Bold Italic
 
-  size: 12.5
+  size: 12
  
 # Colors (Nord)
 colors:
