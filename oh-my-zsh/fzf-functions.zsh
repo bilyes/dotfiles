@@ -130,3 +130,22 @@ fgco() {
 
   #git checkout "$(echo "$target" | awk '{print $2}')"
 #}
+
+fco() {
+    git checkout $(git for-each-ref refs/heads/ --format='%(refname:short)' | fzf)
+}
+
+fcn() {
+  local IFS=$'\n'
+  local namespaces=()
+  namespaces=(
+    "$(kubectl get ns --no-headers -o custom-columns=name:.metadata.name | fzf \
+          --height=40% \
+          --query="$1" \
+          --select-1 \
+          --exit-0 \
+          --layout=reverse
+    )"
+  ) || return
+  kubectl config set-context --current --namespace "${namespaces[@]}"
+}
