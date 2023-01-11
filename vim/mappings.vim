@@ -23,7 +23,7 @@ nnoremap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <silent> <leader>rr :YcmCompleter RefactorRename<CR>
 
 " FZF
-nnoremap <C-i>p :Files<CR>
+nnoremap <tab>p :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fl :BLines<CR>

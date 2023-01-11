@@ -18,4 +18,9 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_PREVIEW_CMD="cat {}"
 
 # install fzf by cloning the git repo and running: ./install --xdg --no-bash --no-fish
-source $HOME/.config/fzf/fzf.zsh
+#source $HOME/.config/fzf/fzf.zsh
+
+# OR install through apt and
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
