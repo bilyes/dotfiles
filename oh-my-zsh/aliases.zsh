@@ -14,7 +14,7 @@ alias dcs="docker-compose stop"
 # Git
 alias grm="git rebase main"
 
-alias v=vim
+alias v=nvim
 alias c=clear
 alias chmox="chmod u+x"
 
