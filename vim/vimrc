@@ -1,6 +1,7 @@
 so $XDG_CONFIG_HOME/vim/xdg-support.vim
 so $XDG_CONFIG_HOME/vim/basic.vim
 so $XDG_CONFIG_HOME/vim/plugins.vim
+so $XDG_CONFIG_HOME/vim/lua.vim
 
 "let g:gruvbox_invert_selection='0'
 ":silent! colorscheme gruvbox

@@ -1,40 +1,43 @@
 window:
-  opacity: 0.8
+  opacity: 0.9
   padding:
     x: 4
     y: 4
+  decorations: None
 
 font:
+  offset:
+    y: 2
   normal:
     #family: Fira Mono Nerd Font Mono
     #family: FiraCode Nerd Font Mono
     #family: RobotoMono Nerd Font
     #family: mononoki Nerd Font
-    #family: Inconsolata
+    family: Inconsolata
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
-    family: Roboto Mono
+    #family: Roboto Mono
     style: Regular
 
   bold:
-    #family: monospace
+    family: monospace
     #family: FiraCode Nerd Font Mono
     #family: RobotoMono Nerd Font
-    family: Roboto Mono
+    #family: Roboto Mono
     style: Bold
 
   italic:
-    #family: monospace
+    family: monospace
     #family: FiraCode Nerd Font Mono
     #family: RobotoMono Nerd Font
-    family: Roboto Mono
+    #family: Roboto Mono
     style: Italic
 
   bold_italic:
-    #family: monospace
+    ##family: monospace
     #family: FiraCode Nerd Font Mono
     #family: RobotoMono Nerd Font
-    family: Roboto Mono
+    #family: Roboto Mono
     style: Bold Italic
 
   size: 12
