@@ -8,23 +8,32 @@ vim.g.netrw_winsize = 25
 --" don't require buffers to be saved before navigating away from them
 vim.opt.hidden = true
 
---syntax on
+vim.opt.wrap = false
 
---set tabstop=4 softtabstop=4
---set shiftwidth=4
---set expandtab
---set smartindent
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 
---set scrolloff=8
---"set signcolumn=yes
---
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+
+vim.opt.colorcolumn = "100"
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
 --set foldmethod=syntax
 --set foldnestmax=1
---
---set colorcolumn=100
---vim.opt.highlight = 'ColorColumn ctermbg=0 guibg=lightgrey'
---
+
 --"Needed for vimwiki
 --set nocompatible
 --filetype plugin on
-

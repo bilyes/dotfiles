@@ -6,16 +6,15 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'preservim/nerdcommenter'
   use 'vim-airline/vim-airline'
+  use('junegunn/fzf', { run = "fzf#install()" })
+  use 'junegunn/fzf.vim'
+  -- Auto pairs for '[', '{' and '('
+  use 'jiangmiao/auto-pairs'
 
   -- use 'jremmen/vim-ripgrep'
   -- use 'lyuts/vim-rtags'
 
-  -- use 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  -- use 'junegunn/fzf.vim'
   -- use 'mbbill/undotree'
-
-  -- Auto pairs for '[', '{' and '('
-  -- use 'jiangmiao/auto-pairs'
 
   -- Debugging
   -- use 'puremourning/vimspector'
@@ -32,6 +31,6 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   
-  -- use 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 
 end)
