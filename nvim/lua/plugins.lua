@@ -1,7 +1,7 @@
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  
+
   use 'arcticicestudio/nord-vim'
   use 'tpope/vim-fugitive'
   use 'preservim/nerdcommenter'
@@ -20,17 +20,17 @@ return require('packer').startup(function(use)
   -- use 'puremourning/vimspector'
   -- use 'szw/vim-maximizer'
   -- use 'vimwiki/vimwiki'
-  
+
   -- Snippets
   -- use 'SirVer/ultisnips'
   -- use 'honza/vim-snippets'
-  
+
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
-  
+
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 
 end)
