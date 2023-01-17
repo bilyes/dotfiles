@@ -11,6 +11,16 @@ return require('packer').startup(function(use)
   -- Auto pairs for '[', '{' and '('
   use 'jiangmiao/auto-pairs'
 
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+
+  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
+
+  use 'lewis6991/gitsigns.nvim'
+
   -- use 'jremmen/vim-ripgrep'
   -- use 'lyuts/vim-rtags'
 
@@ -24,13 +34,4 @@ return require('packer').startup(function(use)
   -- Snippets
   -- use 'SirVer/ultisnips'
   -- use 'honza/vim-snippets'
-
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
-
 end)
