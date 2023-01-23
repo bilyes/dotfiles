@@ -32,6 +32,8 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+vim.cmd[[au BufEnter *.txt,*.md setl tw=100]]
+
 --set foldmethod=syntax
 --set foldnestmax=1
 

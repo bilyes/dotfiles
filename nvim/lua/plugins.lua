@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
 
   use 'lewis6991/gitsigns.nvim'
+  use 'vimwiki/vimwiki'
 
   -- use 'jremmen/vim-ripgrep'
   -- use 'lyuts/vim-rtags'
@@ -29,7 +30,6 @@ return require('packer').startup(function(use)
   -- Debugging
   -- use 'puremourning/vimspector'
   -- use 'szw/vim-maximizer'
-  -- use 'vimwiki/vimwiki'
 
   -- Snippets
   -- use 'SirVer/ultisnips'
