@@ -9,35 +9,30 @@ font:
   offset:
     y: 2
   normal:
-    #family: Fira Mono Nerd Font Mono
-    #family: FiraCode Nerd Font Mono
+    family: FiraCode Nerd Font
     #family: RobotoMono Nerd Font
     #family: mononoki Nerd Font
-    family: Inconsolata
+    #family: Inconsolata
     #family: BlexMono Nerd Font Mono
     #family: Mononoki Nerd Font Mono
     #family: Roboto Mono
     style: Regular
 
   bold:
-    family: monospace
-    #family: FiraCode Nerd Font Mono
+    #family: monospace
+    family: FiraCode Nerd Font
     #family: RobotoMono Nerd Font
     #family: Roboto Mono
     style: Bold
 
   italic:
-    family: monospace
-    #family: FiraCode Nerd Font Mono
-    #family: RobotoMono Nerd Font
-    #family: Roboto Mono
+    #family: monospace
+    family: RobotoMono Nerd Font
     style: Italic
 
   bold_italic:
-    ##family: monospace
-    #family: FiraCode Nerd Font Mono
-    #family: RobotoMono Nerd Font
-    #family: Roboto Mono
+    #family: monospace
+    family: Roboto Mono Nerd Font
     style: Bold Italic
 
   size: 12
