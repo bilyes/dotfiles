@@ -5,7 +5,7 @@ return require('packer').startup(function(use)
   use 'arcticicestudio/nord-vim'
   use 'tpope/vim-fugitive'
   use 'preservim/nerdcommenter'
-  use 'vim-airline/vim-airline'
+  use 'nvim-lualine/lualine.nvim'
   use('junegunn/fzf', { run = "fzf#install()" })
   use 'junegunn/fzf.vim'
   -- Auto pairs for '[', '{' and '('
