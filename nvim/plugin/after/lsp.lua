@@ -77,7 +77,22 @@ require('lspconfig')['tsserver'].setup {
     capabilities = capabilities
 }
 
-require('lspconfig')['sumneko_lua'].setup {
+require('lspconfig')['lua_ls'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+require('lspconfig')['jdtls'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+require('lspconfig')['gopls'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+require('lspconfig')['terraformls'].setup {
     on_attach = on_attach,
     capabilities = capabilities
 }
