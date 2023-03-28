@@ -23,7 +23,9 @@ return require('packer').startup(function(use)
   use 'vimwiki/vimwiki'
 
   use 'kyazdani42/nvim-tree.lua'
-  use 'folke/which-key.nvim'
+  --use 'folke/which-key.nvim'
+
+  use 'mfussenegger/nvim-jdtls'
 
   -- use 'jremmen/vim-ripgrep'
   -- use 'lyuts/vim-rtags'
