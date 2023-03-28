@@ -69,30 +69,20 @@ cmp.setup({
     })
 })
 
--- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require('lspconfig')
 
-require('lspconfig')['tsserver'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+local servers = {
+    'denols',
+    --'tsserver',
+    'lua_ls',
+    'gopls',
+    'terraformls',
 }
 
-require('lspconfig')['lua_ls'].setup {
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
     on_attach = on_attach,
-    capabilities = capabilities
-}
-
---require('lspconfig')['jdtls'].setup {
-    --on_attach = on_attach,
-    --capabilities = capabilities,
---}
-
-require('lspconfig')['gopls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-require('lspconfig')['terraformls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+    capabilities = capabilities,
+  }
+end
