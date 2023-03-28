@@ -1,42 +1,53 @@
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
-  use 'arcticicestudio/nord-vim'
-  use 'tpope/vim-fugitive'
-  use 'preservim/nerdcommenter'
-  use 'nvim-lualine/lualine.nvim'
-  use('junegunn/fzf', { run = "fzf#install()" })
-  use 'junegunn/fzf.vim'
-  -- Auto pairs for '[', '{' and '('
-  use 'jiangmiao/auto-pairs'
+    use 'arcticicestudio/nord-vim'
+    use 'tpope/vim-fugitive'
+    use 'preservim/nerdcommenter'
+    use 'nvim-lualine/lualine.nvim'
+    use('junegunn/fzf', { run = "fzf#install()" })
+    use 'junegunn/fzf.vim'
+    -- Auto pairs for '[', '{' and '('
+    use 'jiangmiao/auto-pairs'
 
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
 
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
+    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
-  use 'lewis6991/gitsigns.nvim'
-  use 'vimwiki/vimwiki'
+    use 'lewis6991/gitsigns.nvim'
+    use 'vimwiki/vimwiki'
 
-  use 'kyazdani42/nvim-tree.lua'
-  --use 'folke/which-key.nvim'
+    use 'kyazdani42/nvim-tree.lua'
+    --use 'folke/which-key.nvim'
 
-  use 'mfussenegger/nvim-jdtls'
+    use 'mfussenegger/nvim-jdtls'
 
-  -- use 'jremmen/vim-ripgrep'
-  -- use 'lyuts/vim-rtags'
+    use({
+        'folke/noice.nvim',
+        requires = {
+            'MunifTanjim/nui.nvim',
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            'rcarriga/nvim-notify',
+        }
+    })
 
-  -- use 'mbbill/undotree'
+    -- use 'jremmen/vim-ripgrep'
+    -- use 'lyuts/vim-rtags'
 
-  -- Debugging
-  -- use 'puremourning/vimspector'
-  -- use 'szw/vim-maximizer'
+    -- use 'mbbill/undotree'
 
-  -- Snippets
-  -- use 'SirVer/ultisnips'
-  -- use 'honza/vim-snippets'
+    -- Debugging
+    -- use 'puremourning/vimspector'
+    -- use 'szw/vim-maximizer'
+
+    -- Snippets
+    -- use 'SirVer/ultisnips'
+    -- use 'honza/vim-snippets'
 end)
