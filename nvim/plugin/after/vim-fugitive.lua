@@ -6,3 +6,6 @@ vim.keymap.set('n', '<leader>gpf', function() vim.cmd.Git('push -f') end, opts)
 vim.keymap.set('n', '<leader>ggl', function() vim.cmd.Git('pull') end, opts)
 vim.keymap.set('n', '<leader>gcob', ':G checkout -b ', opts)
 vim.keymap.set('n', '<leader>gpu', function() vim.cmd.Git('push -u origin ' .. cur_branch) end, opts)
+
+vim.opt.diffopt = vim.opt.diffopt + "vertical"
+
