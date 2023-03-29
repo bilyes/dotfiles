@@ -75,14 +75,28 @@ local lspconfig = require('lspconfig')
 local servers = {
     'denols',
     --'tsserver',
-    'lua_ls',
+    --'lua_ls',
     'gopls',
     'terraformls',
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+    lspconfig[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
+end
+
+lspconfig['lua_ls'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
-  }
-end
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {
+                    'dump',
+                },
+            },
+        }
+    },
+}
