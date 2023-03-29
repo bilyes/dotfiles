@@ -40,6 +40,10 @@ return require('packer').startup(function(use)
 
     use 'akinsho/toggleterm.nvim'
 
+    use 'github/copilot.vim'
+
+    --use 'jackMort/ChatGPT.nvim'
+
     -- use 'jremmen/vim-ripgrep'
     -- use 'lyuts/vim-rtags'
 
