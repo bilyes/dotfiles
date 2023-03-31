@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
 
     use 'github/copilot.vim'
 
+    --use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     --use 'jackMort/ChatGPT.nvim'
 
     -- use 'jremmen/vim-ripgrep'
