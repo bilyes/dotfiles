@@ -1,4 +1,5 @@
-vim.g.copilot_filetypes = { xml = false }
+vim.g.copilot_exclude = { '*' }
+vim.g.copilot_filetypes = { lua = true, java = true, go = true, yaml = true, typescript = true }
 vim.g.copilot_no_tab_map = true
 
 local opts = { silent = true, noremap = true, expr = true }
