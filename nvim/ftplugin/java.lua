@@ -6,9 +6,14 @@ local jdtls = require('jdtls')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     require("jdtls.dap").setup_dap_main_class_configs()
-    jdtls.setup_dap({ hotcodereplace = "auto" })
+    jdtls.setup_dap({
+        config_overrides = {
+            vmArgs = "--enable-preview" -- needed for spring boot
+        },
+        hotcodereplace = "auto"
+    })
 
     -- Enable completion triggered by <c-x><c-o>
     --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -52,7 +57,13 @@ local workspace_folder = cache_folder .. "/nvim/eclipse/" .. vim.fn.fnamemodify(
 
 local bundles = {}
 local mason_path = vim.fn.glob(data_folder .. "/mason/")
-vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
+vim.list_extend(
+    bundles,
+    vim.split(
+        vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"),
+        "\n"
+    )
+)
 vim.list_extend(
     bundles,
     vim.split(

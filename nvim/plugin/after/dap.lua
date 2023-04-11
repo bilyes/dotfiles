@@ -4,6 +4,7 @@ local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>db', ':lua require("dap").toggle_breakpoint()<CR>', opts);
 vim.keymap.set('n', '<leader>dB', ':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts);
 vim.keymap.set('n', '<leader>dc', ':lua require("dap").continue()<CR>', opts);
+vim.keymap.set('n', '<leader>dt', ':lua require("dap").terminate()<CR>', opts);
 vim.keymap.set('n', '<leader>dsv', ':lua require("dap").step_over()<CR>', opts);
 vim.keymap.set('n', '<leader>dsi', ':lua require("dap").step_into()<CR>', opts);
 vim.keymap.set('n', '<leader>dso', ':lua require("dap").step_out()<CR>', opts);
