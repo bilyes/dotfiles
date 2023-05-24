@@ -1,3 +1,5 @@
+-- Only needed when managing plugins with packer
+-- Must be required in init.lua
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
