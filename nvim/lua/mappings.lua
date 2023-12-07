@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 
 vim.keymap.set('i', 'jj', '<Esc>', opts)
 
@@ -23,7 +23,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 
 -- preserve copied values across multiples pastes
-vim.keymap.set('x', '<leader>p', '"_dP', opts) 
+vim.keymap.set('x', '<leader>p', '"_dP', opts)
 
 -- find and replace
 vim.keymap.set('n', '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', opts)
