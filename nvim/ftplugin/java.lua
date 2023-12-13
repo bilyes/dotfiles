@@ -76,6 +76,7 @@ local config = {
     cmd = {
         -- Make sure to set JAVA_HOME env environment to the appropriate java binary
         mason_path .. 'packages/jdtls/bin/jdtls',
+        '--jvm-arg=-javaagent:' .. mason_path .. "packages/jdtls/lombok.jar",
         '-configuration', mason_path .. 'jdtls/config_linux',
         '-data', workspace_folder,
     },
