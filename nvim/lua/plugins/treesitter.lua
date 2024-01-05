@@ -12,7 +12,7 @@ return {
                 "yaml",
                 "lua",
                 "vim",
-                "help",
+                --"help",
                 "terraform",
                 "graphql"
             },
