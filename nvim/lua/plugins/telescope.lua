@@ -17,11 +17,24 @@ return {
         require('telescope').setup {
             defaults = {
                 layout_strategy = 'vertical',
+                path_display = {
+                    shorten = {
+                        len = 3,
+                        exclude = { -1, -2 }, -- exclude the last 2 sections of the path
+                    }
+                }
             },
             pickers = {
+                buffers = {
+                    ignore_current_buffer = true,
+                    sort_lastused = true,
+                },
                 find_files = {
                     theme = "dropdown",
                     previewer = false,
+                },
+                lsp_implementations = {
+                    theme = "dropdown",
                 }
             },
         }
