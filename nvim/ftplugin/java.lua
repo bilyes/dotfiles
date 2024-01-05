@@ -8,6 +8,17 @@ local jdtls = require('jdtls')
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
     require("jdtls.dap").setup_dap_main_class_configs()
+
+    require("dap").configurations.java = {
+        {
+            name = "Debug (Attach)",
+            type = "java",
+            request = "attach",
+            hostName = "localhost",
+            port = 5005,
+        },
+    }
+
     jdtls.setup_dap({
         config_overrides = {
             vmArgs = "--enable-preview" -- needed for spring boot
