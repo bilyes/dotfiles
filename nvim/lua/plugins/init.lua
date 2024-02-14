@@ -1,7 +1,7 @@
 return {
     'preservim/nerdcommenter',
     -- Auto pairs for '[', '{' and '('
-    'jiangmiao/auto-pairs',
+    --'jiangmiao/auto-pairs',
 
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
@@ -23,6 +23,16 @@ return {
     },
 
     { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"} },
+    {
+        "j-hui/fidget.nvim",
+        opts = {
+            notification = {
+                window = {
+                    winblend = 0,
+                }
+            }
+        }
+    }
 
     --'jackMort/ChatGPT.nvim',
 
