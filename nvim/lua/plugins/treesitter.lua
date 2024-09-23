@@ -8,6 +8,8 @@ return {
                 "ruby",
                 "typescript",
                 "go",
+                "gomod",
+                "gosum",
                 "java",
                 "yaml",
                 "lua",
