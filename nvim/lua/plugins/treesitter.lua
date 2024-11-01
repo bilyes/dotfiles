@@ -16,6 +16,7 @@ return {
                 "vim",
                 --"help",
                 "terraform",
+                "javascript",
                 "graphql"
             },
 
