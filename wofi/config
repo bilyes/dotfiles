@@ -1,0 +1,9 @@
+mode=drun
+width=25%
+allow_images=true
+matching=fuzzy
+insensitive=true
+key_up=Ctrl-k
+key_down=Ctrl-j
+#key_right=Ctrl-l
+#key_left=Ctrl-h
