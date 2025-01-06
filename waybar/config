@@ -49,7 +49,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
 	//"workspace": {
 	//	"format": " {}",
