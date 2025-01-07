@@ -30,6 +30,8 @@
         "clock"
     ],
 	"modules-right": [
+        //"custom/waybar-scrolling-mpris",
+        "mpris",
         "tray",
 		"pulseaudio",
 		//"backlight",
@@ -179,7 +181,33 @@
 		"tooltip-format-connected": " {device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}"
 	},
-
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": {
+            "default": "▶",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "interval": 3,
+        "max-length": 40,
+        "album-len": 15,
+        "title-len": 15,
+        // "ignored-players": ["firefox"]
+    },
+    //"custom/waybar-scrolling-mpris": {
+    //    "format": "{}",
+    //    "display-format": "{icon} {title} - {artist}",
+    //    "exec": "~/.config/waybar/scripts/waybar-scrolling-mpris ~/.config/waybar/config",
+    //    "icons": {
+    //        "Paused": "⏸",
+    //        "Playing": "▶",
+    //        "Stopped": "■"
+    //    },
+    //    "length": 40
+    //},
 	"custom/launch_wofi": {
 		"format": " ",
 		"on-click": "pkill wofi; wofi",
