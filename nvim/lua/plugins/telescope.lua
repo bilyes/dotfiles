@@ -6,6 +6,7 @@ return {
         local opts = { noremap = true, silent = true }
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<tab>p', builtin.find_files, opts)
+        vim.keymap.set('n', '<leader>fc', builtin.commands, opts)
         vim.keymap.set('n', '<leader>fs', builtin.live_grep, opts)
         vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
@@ -32,6 +33,11 @@ return {
                 find_files = {
                     theme = "dropdown",
                     previewer = false,
+                    mappings = {
+                        i = {
+                            ["<C-h>"] = require('telescope.actions').file_split,
+                        },
+                    },
                 },
                 lsp_implementations = {
                     theme = "dropdown",
