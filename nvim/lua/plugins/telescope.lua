@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
+    tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         local opts = { noremap = true, silent = true }
@@ -31,6 +31,11 @@ return {
                     sort_lastused = true,
                 },
                 find_files = {
+                    hidden = true, -- show hidden files
+                    no_ignore = true, -- do not respect .gitignore
+                    file_ignore_patterns = {
+                        "node_modules", "build", "dist", "yarn.lock", ".git"
+                    },
                     theme = "dropdown",
                     previewer = false,
                     mappings = {
