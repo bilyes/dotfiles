@@ -1,4 +1,8 @@
 return {
     'nvim-lualine/lualine.nvim',
-    config = true
+    opts = {
+        sections = {
+            lualine_c = {{ 'filename', path = 1 }},
+        },
+    }
 }
