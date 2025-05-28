@@ -34,7 +34,7 @@ return {
                     hidden = true, -- show hidden files
                     no_ignore = true, -- do not respect .gitignore
                     file_ignore_patterns = {
-                        "node_modules", "build", "dist", "yarn.lock", ".git"
+                        "node_modules", "build", "dist", "yarn.lock", ".git/", ".ve"
                     },
                     theme = "dropdown",
                     previewer = false,
