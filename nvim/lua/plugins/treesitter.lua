@@ -17,6 +17,7 @@ return {
                 --"help",
                 "terraform",
                 "javascript",
+                "python",
                 "graphql"
             },
 
