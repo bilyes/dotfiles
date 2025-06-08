@@ -236,6 +236,11 @@ exec swaync
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
 
+# Clipboard Manager
+exec clipse -listen
+for_window [app_id="Alacritty" title="clipse-clipboard"] floating enable
+bindsym $mod+c exec $term -T clipse-clipboard -e sh -c "clipse"
+
 bindsym control+$alt+l exec swaylock
 
 include /etc/sway/config.d/*
