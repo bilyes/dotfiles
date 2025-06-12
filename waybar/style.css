@@ -1,50 +1,54 @@
+@import "../../.cache/wal/colors-waybar.css";
+
 * {
   border: none;
   border-radius: 0;
-  font-family: "JetBrainsMono Nerd Font";
+  /* use Propo for better icon alignment */
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-weight: bold;
   font-size: 14px;
   min-height: 0;
 }
 
 window#waybar {
-  background: rgba(30, 30, 46, 0.85);
-  color: #cdd6f4;
+  background: shade(alpha(@background, 0.8), 1);
+  color: @foreground;
 }
 
 tooltip {
-  background: #1e1e2e;
+  background: @background;
   border-radius: 10px;
   border-width: 2px;
   border-style: solid;
-  border-color: #11111b;
+  border-color: @color3;
 }
 
 #workspaces button {
   padding: 5px 10px;
-  color: #b4befe;
+  color: @color5;
   margin-right: 0px;
+  border-radius: 14px;
 }
 
 #workspaces button.active {
-  color: #1e1e2e;
+  background: @color8;
 }
 
-#workspaces button.focused {
-  color: #1e1e2e;
-  background: #eba0ac;
-  border-radius: 15px;
-}
+/*#workspaces button.focused {*/
+  /*color: @background;*/
+  /*background: @color5;*/
+  /*border-radius: 15px;*/
+/*}*/
 
 #workspaces button.urgent {
-  color: #11111b;
-  background: #a6e3a1;
+  color: @background;
+  background: @color6;
   border-radius: 10px;
 }
 
 #workspaces button:hover {
-  background: #313244;
-  color: #cdd6f4;
+  background: @color2;
+  color: @color5;
   border-radius: 20px;
 }
 
@@ -63,20 +67,17 @@ tooltip {
 #backlight,
 #mpris,
 #custom-launch_wofi {
-  /*background: #1e1e2e;*/
-  background: #313244;
-  opacity: 0.8;
+  background: @background;
   padding: 0px 10px;
-  margin: 3px 0px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border: 1px solid #181825;
+  margin: 5px 0px;
+  border: 1px solid @color3;
 }
 
 #cpu {
   border-radius: 15px 0px 0px 15px;
   margin-left: 5px;
   border-right: none;
+  border-left: 0px;
 }
 
 #memory {
@@ -88,10 +89,11 @@ tooltip {
   border-radius: 0px 15px 15px 0px;
   margin-right: 5px;
   border-left: none;
+  border-right: 0px;
 }
 
 #temperature.critical {
-  color: #eba0ac;
+  color: @color2;
 }
 
 #backlight {
@@ -106,8 +108,7 @@ tooltip {
 }
 
 #workspaces {
-  background: #1e1e2e;
-  background: #313244;
+  background: @background;
   border-radius: 15px;
   margin-left: 10px;
   padding-right: 0px;
@@ -115,7 +116,7 @@ tooltip {
 }
 
 #custom-power_profile {
-  color: #a6e3a1;
+  color: @color4;
   border-left: 0px;
   border-right: 0px;
 }
@@ -127,37 +128,37 @@ tooltip {
 }
 
 #clock {
-  color: #fab387;
+  color: @color6;
   border-radius: 15px;
   padding: 0 10px;
   border-right: 0px;
+  border-left: 0px;
 }
 
 #network {
-  color: #f9e2af;
+  color: @color6;
   border-radius: 0px 15px 15px 0px;
   border-left: 0px;
   border-right: 0px;
-  padding-right: 17px;
-  margin-right: 10px;
+  padding-right: 15px;
 }
 
 #bluetooth {
-  color: #89b4fa;
-  border-radius: 0px 15px 15px 0px;
+  color: @color6;
+  /*border-radius: 0px 15px 15px 0px;*/
   border-left: 0px;
+  border-right: none;
 }
 
 #pulseaudio {
-  color: #89b4fa;
+  color: @color6;
   border-left: 0px;
   border-right: 0px;
-  /*padding-left: 15px;*/
   border-radius: 15px 0px 0px 15px;
 }
 
 #pulseaudio.microphone {
-  color: #cba6f7;
+  color: @color4;
   border-left: 0px;
   border-right: 0px;
   border-radius: 0px 15px 15px 0px;
@@ -165,7 +166,7 @@ tooltip {
 }
 
 #battery {
-  color: #a6e3a1;
+  color: @color4;
   border-radius: 15px;
   margin-right: 10px;
   padding: 0 15px;
@@ -173,17 +174,16 @@ tooltip {
 }
 
 #mpris {
-  /*color: #a6e3a1;*/
-  color: #b4befe;
+  color: @color4;
   border-radius: 15px;
   margin-right: 5px;
   padding: 0 15px;
-  border-left: 0px;
+  border-right: 0px;
 }
 
 #custom-launch_wofi {
   border-radius: 15px;
-  color: #89b4fa;
+  color: @color6;
   margin-left: 10px;
   padding-right: 10px;
   padding-left: 15px;

@@ -23,8 +23,9 @@
 	"gtk-layer-shell": true,
 	"height": 44,
 	"modules-left": [
-        "custom/launch_wofi",
-        "sway/workspaces"
+        //"custom/launch_wofi",
+        //"sway/workspaces"
+        "hyprland/workspaces"
     ],
     "modules-center": [
         "clock"
@@ -36,14 +37,14 @@
 		"pulseaudio",
 		//"backlight",
         "bluetooth",
-		//"network",
+		"network",
         "cpu",
         "memory",
         "temperature",
 		//"custom/power_profile",
 		"battery"
 	],
-	"sway/window": {
+	"hyprland/window": {
 		"format": "{}"
 	},
     "cpu": {
@@ -57,16 +58,18 @@
 	//	"format": " {}",
 	//	"disable-scroll": false
 	//},
-	"sway/workspaces": {
+	"hyprland/workspaces": {
 		"disable-scroll": true,
 		//"all-outputs": true,
 		"format": "{icon}",
 		"on-click": "activate",
-		//"persistent-workspaces": {
-		//	"1": [],
-		//	"2": [],
-		//	"3": []
-		//},
+		"persistent-workspaces": {
+			"1": [],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": []
+		},
 		"format-icons": {
 			"1": "",
 			"2": "",
@@ -157,15 +160,15 @@
 	},
 
 	"temperature": {
-		"thermal-zone": 1,
-		"format": "{temperatureF}°F ",
+		"thermal-zone": 3,
+		"format": "{temperatureC}°C ",
 		"critical-threshold": 80,
 		"format-critical": "{temperatureC}°C "
 	},
 
 	"network": {
 		// "interface": "wlp2*", // (Optional) To force the use of this interface
-		"format-wifi": "  {signalStrength}%",
+		"format-wifi": " {signalStrength}%",
 		"format-ethernet": "{ipaddr}/{cidr}",
 		"tooltip-format": "{essid} - {ifname} via {gwaddr}",
 		"format-linked": "{ifname} (No IP)",
@@ -193,6 +196,7 @@
         },
         "interval": 3,
         "max-length": 40,
+        "artist-len": 12,
         "album-len": 15,
         "title-len": 15,
         // "ignored-players": ["firefox"]
