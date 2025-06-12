@@ -1,3 +1,7 @@
+# Colors are managed by pywal16
+[general]
+import = ["~/.cache/wal/colors-alacritty.toml"]
+
 [font]
 size = 12
 
@@ -28,5 +32,3 @@ opacity = 0.9
 [window.padding]
 x = 4
 y = 4
-
-# Colors are managed by pywal16
