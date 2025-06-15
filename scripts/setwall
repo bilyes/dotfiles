@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WALL_DIR=~/Pictures/wallpapers
+FZF_PREVIEW_COLUMNS=$(($(tput cols) / 2)) # half of the terminal width
+FZF_PREVIEW_LINES=$(tput lines) # full height
+_KITTEN_ICAT_PLACE=${FZF_PREVIEW_COLUMNS:-64}x${FZF_PREVIEW_LINES}@${FZF_PREVIEW_COLUMNS:-64}x0
+img=$(ls "$WALL_DIR" | fzf --preview "kitty icat --clear --transfer-mode=memory --stdin=no --place=${_KITTEN_ICAT_PLACE} '$WALL_DIR/{}'") && wal --cols16 lighten -i "$WALL_DIR/$img"
+
+# Reload swaync
+pkill swaync
+hyprctl dispatch exec swaync
