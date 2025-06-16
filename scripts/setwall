@@ -10,5 +10,5 @@ img=$(ls "$WALL_DIR" | fzf --preview "kitty icat --clear --transfer-mode=memory 
 pkill swaync
 hyprctl dispatch exec swaync
 
-# Copy the wallpaper for Hyprlock
+# Copy the wallpaper for Hyprlock and Hyprpaper
 cp "$WALL_DIR/$img" ~/.config/hypr/wallpaper
