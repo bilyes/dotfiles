@@ -20,6 +20,6 @@ alias chmox="chmod u+x"
 
 alias -g G='| grep'
 alias i="sudo pacman -S"
-alias r="sudo pacman -Rss"
-alias up="sudo pacman -Syy && sudo pacman -Syu"
+alias r="sudo pacman -Rns"
+alias up="sudo pacman -Syu"
 alias t="tmux"
