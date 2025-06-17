@@ -36,6 +36,8 @@ return {
             folder = "main/diary",
         },
 
+        preferred_link_style = "markdown",
+
         mappings = {
             ["<tab>p"] = {
                 action = function()
@@ -61,6 +63,25 @@ return {
                 end,
                 description = "Open today's note",
             },
+            ["<leader>gd"] = {
+                action = function()
+                    vim.cmd("ObsidianFollowLink")
+                end,
+                description = "Follow link under cursor",
+            },
+            ["<leader>ch"] = {
+                action = function()
+                    return require("obsidian").util.toggle_checkbox()
+                end,
+                opts = { buffer = true },
+            },
+            -- Smart action depending on context, either follow link or toggle checkbox.
+            ["<cr>"] = {
+                action = function()
+                    return require("obsidian").util.smart_action()
+                end,
+                opts = { buffer = true, expr = true },
+            }
         },
     },
 }
