@@ -1,3 +1,54 @@
+local loaded_clients = {}
+
+local function list_workspace_files()
+    local workspace_files = vim.fn.split(vim.fn.system('git ls-files'), "\n")
+    -- convert paths to absolute
+    local full_path_files = {}
+    for _, path in ipairs(workspace_files) do
+        table.insert(full_path_files, vim.fn.fnamemodify(path, ":p"))
+    end
+    return full_path_files
+end
+
+local function trigger_workspace_diagnostics(client, bufnr)
+    local workspace_files = list_workspace_files()
+    if #workspace_files == 0 then
+        return
+    end
+    if vim.tbl_contains(loaded_clients, client.id) then
+        return
+    end
+    table.insert(loaded_clients, client.id)
+
+    if not vim.tbl_get(client.server_capabilities, 'textDocumentSync', 'openClose') then
+        return
+    end
+
+    for _, path in ipairs(workspace_files) do
+        if path == vim.api.nvim_buf_get_name(bufnr) then
+            goto continue
+        end
+
+        local filetype = vim.filetype.match({ filename = path })
+
+        if not vim.tbl_contains(client.config.filetypes, filetype) then
+            goto continue
+        end
+
+        local params = {
+            textDocument = {
+                uri = vim.uri_from_fname(path),
+                version = 0,
+                text = vim.fn.join(vim.fn.readfile(path), "\n"),
+                languageId = filetype
+            }
+        }
+        client.notify('textDocument/didOpen', params)
+
+        ::continue::
+    end
+end
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 
@@ -9,6 +60,9 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+
+    trigger_workspace_diagnostics(client, bufnr)
+
     -- Enable completion triggered by <c-x><c-o>
     --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
