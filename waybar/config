@@ -33,6 +33,7 @@
 	"modules-right": [
         //"custom/waybar-scrolling-mpris",
         "mpris",
+        "custom/weather",
         "tray",
 		"pulseaudio",
 		//"backlight",
@@ -216,5 +217,15 @@
 		"format": " ",
 		"on-click": "pkill wofi; wofi",
 		"tooltip": false
-	}
+	},
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click",
+        "interval": 3600,
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/weather.sh",
+        //"exec-if": "ping wttr.in -c1",
+        "tooltip": true
+    }
 }
