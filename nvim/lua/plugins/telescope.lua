@@ -1,6 +1,8 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    -- Switching to rolling release since some fixes haven't been released yet.
+    -- Uncomment when 0.1.9 or 0.2.0 is released.
+    --tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         local opts = { noremap = true, silent = true }
@@ -34,7 +36,7 @@ return {
                     hidden = true, -- show hidden files
                     no_ignore = true, -- do not respect .gitignore
                     file_ignore_patterns = {
-                        "node_modules", "build", "dist", "yarn.lock", ".git/", ".ve"
+                        "node_modules", "build", "dist", "yarn.lock", ".git/", ".ve", ".np",
                     },
                     theme = "dropdown",
                     previewer = false,
