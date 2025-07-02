@@ -64,6 +64,7 @@ tooltip {
 #cpu,
 #memory,
 #tray,
+#custom-weather,
 #backlight,
 #mpris,
 #custom-launch_wofi {
@@ -102,7 +103,8 @@ tooltip {
   border-right: none;
 }
 
-#tray {
+#tray,
+#custom-weather {
   border-radius: 15px;
   margin-right: 5px;
   border-left: none;
@@ -190,4 +192,8 @@ tooltip {
   padding-right: 10px;
   padding-left: 15px;
   border-right: 0px;
+}
+
+#custom-weather {
+    color: @color5;
 }
