@@ -2,7 +2,6 @@ return {
     'github/copilot.vim',
     config = function()
         vim.g.copilot_filetypes = {
-            vimwiki = false,
             markdown = false,
             lua = true,
             java = true,
