@@ -38,50 +38,37 @@ return {
 
         preferred_link_style = "markdown",
 
-        mappings = {
-            ["<tab>p"] = {
-                action = function()
-                    vim.cmd("ObsidianQuickSwitch")
-                end,
-                description = "Quick switch",
-            },
-            ["<leader>fs"] = {
-                action = function()
-                    vim.cmd("ObsidianSearch")
-                end,
-                description = "Search notes",
-            },
-            ["<leader>ta"] = {
-                action = function()
-                    vim.cmd("ObsidianTags")
-                end,
-                description = "Show tags",
-            },
-            ["<leader>to"] = {
-                action = function()
-                    vim.cmd("ObsidianToday")
-                end,
-                description = "Open today's note",
-            },
-            ["<leader>gd"] = {
-                action = function()
-                    vim.cmd("ObsidianFollowLink")
-                end,
-                description = "Follow link under cursor",
-            },
-            ["<leader>ch"] = {
-                action = function()
-                    return require("obsidian").util.toggle_checkbox()
-                end,
-                opts = { buffer = true },
-            },
-            -- Smart action depending on context, either follow link or toggle checkbox.
-            ["<cr>"] = {
-                action = function()
-                    return require("obsidian").util.smart_action()
-                end,
-                opts = { buffer = true, expr = true },
-            }
+        new_notes_location = "notes_subdir",
+
+        legacy_commands = false, -- remove this after version 4
+
+        callbacks = {
+            enter_note = function(_, note)
+                vim.keymap.set("n", "<tab>p", "<cmd>Obsidian quick_switch<cr>", {
+                    buffer = note.bufnr,
+                    desc = "Quick switch",
+                })
+                vim.keymap.set("n", "<leader>fs", "<cmd>Obsidian search<cr>", {
+                    buffer = note.bufnr,
+                    desc = "Search notes",
+                })
+                vim.keymap.set("n", "<leader>ta", "<cmd>Obsidian tags<cr>", {
+                    buffer = note.bufnr,
+                    desc = "Show tags",
+                })
+                vim.keymap.set("n", "<leader>to", "<cmd>Obsidian today<cr>", {
+                    buffer = note.bufnr,
+                    desc =  "Open today's note",
+                })
+                vim.keymap.set("n", "<leader>gd", "<cmd>Obsidian follow_link<cr>", {
+                    buffer = note.bufnr,
+                    desc =  "Follow link under cursor",
+                })
+                vim.keymap.set("n", "<leader>ch", "<cmd>Obsidian toggle_checkbox<cr>", {
+                    buffer = note.bufnr,
+                    desc =  "Toggle checkbox",
+                })
+            end,
         },
     },
 }
