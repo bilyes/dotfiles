@@ -27,7 +27,10 @@ return {
             --},
         },
 
-        disable_frontmatter = true,
+        frontmatter = {
+            enabled = false,
+        },
+
         note_id_func = function(title)
             return title
         end,
@@ -43,7 +46,7 @@ return {
         legacy_commands = false, -- remove this after version 4
 
         callbacks = {
-            enter_note = function(_, note)
+            enter_note = function(note)
                 vim.keymap.set("n", "<tab>p", "<cmd>Obsidian quick_switch<cr>", {
                     buffer = note.bufnr,
                     desc = "Quick switch",
