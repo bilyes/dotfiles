@@ -25,7 +25,7 @@ if [ $cacheage -gt 1740 ] || [ ! -s $cachedir/$cachefile ]; then
     data=($(oniux curl -s https://en.wttr.in/"$city"\?0qnTm 2>&1))
     # if curl fails, keep retrying
     while [ $? -ne 0 ]; do
-        sleep 10
+        sleep 30
         data=($(oniux curl -s https://en.wttr.in/"$city"\?0qnTm 2>&1))
     done
     echo ${data[0]} | cut -f1 -d, > $cachedir/$cachefile
