@@ -125,32 +125,21 @@ cmp.setup({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local servers = {
-    'denols',
-    --'tsserver',
-    --'lua_ls',
-    'gopls',
-    'terraformls',
-    --'ltex',
-}
+-- Initialize lspconfig to add its configurations to the runtime path
+require('lspconfig')
 
-for _, lsp in ipairs(servers) do
-    vim.lsp.config(lsp, {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    })
-end
-
-vim.lsp.config('lua_ls', {
+vim.lsp.config('*', {
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = {
-                    'vim',
-                },
-            },
-        }
-    },
 })
+
+local servers = {
+    --'denols',
+    --'tsserver',
+    'lua_ls',
+    'gopls',
+    --'terraformls',
+    --'ltex',
+    'pylsp',
+}
+vim.lsp.enable(servers)
