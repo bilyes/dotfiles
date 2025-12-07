@@ -1,3 +1,8 @@
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .cache --ignore .npm --ignore .cargo --ignore .yarn -f -g "" --depth 10' # requires silversearch-ag
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_PREVIEW_CMD="cat {}"
+source <(fzf --zsh)
+
 # https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.sh
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
