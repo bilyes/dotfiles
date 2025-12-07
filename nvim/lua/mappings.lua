@@ -3,6 +3,7 @@ vim.g.mapleader = " "
 local opts = { noremap = true, silent = true }
 
 vim.keymap.set('i', 'jj', '<Esc>', opts)
+vim.keymap.set('i', '<C-v>', '<Esc>"+pa', opts)
 
 vim.keymap.set('n', '<leader>h', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<leader>j', ':wincmd j<CR>', opts)
