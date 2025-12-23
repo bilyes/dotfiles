@@ -2,31 +2,63 @@ vim.g.mapleader = " "
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set('i', 'jj', '<Esc>', opts)
-vim.keymap.set('i', '<C-v>', '<Esc>"+pa', opts)
+local function map(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options or opts)
+end
 
-vim.keymap.set('n', '<leader>h', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<leader>j', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<leader>k', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<leader>l', ':wincmd l<CR>', opts)
---vim.keymap.set('n', '<leader>pv', ':Lex 28 <CR>', opts)
-vim.keymap.set('n', '<leader>pa', ':set paste! <CR>', opts)
-vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR> :pwd <CR>', opts)
-vim.keymap.set('n', '<leader>du', ':sav %:p:h/', opts)
+local mappings = {
+    {
+        mode = 'i',
+        mappings = {
+            { 'jj',    '<Esc>' },
+            { '<C-v>', '<Esc>"+pa' },
+        }
+    },
+    {
+        mode = 'n',
+        mappings = {
+            -- Window navigation
+            { '<leader>h',  ':wincmd h<CR>' },
+            { '<leader>j',  ':wincmd j<CR>' },
+            { '<leader>k',  ':wincmd k<CR>' },
+            { '<leader>l',  ':wincmd l<CR>' },
 
-vim.keymap.set('n', 'oo', 'o<Esc>k', opts)
-vim.keymap.set('n', 'OO', 'O<Esc>j', opts)
-vim.keymap.set('n', 'Y', 'y$', opts)
-vim.keymap.set('n', 'cY', '"+Y', opts)
-vim.keymap.set('v', 'cy', '"+y', opts)
-vim.keymap.set('n', 'cp', '"+p', opts)
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
+            -- File and directory operations
+            { '<leader>pa', ':set paste! <CR>' },
+            { '<leader>cd', ':cd %:p:h<CR> :pwd <CR>' },
+            { '<leader>du', ':sav %:p:h/' },
 
--- preserve copied values across multiples pastes
-vim.keymap.set('x', '<leader>p', '"_dP', opts)
+            -- Text editing and manipulation
+            { 'oo',         'o<Esc>k' },
+            { 'OO',         'O<Esc>j' },
+            { 'Y',          'y$' },
+            { '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>' },
 
--- find and replace
-vim.keymap.set('n', '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', opts)
+            -- Clipboard and system integration
+            { 'cY',         '"+Y' },
+            { 'cp',         '"+p' },
+        }
+    },
+    {
+        mode = 'v',
+        mappings = {
+            { 'J',  ":m '>+1<CR>gv=gv" },
+            { 'K',  ":m '<-2<CR>gv=gv" },
 
---vim.keymap.set('n', '<leader>u', ':UndotreeShow<CR>', opts)
+            -- Clipboard and system integration
+            { 'cy', '"+y' },
+        }
+    },
+    {
+        mode = 'x',
+        mappings = {
+            { '<leader>p', '"_dP' },
+        }
+    },
+}
+
+for _, section in ipairs(mappings) do
+    for _, mapping in ipairs(section.mappings) do
+        map(section.mode, mapping[1], mapping[2])
+    end
+end
