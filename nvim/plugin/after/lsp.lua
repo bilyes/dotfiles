@@ -126,7 +126,7 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Initialize lspconfig to add its configurations to the runtime path
-require('lspconfig')
+--require('lspconfig')
 
 vim.lsp.config('*', {
     on_attach = on_attach,
