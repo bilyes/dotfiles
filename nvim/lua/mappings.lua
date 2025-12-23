@@ -1,11 +1,5 @@
 vim.g.mapleader = " "
 
-local opts = { noremap = true, silent = true }
-
-local function map(mode, lhs, rhs, options)
-    vim.keymap.set(mode, lhs, rhs, options or opts)
-end
-
 local mappings = {
     {
         mode = 'i',
@@ -59,6 +53,6 @@ local mappings = {
 
 for _, section in ipairs(mappings) do
     for _, mapping in ipairs(section.mappings) do
-        map(section.mode, mapping[1], mapping[2])
+        vim.keymap.set(section.mode, mapping[1], mapping[2], { noremap = true, silent = true })
     end
 end
