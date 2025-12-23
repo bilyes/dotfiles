@@ -6,7 +6,7 @@
 ## Installation
 
 ```
-git clone git@github.com:ilyessbachiri/dotfiles.git ~/.config/dotfiles \
+git clone git@github.com:bilyes/dotfiles.git ~/.config/dotfiles \
     && ~/.config/dotfiles/install.sh
 ```
 
