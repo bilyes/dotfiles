@@ -3,17 +3,22 @@ return {
     tag = 'v0.2.0',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        local opts = { noremap = true, silent = true }
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<tab>p', builtin.find_files, opts)
-        vim.keymap.set('n', '<leader>fc', builtin.commands, opts)
-        vim.keymap.set('n', '<leader>fs', builtin.live_grep, opts)
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
-        vim.keymap.set('n', '<leader>fr', builtin.lsp_references, opts)
-        vim.keymap.set('n', '<leader>fi', builtin.lsp_implementations, opts)
-        vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, opts)
-        vim.keymap.set('n', '<leader>fw', builtin.grep_string, opts)
+        local mappings = {
+            { "<tab>p", builtin.find_files },
+            { "<leader>fc", builtin.commands },
+            { "<leader>fs", builtin.live_grep },
+            { "<leader>fb", builtin.buffers },
+            { "<leader>fh", builtin.help_tags },
+            { "<leader>fr", builtin.lsp_references },
+            { "<leader>fi", builtin.lsp_implementations },
+            { "<leader>ds", builtin.lsp_document_symbols },
+            { "<leader>fw", builtin.grep_string },
+        }
+        for _, map in ipairs(mappings) do
+            local key, func = map[1], map[2]
+            vim.keymap.set('n', key, func, { noremap = true, silent = true })
+        end
 
         require('telescope').setup {
             defaults = {
