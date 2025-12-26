@@ -172,7 +172,8 @@ fip() {
   
   if [[ -n "$pkg_names" ]]; then
     # Convert newline-separated selections to space-separated for yay
-    echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S # --noconfirm
+    #echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S --noconfirm
+    sudo pacman -S $(echo "$pkg_names" | tr '\n' ' ')
   fi
 }
 
@@ -195,7 +196,8 @@ fiap() {
   
   if [[ -n "$pkg_names" ]]; then
     # Convert newline-separated selections to space-separated for yay
-    echo "$pkg_names" | tr '\n' ' ' | xargs yay -S # --noconfirm
+    #echo "$pkg_names" | tr '\n' ' ' | xargs yay -S --noconfirm
+    yay -S $(echo "$pkg_names" | tr '\n' ' ')
   fi
 }
 
@@ -216,6 +218,7 @@ frp() {
   
   if [[ -n "$pkg_names" ]]; then
     # Convert newline-separated selections to space-separated for yay
-    echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -Rns # --noconfirm
+    #echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -Rns --noconfirm
+    sudo pacman -Rns $(echo "$pkg_names" | tr '\n' ' ')
   fi
 }
