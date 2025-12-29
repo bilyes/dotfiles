@@ -31,6 +31,10 @@ return {
             enabled = false,
         },
 
+        ui = {
+            enable = false,
+        },
+
         note_id_func = function(title)
             return title
         end,
