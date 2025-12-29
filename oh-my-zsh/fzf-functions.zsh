@@ -1,4 +1,6 @@
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .cache --ignore .npm --ignore .cargo --ignore .yarn -f -g "" --depth 10' # requires silversearch-ag
+#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .cache --ignore .npm --ignore .cargo --ignore .yarn --ignore .steam --ignore .electron-gyp --ignore .wine --ignore "*.otf" --ignore "*.png" --ignore "*.jpg" -f -g "" --depth 10' # requires silversearch-ag
+#export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git, .cache, .npm, .cargo, .yarn, .steam, .electron-gyp, .wine, *.otf, *.png, *.jpg}" --max-depth 10' # requires ripgrep
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --exclude .cache --exclude .npm --exclude .cargo --exclude .yarn --exclude .steam --exclude .electron-gyp --exclude .wine --exclude "*.otf" --exclude "*.png" --exclude "*.jpg" --max-depth 10' # requires fd (fd-find)
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_PREVIEW_CMD="cat {}"
 source <(fzf --zsh)
