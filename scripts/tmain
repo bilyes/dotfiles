@@ -6,5 +6,6 @@ tmux new-session \; \
   split-window -h \; \
   select-pane -t 1 \; \
   split-window -v \; \
+  send-keys 'ff' C-m \; \
   select-layout -E \; \
   select-pane -t 3 \;
