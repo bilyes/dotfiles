@@ -151,6 +151,21 @@ local function update_diary_index_on_write(note, index_path)
     vim.fn.writefile(vim.split(new_content, "\n"), index_path)
 end
 
+local function is_daily_note(note)
+    local path_str = tostring(note.path)
+
+    local daily_folder = Obsidian.opts.daily_notes.folder
+
+    -- Check if this is a daily note in the configured folder
+    return path_str:match(daily_folder:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0"))
+end
+
+local function get_diary_index_path()
+    local workspace_path = tostring(Obsidian.workspace.path)
+    local daily_folder = Obsidian.opts.daily_notes.folder
+    return workspace_path .. "/" .. daily_folder .. "/diary.md"
+end
+
 return {
     "obsidian-nvim/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
@@ -231,24 +246,11 @@ return {
             end,
             pre_write_note = function(note)
                 local success, err = pcall(function()
-                    local path_str = tostring(note.path)
-
-                    -- TODO: Read daily folder from config
-                    local daily_folder = "main/diary"
-
-                    -- Check if this is a daily note in the configured folder
-                    if not path_str:match(daily_folder:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%0")) then
-                        return -- Not a daily note, exit silently
+                    if not is_daily_note(note) then
+                        return
                     end
 
-                    -- Construct diary index path dynamically
-                    -- TODO: Read workspace from config
-                    local workspace_path = vim.fn.expand("~/notes")
-                    --local workspace_path = tostring(client:dir())
-
-                    local index_path = workspace_path .. "/" .. daily_folder .. "/diary.md"
-
-                    -- Update diary index (no need to pass daily_folder now)
+                    local index_path = get_diary_index_path()
                     update_diary_index_on_write(note, index_path)
                 end)
                 if not success then
