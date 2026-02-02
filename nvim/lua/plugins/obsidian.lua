@@ -76,23 +76,6 @@ return {
                     desc = "Toggle checkbox",
                 })
             end,
-            pre_write_note = function(note)
-                local success, err = pcall(function()
-                    local DailyNotesIndex = require("daily_notes_index")
-                    local daily_folder = Obsidian.opts.daily_notes.folder
-                    local note_path = tostring(note.path)
-                    if not DailyNotesIndex.is_daily_note(note_path, Obsidian.opts.daily_notes.folder) then
-                        return
-                    end
-
-                    local daily_folder_full_path = tostring(Obsidian.workspace.path) .. "/" .. daily_folder
-                    local index_path = DailyNotesIndex.get_index_path(daily_folder_full_path)
-                    DailyNotesIndex.update_index(note_path, index_path)
-                end)
-                if not success then
-                    vim.notify("Error updating diary index: " .. (err or "unknown"), vim.log.levels.ERROR)
-                end
-            end,
         },
     },
 }
