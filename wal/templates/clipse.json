@@ -1,5 +1,5 @@
 {{
-    "useCustomTheme": true,
+    "useCustom": true,
     "TitleFore": "{foreground}",
     "TitleBack": "{color3}",
     "TitleInfo": "{color1}",
