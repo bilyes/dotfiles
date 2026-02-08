@@ -141,5 +141,6 @@ local servers = {
     --'terraformls',
     --'ltex',
     'pylsp',
+    'ruby_lsp',
 }
 vim.lsp.enable(servers)

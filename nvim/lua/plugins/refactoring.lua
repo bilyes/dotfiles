@@ -5,7 +5,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         'nvim-telescope/telescope.nvim',
     },
-    lazy = false,
+    --lazy = false,
     opts = {},
     config = function()
         -- load refactoring Telescope extension
