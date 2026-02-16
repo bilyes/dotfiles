@@ -6,7 +6,11 @@ function zle-clipboard-paste {
   if ((REGION_ACTIVE)); then
     zle kill-region
   fi
-  LBUFFER+="$(wl-paste)"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    LBUFFER+="$(pbpaste)"
+  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    LBUFFER+="$(wl-paste)"
+  fi
 }
 zle -N zle-clipboard-paste
 
