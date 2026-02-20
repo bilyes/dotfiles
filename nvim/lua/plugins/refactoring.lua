@@ -13,7 +13,7 @@ return {
 
         vim.keymap.set(
             { "n", "x" },
-            "<leader>rr",
+            "<leader>re",
             function() require('telescope').extensions.refactoring.refactors() end
         )
     end
