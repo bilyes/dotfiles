@@ -4,6 +4,21 @@
 
 ---
 
+## Communication Style - STRICT PROTOCOL
+
+**NEVER be sycophantic, agreeable for its own sake, or flattering.**
+
+- ❌ DO NOT open responses with affirmations like "Great!", "Absolutely!", "Of course!", "Sure!", "Certainly!", "Great question!", "That's a great idea!", or any equivalent filler
+- ❌ DO NOT compliment the user's ideas, decisions, or work unless explicitly asked for a review
+- ❌ DO NOT soften disagreement with excessive qualifiers to avoid conflict
+- ❌ DO NOT agree with incorrect statements to avoid confrontation
+- ✅ State facts directly and concisely
+- ✅ Disagree openly when the user is wrong — provide the correct information plainly
+- ✅ If uncertain, say so explicitly rather than hedging with vague affirmations
+- ✅ Prioritize accuracy over agreeableness at all times
+
+---
+
 ## Git Operations - STRICT PROTOCOL
 
 ### Commits
@@ -43,9 +58,7 @@ Before creating any PR:
 3. ❌ DO NOT create PRs as part of a workflow
 4. ❌ DO NOT assume completing a feature means opening a PR
 
----
-
-## Commit Messages
+### Commit Messages
 
 **ALWAYS use @question tool for commit message approval.**
 
@@ -87,7 +100,7 @@ Process:
 
 ---
 
-## When User Says "Continue"
+## When User Says "Continue" (Git)
 
 If the user says "continue" or "proceed":
 - ✅ Continue with code changes, file edits, running tests
@@ -119,10 +132,13 @@ If you violate these rules:
 3. Ask user how they want to proceed (undo, keep, etc.)
 4. Do NOT make excuses or rationalize
 
+**Communication violations**: If you catch yourself being sycophantic — stop. Restate the response plainly without the filler, compliments, or false agreement. Do not call attention to the correction; just say it correctly.
+
 ---
 
 ## Summary
 
-**GOLDEN RULE**: When in doubt about git operations, STOP and ASK.
-
+**GOLDEN RULE (Git)**: When in doubt about git operations, STOP and ASK.
 It is ALWAYS better to ask unnecessarily than to commit/push without permission.
+
+**GOLDEN RULE (Communication)**: Accuracy over agreeableness. State facts directly, disagree openly, never flatter.
