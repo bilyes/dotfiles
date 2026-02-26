@@ -52,15 +52,14 @@ return {
                     sort_mru = true,
                 },
                 find_files = {
-                    hidden = true,    -- show hidden files
-                    no_ignore = true, -- do not respect .gitignore
-                    file_ignore_patterns = {
-                        "^node_modules/",
-                        "^build/",
-                        "^dist/",
-                        "^yarn%.lock",
-                        "^%.git/",
-                        "^%.np/",
+                    find_command = {
+                        "fd", "--type", "f", "--hidden", "--no-ignore",
+                        "--exclude", ".git",
+                        "--exclude", "node_modules",
+                        "--exclude", "build",
+                        "--exclude", "dist",
+                        "--exclude", "yarn.lock",
+                        "--exclude", ".np",
                     },
                     theme = "dropdown",
                     previewer = false,
