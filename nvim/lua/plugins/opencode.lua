@@ -10,6 +10,9 @@ return {
         ---@type opencode.Opts
         vim.g.opencode_opts = {
             -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition" on the type or field.
+          provider = vim.uv.os_uname().sysname == "Darwin" and {
+            cmd = "devx opencode --port",
+          } or nil,
         }
 
         -- Required for `opts.events.reload`.
