@@ -90,7 +90,6 @@ usable_w=$((monitor_w - outer_left - outer_right - 2 * inner_gap))
 w_side=$(( usable_w * 30 / 100 ))
 w_center=$(( usable_w - 2 * w_side ))
 
-# ── 5. Apply sizes ──
+# ── 5. Apply sizes (right window skipped — tiling engine assigns the remainder) ──
 "$AEROSPACE" resize width "$w_side"   --window-id "$id_left"
 "$AEROSPACE" resize width "$w_center" --window-id "$id_center"
-"$AEROSPACE" resize width "$w_side"   --window-id "$id_right"
