@@ -61,7 +61,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 
-    trigger_workspace_diagnostics(client, bufnr)
+    --trigger_workspace_diagnostics(client, bufnr)
 
     -- Enable completion triggered by <c-x><c-o>
     --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -70,7 +70,9 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, bufopts)
+    local ok, telescope = pcall(require, 'telescope.builtin')
+    local go_to_definition = ok and telescope.lsp_definitions or vim.lsp.buf.definition
+    vim.keymap.set('n', '<leader>gd', go_to_definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
