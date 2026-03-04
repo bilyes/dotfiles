@@ -12,6 +12,10 @@ return {
             "nvim-telescope/telescope-live-grep-args.nvim",
             version = "^1.0.0",
         },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'make',
+        },
     },
     config = function()
         local builtin = require('telescope.builtin')
@@ -35,6 +39,17 @@ return {
 
         local telescope = require('telescope')
         local lga_actions = require("telescope-live-grep-args.actions")
+        local action_state = require("telescope.actions.state")
+
+        local function find_files_no_ignore()
+            local line = action_state.get_current_line()
+            builtin.find_files({ no_ignore = true, default_text = line })
+        end
+
+        local function find_files_with_hidden()
+            local line = action_state.get_current_line()
+            builtin.find_files({ hidden = true, default_text = line })
+        end
 
         telescope.setup {
             defaults = {
@@ -53,7 +68,7 @@ return {
                 },
                 find_files = {
                     find_command = {
-                        "fd", "--type", "f", "--hidden", "--no-ignore",
+                        "fd", "--type", "f",
                         "--exclude", ".git",
                         "--exclude", "node_modules",
                         "--exclude", "build",
@@ -66,6 +81,8 @@ return {
                     mappings = {
                         i = {
                             ["<C-h>"] = require('telescope.actions').file_split,
+                            ["<a-i>"] = find_files_no_ignore,
+                            ["<a-h>"] = find_files_with_hidden,
                         },
                     },
                 },
@@ -96,5 +113,6 @@ return {
 
         telescope.load_extension('ui-select')
         telescope.load_extension("live_grep_args")
+        telescope.load_extension('fzf')
     end,
 }
