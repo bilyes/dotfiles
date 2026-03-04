@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/.config/opencode/RULES.md"
+  ],
+  "keybinds": {
+    "messages_line_up": "ctrl+p",
+    "messages_line_down": "ctrl+n",
+    "messages_half_page_up": "ctrl+u",
+    "messages_half_page_down": "ctrl+d",
+    "messages_first": "<leader>g,home",
+    "session_timeline" : "none",
+    "messages_last": "<leader>shift+g,end"
+  }
+}
