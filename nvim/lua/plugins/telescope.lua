@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = 'v0.2.0',
+    tag = 'v0.2.1',
     dependencies = {
         {
             'nvim-lua/plenary.nvim',
@@ -54,6 +54,9 @@ return {
         telescope.setup {
             defaults = {
                 layout_strategy = 'vertical',
+                preview = {
+                    treesitter = true,
+                },
                 path_display = {
                     shorten = {
                         len = 3,
