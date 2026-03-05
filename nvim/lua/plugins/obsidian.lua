@@ -35,6 +35,11 @@ return {
             enable = false,
         },
 
+        checkbox = {
+            --order = { " ", "~", "!", ">", "x" },
+            order = { " ", "x" },
+        },
+
         note_id_func = function(title)
             return title
         end,
@@ -64,6 +69,10 @@ return {
                     desc = "Show tags",
                 })
                 vim.keymap.set("n", "<leader>to", "<cmd>Obsidian today<cr>", {
+                    buffer = note.bufnr,
+                    desc = "Open today's note",
+                })
+                vim.keymap.set("n", "<leader>ye", "<cmd>Obsidian yesterday<cr>", {
                     buffer = note.bufnr,
                     desc = "Open today's note",
                 })
