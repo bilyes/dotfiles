@@ -74,7 +74,7 @@ return {
                 })
                 vim.keymap.set("n", "<leader>ye", "<cmd>Obsidian yesterday<cr>", {
                     buffer = note.bufnr,
-                    desc = "Open today's note",
+                    desc = "Open yesterday's note",
                 })
                 vim.keymap.set("n", "<leader>gd", "<cmd>Obsidian follow_link<cr>", {
                     buffer = note.bufnr,
