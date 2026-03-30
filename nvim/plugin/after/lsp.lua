@@ -144,5 +144,6 @@ local servers = {
     --'ltex',
     'pylsp',
     'ruby_lsp',
+    'sorbet',
 }
 vim.lsp.enable(servers)

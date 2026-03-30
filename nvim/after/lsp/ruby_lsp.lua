@@ -8,7 +8,7 @@ return {
             dispatchers,
             {
                 cwd = config.cmd_cwd or config.root_dir,
-                env = { RUBY_LSP_BYPASS_TYPECHECKER = "1" },
+                --env = { RUBY_LSP_BYPASS_TYPECHECKER = "1" },
             }
         )
     end,
