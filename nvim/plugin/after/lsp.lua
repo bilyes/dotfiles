@@ -64,8 +64,10 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    local ok, telescope = pcall(require, 'telescope.builtin')
-    local go_to_definition = ok and telescope.lsp_definitions or vim.lsp.buf.definition
+    local go_to_definition = function()
+        local ok, telescope = pcall(require, 'telescope.builtin')
+        if ok then telescope.lsp_definitions() else vim.lsp.buf.definition() end
+    end
     vim.keymap.set('n', '<leader>gd', go_to_definition, vim.tbl_extend('force', bufopts, { desc = 'Go to definition' }))
     --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)

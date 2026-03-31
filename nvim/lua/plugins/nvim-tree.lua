@@ -1,6 +1,6 @@
 return {
     'kyazdani42/nvim-tree.lua',
-    enable = false,
+    enabled = false,
     config = function()
         require('nvim-tree').setup({
             view = {
