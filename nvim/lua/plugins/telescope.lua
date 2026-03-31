@@ -19,22 +19,23 @@ return {
     },
     config = function()
         local builtin = require('telescope.builtin')
+        local lga = function() require('telescope').extensions.live_grep_args.live_grep_args() end
         local mappings = {
-            { "<tab>p",     builtin.find_files },
-            { "<leader>fc", builtin.commands },
+            { "<tab>p",     builtin.find_files,           desc = 'Find files' },
+            { "<leader>fc", builtin.commands,             desc = 'Find commands' },
             --{ "<leader>fs", builtin.live_grep },
-            { "<leader>fs", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>" },
-            { "<leader>fb", builtin.buffers },
-            { "<leader>fh", builtin.help_tags },
-            { "<leader>fr", builtin.lsp_references },
-            { "<leader>fi", builtin.lsp_implementations },
-            { "<leader>ds", builtin.lsp_document_symbols },
+            { "<leader>fs", lga,                          desc = 'Live grep' },
+            { "<leader>fb", builtin.buffers,              desc = 'Find buffers' },
+            { "<leader>fh", builtin.help_tags,            desc = 'Find help tags' },
+            { "<leader>fr", builtin.lsp_references,       desc = 'Find LSP references' },
+            { "<leader>fi", builtin.lsp_implementations,  desc = 'Find LSP implementations' },
+            { "<leader>ds", builtin.lsp_document_symbols, desc = 'Find document symbols' },
             -- TODO use live_grep_args for this?
-            { "<leader>fw", builtin.grep_string },
+            { "<leader>fw", builtin.grep_string,          desc = 'Grep word under cursor' },
         }
         for _, map in ipairs(mappings) do
             local key, func = map[1], map[2]
-            vim.keymap.set('n', key, func, { noremap = true, silent = true })
+            vim.keymap.set('n', key, func, { noremap = true, silent = true, desc = map.desc })
         end
 
         local telescope = require('telescope')

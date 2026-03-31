@@ -1,10 +1,11 @@
 return {
-    'preservim/nerdcommenter',
     -- Auto pairs for '[', '{' and '('
     --'jiangmiao/auto-pairs',
 
     'neovim/nvim-lspconfig',
-    'hrsh7th/nvim-cmp',
+    -- Loaded eagerly so plugin/after/lsp.lua can call
+    -- require('cmp_nvim_lsp').default_capabilities() at startup,
+    -- before nvim-cmp itself is lazy-loaded on InsertEnter/LspAttach.
     'hrsh7th/cmp-nvim-lsp',
 
     --'folke/which-key.nvim',

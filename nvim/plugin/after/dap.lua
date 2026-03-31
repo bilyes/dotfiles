@@ -10,18 +10,18 @@ vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapS
 
 local dap = require('dap')
 
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>db', ':lua require("dap").toggle_breakpoint()<CR>', opts);
-vim.keymap.set('n', '<leader>dB', ':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts);
-vim.keymap.set('n', '<leader>dc', ':lua require("dap").continue()<CR>', opts);
-vim.keymap.set('n', '<leader>dt', ':lua require("dap").terminate()<CR>', opts);
-vim.keymap.set('n', '<leader>dsv', ':lua require("dap").step_over()<CR>', opts);
-vim.keymap.set('n', '<leader>dsi', ':lua require("dap").step_into()<CR>', opts);
-vim.keymap.set('n', '<leader>dso', ':lua require("dap").step_out()<CR>', opts);
+local function opts(desc) return { noremap = true, silent = true, desc = desc } end
+vim.keymap.set('n', '<leader>db', function() dap.toggle_breakpoint() end, opts('Toggle breakpoint'))
+vim.keymap.set('n', '<leader>dB', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, opts('Set conditional breakpoint'))
+vim.keymap.set('n', '<leader>dc', function() dap.continue() end, opts('Continue'))
+vim.keymap.set('n', '<leader>dt', function() dap.terminate() end, opts('Terminate'))
+vim.keymap.set('n', '<leader>dsv', function() dap.step_over() end, opts('Step over'))
+vim.keymap.set('n', '<leader>dsi', function() dap.step_into() end, opts('Step into'))
+vim.keymap.set('n', '<leader>dso', function() dap.step_out() end, opts('Step out'))
 
 local dapui = require('dapui')
 
-vim.keymap.set('n', '<leader>de', ':lua require("dapui").eval()<CR>', opts);
+vim.keymap.set('n', '<leader>de', function() dapui.eval() end, opts('Evaluate expression'))
 
 dapui.setup({
     layouts = {
