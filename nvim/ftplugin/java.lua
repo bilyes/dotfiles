@@ -87,7 +87,7 @@ local config = {
         -- Make sure to set JAVA_HOME env environment to the appropriate java binary
         mason_path .. 'packages/jdtls/bin/jdtls',
         '--jvm-arg=-javaagent:' .. mason_path .. "packages/jdtls/lombok.jar",
-        '-configuration', mason_path .. 'jdtls/config_' .. (vim.loop.os_uname().sysname == 'Darwin' and 'mac' or 'linux'),
+        '-configuration', mason_path .. 'jdtls/config_' .. (vim.uv.os_uname().sysname == 'Darwin' and 'mac' or 'linux'),
         '-data', workspace_folder,
     },
     on_attach = on_attach,
