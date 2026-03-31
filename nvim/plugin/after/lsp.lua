@@ -67,8 +67,6 @@ local on_attach = function(client, bufnr)
     local ok, telescope = pcall(require, 'telescope.builtin')
     local go_to_definition = ok and telescope.lsp_definitions or vim.lsp.buf.definition
     vim.keymap.set('n', '<leader>gd', go_to_definition, vim.tbl_extend('force', bufopts, { desc = 'Go to definition' }))
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end,
-        vim.tbl_extend('force', bufopts, { desc = 'Hover documentation' }))
     --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     --vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
