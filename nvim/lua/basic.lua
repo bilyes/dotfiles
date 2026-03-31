@@ -1,13 +1,10 @@
 vim.opt.nu = true
 vim.opt.rnu = true
 
-vim.g.netrw_browse_split = 4 -- Open in previous window
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3 -- hierarchical style
-vim.g.netrw_winsize = 25
-
---" don't require buffers to be saved before navigating away from them
-vim.opt.hidden = true
+--vim.g.netrw_browse_split = 4 -- Open in previous window
+--vim.g.netrw_banner = 0
+--vim.g.netrw_liststyle = 3 -- hierarchical style
+--vim.g.netrw_winsize = 25
 
 vim.opt.wrap = false
 
@@ -29,10 +26,18 @@ vim.opt.colorcolumn = "100"
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+vim.fn.mkdir(undodir, "p")
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
-vim.cmd[[au BufEnter *.txt,*.md setl tw=100]]
+vim.opt.updatetime = 250
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = { "*.txt", "*.md" },
+    callback = function() vim.opt_local.textwidth = 100 end,
+})
 
 --set foldmethod=syntax
 --set foldnestmax=1

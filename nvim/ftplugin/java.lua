@@ -1,6 +1,6 @@
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.shiftwidth = 2
 
 local jdtls = require('jdtls')
 
@@ -33,8 +33,8 @@ local on_attach = function(_, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, bufopts)
+    -- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, bufopts)
+    -- vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, bufopts)
     --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     --vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -43,10 +43,10 @@ local on_attach = function(_, bufnr)
     --print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     --end, bufopts)
     --vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    -- vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
     vim.keymap.set("n", "<leader>dm", jdtls.test_nearest_method, bufopts)
 end
@@ -88,7 +88,7 @@ local config = {
         -- Make sure to set JAVA_HOME env environment to the appropriate java binary
         mason_path .. 'packages/jdtls/bin/jdtls',
         '--jvm-arg=-javaagent:' .. mason_path .. "packages/jdtls/lombok.jar",
-        '-configuration', mason_path .. 'jdtls/config_linux',
+        '-configuration', mason_path .. 'jdtls/config_' .. (vim.loop.os_uname().sysname == 'Darwin' and 'mac' or 'linux'),
         '-data', workspace_folder,
     },
     on_attach = on_attach,
