@@ -13,6 +13,16 @@ return {
         -- Close diffview
         vim.keymap.set('n', '<leader>gq', ':DiffviewClose<CR>', opts)
 
-        require('diffview').setup()
+        require('diffview').setup({
+            file_panel = {
+                win_config = function()
+                    if vim.o.columns < 120 then
+                        return { type = "split", position = "bottom", height = 15 }
+                    else
+                        return { type = "split", position = "left", width = 35 }
+                    end
+                end,
+            },
+        })
     end
 }
