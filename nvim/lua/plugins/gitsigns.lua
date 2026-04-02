@@ -26,7 +26,7 @@ return {
             -- Actions
             map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
             map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-            --map('n', '<leader>hS', gs.stage_buffer)
+            map('n', '<leader>hS', gs.stage_buffer)
             map('n', '<leader>hu', gs.undo_stage_hunk)
             --map('n', '<leader>hR', gs.reset_buffer)
             map('n', '<leader>hp', gs.preview_hunk)
