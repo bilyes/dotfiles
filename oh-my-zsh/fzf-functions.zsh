@@ -1,8 +1,22 @@
 #export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .cache --ignore .npm --ignore .cargo --ignore .yarn --ignore .steam --ignore .electron-gyp --ignore .wine --ignore "*.otf" --ignore "*.png" --ignore "*.jpg" -f -g "" --depth 10' # requires silversearch-ag
 #export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git, .cache, .npm, .cargo, .yarn, .steam, .electron-gyp, .wine, *.otf, *.png, *.jpg}" --max-depth 10' # requires ripgrep
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --exclude ".cache" --exclude ".npm" --exclude ".cargo" --exclude ".yarn" --exclude "node_modules" --exclude ".steam" --exclude ".electron-gyp" --exclude ".wine" --exclude ".vim" --exclude "*.otf" --exclude "*.png" --exclude "*.jpg" --max-depth 10' # requires fd (fd-find)
+
+# Directories to exclude from fzf file/dir listings
+_fzf_exclude_dirs=(.git .cache .npm .cargo .yarn node_modules .steam .electron-gyp .wine .gem .vim)
+# File patterns to exclude (only applies to file listings)
+_fzf_exclude_files=("*.otf" "*.png" "*.jpg")
+
+_fzf_dir_excludes=""
+for d in "${_fzf_exclude_dirs[@]}"; do _fzf_dir_excludes+=" --exclude $d"; done
+_fzf_file_excludes=""
+for f in "${_fzf_exclude_files[@]}"; do _fzf_file_excludes+=" --exclude '$f'"; done
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden${_fzf_dir_excludes}${_fzf_file_excludes} --max-depth 10"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --hidden${_fzf_dir_excludes} --max-depth 10"
 export FZF_PREVIEW_CMD="cat {}"
+
+unset _fzf_dir_excludes _fzf_file_excludes _fzf_exclude_dirs _fzf_exclude_files
 source <(fzf --zsh)
 
 # https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.sh
