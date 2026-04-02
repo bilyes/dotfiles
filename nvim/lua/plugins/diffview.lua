@@ -13,6 +13,8 @@ return {
         -- Close diffview
         vim.keymap.set('n', '<leader>gq', ':DiffviewClose<CR>', opts)
 
+        local actions = require('diffview.config').actions
+
         require('diffview').setup({
             file_panel = {
                 win_config = function()
@@ -22,6 +24,11 @@ return {
                         return { type = "split", position = "left", width = 35 }
                     end
                 end,
+            },
+            keymaps = {
+                file_panel = {
+                    { "n", "<leader>gr", actions.restore_entry, { desc = "Restore file to HEAD" } },
+                },
             },
         })
     end
