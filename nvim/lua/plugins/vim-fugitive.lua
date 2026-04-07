@@ -12,7 +12,7 @@ return {
             local cur_branch = vim.fn.system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
             vim.cmd.Git('push -u origin ' .. cur_branch)
         end, opts)
-        vim.keymap.set('n', 'gj', "<cmd>diffget //2<CR>", opts)
+        vim.keymap.set('n', 'gh', "<cmd>diffget //2<CR>", opts)
         vim.keymap.set('n', 'gl', "<cmd>diffget //3<CR>", opts)
 
         vim.opt.diffopt = vim.opt.diffopt + "vertical"
