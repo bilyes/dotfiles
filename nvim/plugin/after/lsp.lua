@@ -74,6 +74,7 @@ local on_attach = function(client, bufnr)
     --vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     --vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     --vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, vim.tbl_extend('force', bufopts, { desc = 'Show diagnostics' }))
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', bufopts, { desc = 'Rename symbol' }))
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', bufopts, { desc = 'Code action' }))
     vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end,
