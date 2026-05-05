@@ -17,8 +17,6 @@ vim.opt.smartindent = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.termguicolors = true
-
 vim.o.winborder = 'rounded'
 
 vim.opt.scrolloff = 8
@@ -35,11 +33,6 @@ vim.opt.undodir = undodir
 vim.opt.undofile = true
 
 vim.opt.updatetime = 250
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.txt", "*.md" },
-    callback = function() vim.opt_local.textwidth = 100 end,
-})
 
 --set foldmethod=syntax
 --set foldnestmax=1

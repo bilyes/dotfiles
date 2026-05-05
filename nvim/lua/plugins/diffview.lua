@@ -1,17 +1,18 @@
 return {
     'sindrets/diffview.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        local opts = { noremap = true, silent = true }
+        local function opts(desc)
+            return { noremap = true, silent = true, desc = desc }
+        end
 
         -- File history for current file
-        vim.keymap.set('n', '<leader>gh', ':DiffviewFileHistory %<CR>', opts)
+        vim.keymap.set('n', '<leader>gh', ':DiffviewFileHistory %<CR>', opts('File history (current file)'))
         -- Repo-wide file history
-        vim.keymap.set('n', '<leader>gH', ':DiffviewFileHistory<CR>', opts)
+        vim.keymap.set('n', '<leader>gH', ':DiffviewFileHistory<CR>', opts('File history (repo)'))
         -- Diff working tree against HEAD
-        vim.keymap.set('n', '<leader>gD', ':DiffviewOpen<CR>', opts)
+        vim.keymap.set('n', '<leader>gD', ':DiffviewOpen<CR>', opts('Diff working tree'))
         -- Close diffview
-        vim.keymap.set('n', '<leader>gq', ':DiffviewClose<CR>', opts)
+        vim.keymap.set('n', '<leader>gq', ':DiffviewClose<CR>', opts('Close diffview'))
 
         local actions = require('diffview.config').actions
 

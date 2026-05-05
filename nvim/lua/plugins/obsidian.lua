@@ -57,31 +57,31 @@ return {
         callbacks = {
             enter_note = function(note)
                 vim.keymap.set("n", "<tab>p", "<cmd>Obsidian quick_switch<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Quick switch",
                 })
                 vim.keymap.set("n", "<leader>fs", "<cmd>Obsidian search<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Search notes",
                 })
                 vim.keymap.set("n", "<leader>ta", "<cmd>Obsidian tags<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Show tags",
                 })
                 vim.keymap.set("n", "<leader>to", "<cmd>Obsidian today<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Open today's note",
                 })
                 vim.keymap.set("n", "<leader>ye", "<cmd>Obsidian yesterday<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Open yesterday's note",
                 })
                 vim.keymap.set("n", "<leader>gd", "<cmd>Obsidian follow_link<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Follow link under cursor",
                 })
                 vim.keymap.set("n", "<leader>ch", "<cmd>Obsidian toggle_checkbox<cr>", {
-                    buffer = note.bufnr,
+                    buf = note.bufnr,
                     desc = "Toggle checkbox",
                 })
             end,

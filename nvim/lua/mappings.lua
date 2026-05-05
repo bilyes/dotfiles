@@ -10,13 +10,12 @@ local mappings = {
         mode = 'n',
         mappings = {
             -- Window navigation
-            { '<leader>h',  ':wincmd h<CR>', desc = 'Move to left window' },
-            { '<leader>j',  ':wincmd j<CR>', desc = 'Move to bottom window' },
-            { '<leader>k',  ':wincmd k<CR>', desc = 'Move to top window' },
-            { '<leader>l',  ':wincmd l<CR>', desc = 'Move to right window' },
+            { '<leader>h',  function() vim.cmd.wincmd('h') end, desc = 'Move to left window' },
+            { '<leader>j',  function() vim.cmd.wincmd('j') end, desc = 'Move to bottom window' },
+            { '<leader>k',  function() vim.cmd.wincmd('k') end, desc = 'Move to top window' },
+            { '<leader>l',  function() vim.cmd.wincmd('l') end, desc = 'Move to right window' },
 
             -- File and directory operations
-            { '<leader>pa', ':set paste! <CR>',  desc = 'Toggle paste mode' },
             { '<leader>cd', ':cd %:p:h<CR> :pwd <CR>', desc = 'cd to current file directory' },
             { '<leader>du', ':sav %:p:h/',       desc = 'Duplicate file' },
 
