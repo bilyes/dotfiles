@@ -11,6 +11,7 @@ return {
             typescript = true,
         }
         vim.g.copilot_no_tab_map = true
+        vim.g.copilot_npx_command = 0 -- use bundled language-server.js instead of npx
 
         vim.g.copilot_lsp_settings = {
             telemetry = {

@@ -5,16 +5,16 @@ return {
         "nvim-treesitter/nvim-treesitter",
         'nvim-telescope/telescope.nvim',
     },
-    --lazy = false,
-    opts = {},
-    config = function()
-        -- load refactoring Telescope extension
-        require("telescope").load_extension("refactoring")
-
-        vim.keymap.set(
-            { "n", "x" },
+    keys = {
+        {
             "<leader>re",
-            function() require('telescope').extensions.refactoring.refactors() end
-        )
-    end
+            function()
+                require("telescope").load_extension("refactoring")
+                require('telescope').extensions.refactoring.refactors()
+            end,
+            mode = { "n", "x" },
+            desc = "Refactors",
+        },
+    },
+    opts = {},
 }

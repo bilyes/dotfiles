@@ -62,7 +62,7 @@ local on_attach = function(client, bufnr)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    local bufopts = { noremap = true, silent = true, buf = bufnr }
     --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     local go_to_definition = function()
         local ok, telescope = pcall(require, 'telescope.builtin')
@@ -75,8 +75,8 @@ local on_attach = function(client, bufnr)
     --vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     --vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, vim.tbl_extend('force', bufopts, { desc = 'Show diagnostics' }))
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', bufopts, { desc = 'Rename symbol' }))
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', bufopts, { desc = 'Code action' }))
+    -- Rename: use built-in `grn`
+    -- Code action: use built-in `gra`
     vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end,
         vim.tbl_extend('force', bufopts, { desc = 'Format buffer' }))
 end
