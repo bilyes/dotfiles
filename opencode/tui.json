@@ -7,6 +7,9 @@
     "messages_half_page_down": "ctrl+d",
     "messages_first": "<leader>g,home",
     "session_timeline": "none",
-    "messages_last": "<leader>shift+g,end"
+    "messages_last": "<leader>shift+g,end",
+    "app_exit": "ctrl+c,<leader>q",
+    "session_delete": "none",
+    "stash_delete": "none"
   }
 }
