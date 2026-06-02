@@ -48,7 +48,9 @@ return {
             folder = "main/diary",
         },
 
-        preferred_link_style = "markdown",
+        link = {
+            style = "markdown",
+        },
 
         new_notes_location = "notes_subdir",
 
