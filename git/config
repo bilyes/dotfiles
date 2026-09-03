@@ -1,11 +1,7 @@
-; Read automatically by git as $XDG_CONFIG_HOME/git/config via the
-; ~/.config/git -> ~/.config/dotfiles/git symlink created by install.sh.
-;
-; Note: this file is read BEFORE ~/.gitconfig, so anything set there (or in
-; the files it includes) takes precedence over these values.
+; Read automatically as $XDG_CONFIG_HOME/git/config (~/.config/git -> here).
+; Loaded before ~/.gitconfig, which therefore overrides anything set here.
 
 [push]
-	; Auto-create the remote branch on first push instead of failing with
-	; "has no upstream branch ... use --set-upstream". Requires git >= 2.37
-	; and push.default set to simple (the default), upstream, or current.
+	; Create the remote branch on first push instead of erroring. Needs git
+	; >= 2.37 and push.default = simple (the default), upstream, or current.
 	autoSetupRemote = true

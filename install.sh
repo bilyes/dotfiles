@@ -32,6 +32,7 @@ link-zsh aliases.zsh
 link-zsh functions.zsh
 
 #link-folder alacritty &
+link-folder git &
 link-folder powerline &
 link-folder rofi &
 link-folder termite &
