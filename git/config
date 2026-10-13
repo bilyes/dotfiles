@@ -5,3 +5,27 @@
 	; Create the remote branch on first push instead of erroring. Needs git
 	; >= 2.37 and push.default = simple (the default), upstream, or current.
 	autoSetupRemote = true
+
+[rerere]
+	; Record conflict resolutions and replay them when the same conflict comes
+	; back (e.g. restacking with gt). Replayed files are left unstaged.
+	enabled = true
+
+[rebase]
+	; Stash uncommitted changes before a rebase and reapply them afterwards,
+	; instead of refusing to start.
+	autoStash = true
+
+[merge]
+	; Conflict markers also show the original text between the two sides.
+	; Needs git >= 2.35.
+	conflictStyle = zdiff3
+
+[branch]
+	; List the most recently committed-to branches first in `git branch`.
+	sort = -committerdate
+
+[column]
+	; Print `git branch`, `git tag` and untracked files in `git status` in
+	; columns when writing to a terminal.
+	ui = auto
