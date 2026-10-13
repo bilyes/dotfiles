@@ -19,9 +19,18 @@ alias c=clear
 alias chmox="chmod u+x"
 
 alias -g G='| grep'
-alias i="sudo pacman -S"
-alias r="sudo pacman -Rns"
-alias up="sudo pacman -Syu"
+
+# pacman (Arch Linux only)
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  alias i="sudo pacman -S"
+  alias r="sudo pacman -Rns"
+  alias up="sudo pacman -Syu"
+else
+  # Without the alias above, `r` would fall back to zsh's builtin, which
+  # re-runs the previous command.
+  disable r
+fi
+
 alias t="tmux"
 alias ff="fastfetch"
 alias p="python3"

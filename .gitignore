@@ -1,3 +1,10 @@
 vim/plugged/*
 vim/.netrwhist
 hypr/wallpaper
+
+# OpenCode: local plugin deps and machine-specific service credentials
+opencode/node_modules
+opencode/package.json
+opencode/package-lock.json
+opencode/bun.lock
+opencode/service.json
