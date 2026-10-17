@@ -17,3 +17,25 @@ env = XDG_CONFIG_HOME,$HOME/.config
 env = XDG_CACHE_HOME,$HOME/.cache
 env = XDG_DATA_HOME,$HOME/.local/share
 env = XDG_STATE_HOME,$HOME/.local/state
+
+# NVIDIA GPU Configuration
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+#env = GBM_BACKEND,nvidia-drm
+
+# Force NVIDIA GPU for Hyprland display rendering
+# env = AQ_DRM_DEVICES,/dev/dri/card1
+
+# Hardware video acceleration
+env = NVD_BACKEND,direct
+
+# VRR/G-Sync
+env = __GL_GSYNC_ALLOWED,1
+env = __GL_VRR_ALLOWED,1
+
+# Electron apps native Wayland
+env = ELECTRON_OZONE_PLATFORM_HINT,auto
+
+# PRIME offload for running apps on NVIDIA
+#env = __NV_PRIME_RENDER_OFFLOAD,1
+#env = __VK_LAYER_NV_optimus,NVIDIA_only

@@ -33,11 +33,53 @@ windowrule {
     opacity = 0.8
 }
 
-windowrule = match:class org.mozilla.Thunderbird, workspace 4, no_initial_focus on
+# Center the satty screenshot editor
+windowrule {
+    name = "Satty Screenshot Editor"
+    match:class = com.gabm.satty
+    float = on
+    center = on
+}
+
+# Firefox About window - always float centered, not tiled
+windowrule {
+    name = "Firefox About"
+    match:class = ^(firefox|FirefoxPrivate)$
+    match:title = ^(About Mozilla Firefox)$
+    float = on
+    center = on
+}
+
+# Thunderbird login / OAuth popups - float centered on current workspace
+windowrule {
+    name = "Thunderbird Login Modal"
+    match:class = org.mozilla.Thunderbird
+    match:modal = 1
+    float = on
+    center = on
+}
+
+windowrule {
+    name = "Thunderbird Login Float"
+    match:class = org.mozilla.Thunderbird
+    match:float = 1
+    center = on
+}
+
+windowrule {
+    name = "Thunderbird OAuth Title"
+    match:class = org.mozilla.Thunderbird
+    match:title = ^(Authentication Required.*|Sign in.*|Log in.*|.*OAuth.*|.*Google.*|.*Microsoft.*)$
+    float = on
+    center = on
+}
+
+windowrule = match:class org.mozilla.Thunderbird, match:float false, match:modal false, workspace 4, no_initial_focus on
 windowrule = match:class signal, match:title Signal, workspace 4, no_initial_focus on
 windowrule = match:class heroic, match:title ^(Heroic Games Launcher)$, workspace 5, no_initial_focus on
 windowrule = match:class steam, match:title ^(Steam)$, workspace 5, no_initial_focus on
-windowrule = match:class FirefoxPrivate, match:title (.*)(Mozilla Firefox)$, workspace 3, no_initial_focus on
+windowrule = match:class Steam, workspace 5, no_initial_focus on
+windowrule = match:class FirefoxPrivate, match:title (.*)(Mozilla Firefox)$, match:float false, match:modal false, workspace 3, no_initial_focus on
 windowrule = match:class ^(Tor Browser), match:title (.*)(Tor Browser)$, workspace 6, no_initial_focus on
 
 windowrule = match:class ^(qalculate-gtk)$, float on
@@ -48,8 +90,8 @@ windowrule = match:title ^(Picture-in-Picture)$, float on
 #windowrule = match:title ^(Picture-in-Picture)$, size (monitor_w*0.4) (monitor_h*0.48)
 #windowrule = match:title ^(Picture-in-Picture)$, keep_aspect_ratio on
 
-## Ignore maximize requests from apps. You'll probably like this.
-#windowrule = match:class .*, suppress_event maximize
+# Ignore maximize requests from apps. You'll probably like this.
+windowrule = match:class .*, suppress_event maximize
 
 ## Fix some dragging issues with XWayland
 #windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0

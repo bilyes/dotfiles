@@ -21,7 +21,7 @@ general {
     # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false
 
-    #layout = dwindle
+    # layout = dwindle
     layout = master
 }
 
@@ -35,7 +35,7 @@ decoration {
     inactive_opacity = 1.0
 
     shadow {
-        enabled = true
+        enabled = false
         range = 4
         render_power = 3
         color = rgba(1a1a1aee)
@@ -43,7 +43,7 @@ decoration {
 
     # https://wiki.hyprland.org/Configuring/Variables/#blur
     blur {
-        enabled = true
+        enabled = false
         size = 5
         passes = 2
 
@@ -95,7 +95,7 @@ workspace = 1, monitor:HDMI-A-2, default:true
 
 # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
 dwindle {
-    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+    # pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
     preserve_split = false # You probably want this
     #use_active_for_splits = false
 }
@@ -105,7 +105,7 @@ master {
     #new_status = slave
     allow_small_split = true
     #special_scale_factor = .80
-    mfact = .34
+    mfact = .4
     orientation = center
     #inherit_fullscreen = false
 }
