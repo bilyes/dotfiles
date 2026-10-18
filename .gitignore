@@ -8,3 +8,6 @@ opencode/package.json
 opencode/package-lock.json
 opencode/bun.lock
 opencode/service.json
+
+# Local-only helper script (not tracked by request)
+scripts/noctalia-export.sh
