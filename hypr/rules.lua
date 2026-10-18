@@ -5,38 +5,21 @@
 -- See https://wiki.hypr.land/configuring/core/rules/
 -- See https://wiki.hypr.land/configuring/core/rules/workspace-rules/ for workspace rules
 
-hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
-hl.layer_rule({ match = { namespace = "waybar" }, ignore_alpha = 0.5 })
-
-hl.layer_rule({ match = { namespace = "swaync-control-center" }, blur = true })
-hl.layer_rule({ match = { namespace = "swaync-notification-window" }, blur = true })
-hl.layer_rule({ match = { namespace = "swaync-control-center" }, ignore_alpha = 0.5 })
-hl.layer_rule({ match = { namespace = "swaync-notification-window" }, ignore_alpha = 0.5 })
-
-hl.window_rule({
-  name = "Clipse Kitty",
-  match = { class = "kitty", title = "clipse-clipboard" },
-  float = true,
-  size = { "monitor_w*0.21", "monitor_h*0.4" },
-  opacity = "0.8",
-  stay_focused = true,
-  pin = true,
+-- Noctalia shell surfaces: no animations, translucent blur
+hl.layer_rule({
+  name = "noctalia",
+  match = {
+    namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$",
+  },
+  no_anim = true,
+  ignore_alpha = 0.5,
+  blur = true,
+  blur_popups = true,
 })
-
 hl.window_rule({
-  name = "Set Wallpaper Kitty",
-  match = { class = "kitty", title = "set-wallpaper" },
+  match = { class = "dev.noctalia.Noctalia" },
   float = true,
-  size = { "monitor_w*0.4", "monitor_h*0.4" },
-  opacity = "0.8",
-})
-
--- Center the satty screenshot editor
-hl.window_rule({
-  name = "Satty Screenshot Editor",
-  match = { class = "com.gabm.satty" },
-  float = true,
-  center = true,
+  size = { 1080, 920 },
 })
 
 -- Firefox About window - always float centered, not tiled
@@ -114,9 +97,6 @@ hl.window_rule({
   match = { title = "^(Picture-in-Picture)$" },
   float = true,
 })
--- hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, move = { "72%", "7%" } })
--- hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, size = { "monitor_w*0.4", "monitor_h*0.48" } })
--- hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, keep_aspect_ratio = true })
 
 -- Ignore maximize requests from apps. You'll probably like this.
 hl.window_rule({
@@ -124,6 +104,3 @@ hl.window_rule({
   match = { class = ".*" },
   suppress_event = "maximize",
 })
-
--- Fix some dragging issues with XWayland
--- hl.window_rule({ match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false }, no_focus = true })
