@@ -1,5 +1,5 @@
--- Hyprland Lua config (0.55+). Converted from hyprlang .conf.
--- Old .conf files are kept as backup; if this file exists it takes precedence.
+-- Hyprland Lua config (0.55+). Converted from hyprlang .conf;
+-- previous .conf configs are available in git history.
 -- See https://wiki.hypr.land/Configuring/Start/
 
 ----------------
@@ -10,7 +10,6 @@
 -- each require()d file runs in an isolated scope. Keep them in sync.
 terminal = "kitty"
 fileManager = "nautilus"
-menu = "sh ~/.config/hypr/scripts/fuzzel.sh"
 
 ----------------
 --- MONITORS ---

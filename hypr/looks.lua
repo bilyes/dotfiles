@@ -47,11 +47,9 @@ hl.config({
 
     -- https://wiki.hypr.land/configuring/core/config-options/#blur
     blur = {
-      enabled = false,
+      enabled = true,
       size = 5,
-      passes = 2,
-
-      vibrancy = 0.1696,
+      passes = 1,
     },
   },
 })
