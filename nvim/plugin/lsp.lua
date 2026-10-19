@@ -87,8 +87,16 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 --require('lspconfig')
 
 vim.lsp.config('*', {
-    on_attach = on_attach,
     capabilities = capabilities,
+})
+
+-- Run on_attach from an LspAttach autocmd rather than `vim.lsp.config('*')`: a server config
+-- that defines its own `on_attach` (several nvim-lspconfig ones do) would replace it.
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('user.lsp', {}),
+    callback = function(ev)
+        on_attach(vim.lsp.get_client_by_id(ev.data.client_id), ev.buf)
+    end,
 })
 
 local servers = {
