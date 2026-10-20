@@ -14,5 +14,9 @@
     "session.half.page.down": "ctrl+d",
     "session.first": "<leader>g,home",
     "session.last": "<leader>shift+g,end"
-  }
+  },
+  "session": {
+    "sidebar": "hide"
+  },
+  "animations": false
 }
