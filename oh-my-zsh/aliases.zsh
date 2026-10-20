@@ -3,6 +3,8 @@ alias doc="docker"
 alias di="docker images"
 alias dcls="docker container ls"
 alias dstat="docker stats --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemPerc}}\t{{.NetIO}}'"
+alias dclean="docker image prune -f"     # dangling images
+alias ddestroy="docker image prune -af"  # every image no container uses
 
 # Docker Compose
 alias dc="docker compose"

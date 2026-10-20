@@ -11,6 +11,10 @@ hl.config({
     kb_options = "",
     kb_rules = "",
 
+    -- Key repeat: start after 200 ms, then 30 repeats per second (was `xset r rate 200 30`)
+    repeat_delay = 200,
+    repeat_rate = 30,
+
     follow_mouse = 1,
 
     sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
@@ -21,22 +25,10 @@ hl.config({
   },
 })
 
--- https://wiki.hypr.land/configuring/core/gestures/
--- gestures {
---   workspace_swipe = false
--- }
-
 -- Apple internal keyboard:
 -- left Option <-> left Command; right Option -> right Control.
 -- See http://wiki.hypr.land/configuring/core/devices/ for more
 hl.device({
     name = "apple-inc.-apple-internal-keyboard-/-trackpad",
     kb_options = "altwin:swap_lalt_lwin,ctrl:ralt_rctrl",
-})
-
--- Example per-device config
--- See https://wiki.hypr.land/configuring/core/devices/ for more
-hl.device({
-  name = "epic-mouse-v1",
-  sensitivity = -0.5,
 })

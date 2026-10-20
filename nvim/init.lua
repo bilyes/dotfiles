@@ -1,8 +1,5 @@
 require("basic")
 
--- Manage plugins using packer
---require("plugins_packer")
-
 -- Manage plugins using lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then

@@ -1,14 +1,9 @@
 return {
     'github/copilot.vim',
-    --enabled = false,
     config = function()
+        -- Every other filetype keeps copilot.vim's default (enabled)
         vim.g.copilot_filetypes = {
             markdown = false,
-            lua = true,
-            java = true,
-            go = true,
-            yaml = true,
-            typescript = true,
         }
         vim.g.copilot_no_tab_map = true
         vim.g.copilot_npx_command = 0 -- use bundled language-server.js instead of npx

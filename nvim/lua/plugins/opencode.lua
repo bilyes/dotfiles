@@ -3,8 +3,6 @@ return {
     dependencies = {
         -- Runs the OpenCode TUI in a floating terminal (see `opencode_terminal`).
         "akinsho/toggleterm.nvim",
-        -- Optional: improves `ask()` and `select()`.
-        --{ "folke/snacks.nvim", opts = { input = {}, picker = {} } },
     },
     config = function()
         -- Floating terminal running `opencode2` (OpenCode v2 with the work provider
@@ -43,7 +41,7 @@ return {
         vim.keymap.set("n", "goo", function() return require("opencode").operator("@this") .. "_" end,
             { desc = "Send line to opencode", expr = true })
 
-        -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o…".
+        -- toggleterm takes <C-x>, so increment/decrement live on +/- instead.
         vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
         vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
     end,

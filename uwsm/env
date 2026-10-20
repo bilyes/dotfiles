@@ -1,0 +1,30 @@
+# Environment for uwsm sessions (all compositors); sourced by sh.
+# Changes apply at the next login. HYPR* and AQ_* variables go in env-hyprland.
+# See https://wiki.hypr.land/useful-utilities/uwsm/
+# XDG base directories aren't set here: uwsm sets them itself.
+
+# export XCURSOR_THEME=McMojave-cursors
+export XCURSOR_THEME=Bibata-Modern-Classic
+export XCURSOR_SIZE=24
+
+# Dark theme for GTK-4 applications
+export GTK_THEME=Adwaita:dark
+
+# NVIDIA GPU configuration
+export LIBVA_DRIVER_NAME=nvidia
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+# export GBM_BACKEND=nvidia-drm
+
+# Hardware video acceleration
+export NVD_BACKEND=direct
+
+# VRR/G-Sync
+export __GL_GSYNC_ALLOWED=1
+export __GL_VRR_ALLOWED=1
+
+# Electron apps native Wayland
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+
+# PRIME offload for running apps on NVIDIA
+# export __NV_PRIME_RENDER_OFFLOAD=1
+# export __VK_LAYER_NV_optimus=NVIDIA_only

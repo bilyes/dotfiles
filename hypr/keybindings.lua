@@ -4,13 +4,11 @@
 
 -- See https://wiki.hypr.land/configuring/core/binds/
 
--- Duplicated from hyprland.lua (each require()d file is isolated).
-local terminal = terminal or "kitty"
-local fileManager = fileManager or "nautilus"
-local mainMod = mainMod or "SUPER" -- Sets "Windows" key as main modifier
+local terminal = "kitty"
+local fileManager = "nautilus"
+local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local ipc = "noctalia msg "
 
--- Example binds, see https://wiki.hypr.land/configuring/core/binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("uwsm app -- " .. terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("uwsm app -- /usr/share/applications/firefox.desktop"))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.close())
@@ -27,11 +25,11 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(ipc .. "panel-toggle wallpaper"))
 hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd(ipc .. "session lock"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
-hl.bind(mainMod .. "+comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
 
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.layout("swapwithmaster master"))
 
--- Move focus with mainMod + arrow keys (H/J/K/L)
+-- Move focus with mainMod + H/J/K/L
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
@@ -61,7 +59,7 @@ hl.bind("CTRL + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
 hl.bind("CTRL + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 hl.bind("CTRL + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
--- Example special workspace (scratchpad)
+-- Special workspace (scratchpad)
 hl.bind(mainMod .. " + BACKSLASH", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + BACKSLASH", hl.dsp.window.move({ workspace = "special:magic" }))
 
@@ -77,7 +75,7 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
 
--- Media control (requires playerctl)
+-- Media control
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ipc .. "media next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })

@@ -1,6 +1,10 @@
 return {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    dependencies = {
+        "mfussenegger/nvim-dap",
+        "nvim-neotest/nvim-nio",
+        { "theHamsta/nvim-dap-virtual-text", opts = {} },
+    },
     keys = {
         { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle breakpoint' },
         { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Set conditional breakpoint' },

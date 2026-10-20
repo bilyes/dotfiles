@@ -2,7 +2,7 @@
 #
 # center-wide.sh
 #
-# Resizes a 3-column horizontal tile layout to 25% / 50% / 25% proportions.
+# Resizes a 3-column horizontal tile layout to 30% / 40% / 30% proportions.
 # Windows are sorted left-to-right by their actual on-screen X position.
 #
 # Requires: aerospace, swift (bundled with Xcode CLT), python3

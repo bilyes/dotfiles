@@ -28,7 +28,6 @@ return {
             map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset hunk' })
             map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
             map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
-            --map('n', '<leader>hR', gs.reset_buffer)
             map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
             map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = 'Blame line' })
             map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'Toggle line blame' })
@@ -48,9 +47,6 @@ return {
             end, { desc = 'Toggle diff' })
             map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'Diff against ~' })
             map('n', '<leader>td', gs.toggle_deleted, { desc = 'Toggle deleted' })
-
-            -- Text object
-            --map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end
     }
 }

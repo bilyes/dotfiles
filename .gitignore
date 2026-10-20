@@ -1,6 +1,5 @@
-vim/plugged/*
-vim/.netrwhist
-hypr/wallpaper
+# Generated on Linux by Noctalia's kitty template
+kitty/themes/noctalia.conf
 
 # OpenCode: local plugin deps and machine-specific service credentials
 opencode/node_modules

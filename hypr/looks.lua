@@ -55,7 +55,6 @@ hl.config({
 })
 
 -- https://wiki.hypr.land/configuring/core/config-options/#animations
--- Old value was the "yes, please :)" joke; Lua needs a real boolean.
 hl.config({
   animations = {
     enabled = true,
@@ -87,12 +86,7 @@ hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "al
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
 -- Ref https://wiki.hypr.land/configuring/core/rules/workspace-rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({ name = "no-gaps-wtv1", match = { float = false, workspace = "w[tv1]" }, border_size = 0, rounding = 0 })
--- hl.window_rule({ name = "no-gaps-f1", match = { float = false, workspace = "f[1]" }, border_size = 0, rounding = 0 })
+-- Default workspace per monitor
 hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true })
 hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-2", default = true })
 

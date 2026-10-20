@@ -50,20 +50,22 @@ fgl() {
   local execute
   local fzf_cmd
 
+  # %h: hash
   # %s: comment
   # %d: branch/tag
-  # %h: hash
   # %cd: date
   # %an: author
   git_cmd='git log \
     --all \
     --graph \
     --date-order \
-    --format=format:"%C(auto)%s %d %h %C(cyan)%cd %C(bold black)%an %C(auto)" \
+    --format=format:"%C(auto)%h %s %d %C(cyan)%cd %C(bold black)%an %C(auto)" \
     --date=short \
     --color=always'
 
-  execute="grep -o '[a-f0-9]\{7\}' \
+  # The hash is the first hex run on the line (graph characters aren't hex), and
+  # {7,} keeps the full abbreviation git printed, which may be longer than 7.
+  execute="grep -oE '[a-f0-9]{7,}' \
     | head -1 \
     | xargs -I % sh -c 'git show --color=always % | less -R'"
 
@@ -81,79 +83,15 @@ fgl() {
   eval "$git_cmd | $fzf_cmd"
 }
 
-# fbr - checkout git branch (including remote branches)
-#   - sorted by most recent commit
-#   - limit 30 last branches
+# fgco [QUERY] - checkout a local git branch, most recently committed first
+#   - opens in a tmux popup inside tmux (--tmux is ignored elsewhere)
 fgco() {
-  local branches
-  local num_branches
   local branch
-  local target
-
-  branches="$(
-    git for-each-ref \
-      --count=30 \
-      --sort=-committerdate \
-      refs/heads/ \
-      --format='%(refname:short)'
-  )" || return
-
-  num_branches="$(wc -l <<< "$branches")"
-
   branch="$(
-    echo "$branches" \
-      | fzf-tmux -d "$((2 + $num_branches))" +m
+    git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' \
+      | fzf --tmux --no-multi --query="$1" --select-1 --exit-0
   )" || return
-
-  target="$(
-    echo "$branch" \
-      | sed "s/.* //" \
-      | sed "s#remotes/[^/]*/##"
-  )" || return
-
-  git checkout "$target"
-}
-
-
-# fco - checkout git branch/tag
-#fco() {
-  #local tags
-  #local branches
-  #local target
-
-  #tags="$(
-    #git tag \
-      #| awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'
-  #)" || return
-
-  #branches="$(
-    #git branch --all \
-      #| grep -v HEAD \
-      #| sed 's/.* //' \
-      #| sed 's#remotes/[^/]*/##' \
-      #| sort -u \
-      #| awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}'
-  #)" || return
-
-  #target="$(
-    #printf '%s\n%s' "$tags" "$branches" \
-      #| fzf-tmux \
-          #-l40 \
-          #-- \
-          #--no-hscroll \
-          #--ansi \
-          #+m \
-          #-d '\t' \
-          #-n 2 \
-          #-1 \
-          #-q "$*"
-  #)" || return
-
-  #git checkout "$(echo "$target" | awk '{print $2}')"
-#}
-
-fco() {
-    git checkout $(git for-each-ref refs/heads/ --format='%(refname:short)' | fzf)
+  git checkout "$branch"
 }
 
 fcn() {
