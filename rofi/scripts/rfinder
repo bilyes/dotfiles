@@ -1,5 +1,0 @@
-#!/bin/bash
-
-file=$(find $HOME/ -type f \( ! -regex '.*/\..*' \) \( ! -regex '.*/go/.*' \) \( ! -regex '.*/tmp/.*' \) \( ! -regex '.*/dev/.*' \) \( ! -regex '.*/code/.*' \) | rofi -threads 0 -width 25 -dmenu -i -p "File:" $@)
-
-[[ -n "$file" ]] && xdg-open $file
