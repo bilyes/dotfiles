@@ -23,7 +23,6 @@ return {
         local mappings = {
             { "<tab>p",     builtin.find_files,           desc = 'Find files' },
             { "<leader>fc", builtin.commands,             desc = 'Find commands' },
-            --{ "<leader>fs", builtin.live_grep },
             { "<leader>fs", lga,                          desc = 'Live grep' },
             { "<leader>fb", builtin.buffers,              desc = 'Find buffers' },
             { "<leader>fh", builtin.help_tags,            desc = 'Find help tags' },
@@ -78,7 +77,7 @@ return {
                         "--exclude", "build",
                         "--exclude", "dist",
                         "--exclude", "yarn.lock",
-                        "--exclude", ".np",
+                        "--exclude", ".npm",
                         -- images
                         "--exclude", "*.png",
                         "--exclude", "*.jpg",
@@ -123,20 +122,14 @@ return {
             extensions = {
                 live_grep_args = {
                     auto_quoting = true, -- enable/disable auto-quoting
-                    -- define mappings, e.g.
                     mappings = {         -- extend mappings
                         i = {
-                            --["<C-k>"] = lga_actions.quote_prompt(),
                             ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                             ["<C-t>"] = lga_actions.quote_prompt({ postfix = " --type " }),
                             -- freeze the current list and start a fuzzy search in the frozen list
                             ["<C-space>"] = lga_actions.to_fuzzy_refine,
                         },
                     },
-                    -- ... also accepts theme settings, for example:
-                    -- theme = "dropdown", -- use dropdown theme
-                    -- theme = { }, -- use own theme spec
-                    -- layout_config = { mirror=true }, -- mirror preview pane
                 }
             }
         }

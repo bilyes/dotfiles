@@ -49,31 +49,19 @@ local function trigger_workspace_diagnostics(client, bufnr)
     end
 end
 
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
---vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
     --trigger_workspace_diagnostics(client, bufnr)
 
-    -- Enable completion triggered by <c-x><c-o>
-    --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buf = bufnr }
-    --vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     local go_to_definition = function()
         local ok, telescope = pcall(require, 'telescope.builtin')
         if ok then telescope.lsp_definitions() else vim.lsp.buf.definition() end
     end
     vim.keymap.set('n', '<leader>gd', go_to_definition, vim.tbl_extend('force', bufopts, { desc = 'Go to definition' }))
-    --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    --vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    --vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    --vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    --vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, vim.tbl_extend('force', bufopts, { desc = 'Show diagnostics' }))
     -- Rename: use built-in `grn`
     -- Code action: use built-in `gra`
@@ -82,9 +70,6 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- Initialize lspconfig to add its configurations to the runtime path
---require('lspconfig')
 
 vim.lsp.config('*', {
     capabilities = capabilities,
@@ -100,12 +85,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local servers = {
-    --'denols',
-    --'tsserver',
     'lua_ls',
     'gopls',
-    --'terraformls',
-    --'ltex',
     'pylsp',
     'ruby_lsp',
     'sorbet',

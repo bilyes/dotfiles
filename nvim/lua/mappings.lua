@@ -3,7 +3,7 @@ local mappings = {
         mode = 'i',
         mappings = {
             { 'jj',    '<Esc>',      desc = 'Exit insert mode' },
-            { '<C-v>', '<Esc>"+pa',  desc = 'Paste from system clipboard' },
+            { '<C-v>', '<C-r><C-o>+', desc = 'Paste from system clipboard' },
         }
     },
     {
@@ -30,19 +30,16 @@ local mappings = {
         }
     },
     {
-        mode = 'v',
+        -- Visual mode only ('v' would also cover Select mode, where these
+        -- letters must type text, e.g. into snippet placeholders)
+        mode = 'x',
         mappings = {
             { 'J',  ":m '>+1<CR>gv=gv", desc = 'Move selection down' },
             { 'K',  ":m '<-2<CR>gv=gv", desc = 'Move selection up' },
+            { '<leader>p', '"_dP', desc = 'Paste without overwriting register' },
 
             -- Clipboard and system integration
             { 'cy', '"+y', desc = 'Yank selection to system clipboard' },
-        }
-    },
-    {
-        mode = 'x',
-        mappings = {
-            { '<leader>p', '"_dP', desc = 'Paste without overwriting register' },
         }
     },
 }
