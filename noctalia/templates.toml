@@ -1,0 +1,6 @@
+# Noctalia merges every *.toml in this folder alphabetically, so this extends config.toml.
+
+[theme.templates]
+enable_builtin_templates = true
+# kitty: writes kitty/themes/noctalia.conf, which kitty/kitty.conf includes.
+builtin_ids = ["kitty"]
