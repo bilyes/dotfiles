@@ -26,6 +26,14 @@ hl.config({
 --   workspace_swipe = false
 -- }
 
+-- Apple internal keyboard:
+-- left Option <-> left Command; right Option -> right Control.
+-- See http://wiki.hypr.land/configuring/core/devices/ for more
+hl.device({
+    name = "apple-inc.-apple-internal-keyboard-/-trackpad",
+    kb_options = "altwin:swap_lalt_lwin,ctrl:ralt_rctrl",
+})
+
 -- Example per-device config
 -- See https://wiki.hypr.land/configuring/core/devices/ for more
 hl.device({
