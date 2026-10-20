@@ -1,0 +1,9 @@
+# Hyprland-only environment for uwsm (HYPR* and AQ_* variables); sourced by sh.
+# Changes apply at the next login.
+# See https://wiki.hypr.land/useful-utilities/uwsm/
+
+# export HYPRCURSOR_THEME=Bibata-Modern-Classic
+# export HYPRCURSOR_SIZE=24
+
+# Force NVIDIA GPU for Hyprland display rendering
+# export AQ_DRM_DEVICES=/dev/dri/card1
