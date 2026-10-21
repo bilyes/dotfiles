@@ -180,7 +180,7 @@ on-mode-changed = []
 
 [[on-window-detected]]
 if.app-id = "org.mozilla.firefox"
-run = "move-node-to-workspace 2"
+run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
 if.app-id = "com.google.Chrome"
