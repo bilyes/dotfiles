@@ -1,6 +1,9 @@
 # Generated on Linux by Noctalia's kitty template
 kitty/themes/noctalia.conf
 
+# Machine-specific Neovim plugin settings
+nvim/lua/plugins/local.lua
+
 # OpenCode: local plugin deps and machine-specific service credentials
 opencode/node_modules
 opencode/package.json

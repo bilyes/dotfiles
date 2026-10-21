@@ -46,6 +46,8 @@ Afterwards:
 
 - `~/.zshrc` isn't in this repo. For machine-specific shell config (e.g. work aliases), add a
   `*.zsh` file to `$ZSH_CUSTOM`; Oh My Zsh loads all of them.
+- Machine-specific Neovim plugin settings go in `nvim/lua/plugins/local.lua` (git-ignored).
+  lazy.nvim merges it with the plugin specs in this repo.
 - `nvim/scripts/test-config.sh` checks that the Neovim config loads.
 
 #### Terminal tips
