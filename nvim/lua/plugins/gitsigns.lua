@@ -13,13 +13,13 @@ return {
             -- Navigation
             map('n', ']c', function()
                 if vim.wo.diff then return ']c' end
-                vim.schedule(function() gs.next_hunk() end)
+                vim.schedule(function() gs.nav_hunk('next') end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Next hunk' })
 
             map('n', '[c', function()
                 if vim.wo.diff then return '[c' end
-                vim.schedule(function() gs.prev_hunk() end)
+                vim.schedule(function() gs.nav_hunk('prev') end)
                 return '<Ignore>'
             end, { expr = true, desc = 'Previous hunk' })
 
@@ -27,7 +27,8 @@ return {
             map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>', { desc = 'Stage hunk' })
             map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset hunk' })
             map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
-            map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+            -- stage_hunk on an already staged hunk unstages it
+            map('n', '<leader>hu', gs.stage_hunk, { desc = 'Unstage hunk' })
             map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
             map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = 'Blame line' })
             map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'Toggle line blame' })
@@ -46,7 +47,7 @@ return {
                 end
             end, { desc = 'Toggle diff' })
             map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'Diff against ~' })
-            map('n', '<leader>td', gs.toggle_deleted, { desc = 'Toggle deleted' })
+            map('n', '<leader>td', gs.preview_hunk_inline, { desc = 'Preview hunk inline' })
         end
     }
 }

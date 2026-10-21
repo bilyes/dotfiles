@@ -113,9 +113,10 @@ else
 fi
 
 # Test 3: Startup time
-STARTUP_FILE="/tmp/nvim_test_startup"
+STARTUP_FILE="$(mktemp)"
+trap 'rm -f "$STARTUP_FILE"' EXIT
 if timeout 5 nvim --headless --startuptime "$STARTUP_FILE" +q &>/dev/null; then
-    if [ -f "$STARTUP_FILE" ]; then
+    if [ -s "$STARTUP_FILE" ]; then
         # Look for the NVIM STARTED line and extract the time
         STARTUP_TIME=$(grep "NVIM STARTED" "$STARTUP_FILE" | tail -1 | awk '{print $1}')
         if [[ -n "$STARTUP_TIME" ]]; then
@@ -130,7 +131,6 @@ if timeout 5 nvim --headless --startuptime "$STARTUP_FILE" +q &>/dev/null; then
         else
             print_warning "Could not parse startup time"
         fi
-        rm -f "$STARTUP_FILE"
     else
         print_warning "Could not read startup time"
     fi

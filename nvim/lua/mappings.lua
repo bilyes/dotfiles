@@ -17,12 +17,12 @@ local mappings = {
 
             -- File and directory operations
             { '<leader>cd', ':cd %:p:h<CR> :pwd <CR>', desc = 'cd to current file directory' },
-            { '<leader>du', ':sav %:p:h/',       desc = 'Duplicate file' },
+            { '<leader>du', ':sav %:p:h/',       desc = 'Duplicate file', silent = false },
 
             -- Text editing and manipulation
             { 'oo',         'o<Esc>k',           desc = 'Add blank line below' },
             { 'OO',         'O<Esc>j',           desc = 'Add blank line above' },
-            { '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', desc = 'Search and replace word under cursor' },
+            { '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', desc = 'Search and replace word under cursor', silent = false },
 
             -- Clipboard and system integration
             { 'cY',         '"+Y',  desc = 'Yank line to system clipboard' },
@@ -44,8 +44,11 @@ local mappings = {
     },
 }
 
+-- Mappings that leave a command half-typed set `silent = false`: silent would keep
+-- the command line blank until the first key is typed.
 for _, section in ipairs(mappings) do
     for _, mapping in ipairs(section.mappings) do
-        vim.keymap.set(section.mode, mapping[1], mapping[2], { noremap = true, silent = true, desc = mapping.desc })
+        vim.keymap.set(section.mode, mapping[1], mapping[2],
+            { noremap = true, silent = mapping.silent ~= false, desc = mapping.desc })
     end
 end
