@@ -35,8 +35,8 @@ return {
                     elements = {
                         { id = "scopes", size = 0.25 },
                         "breakpoints",
-                         "stacks",
-                         "watches",
+                        "stacks",
+                        "watches",
                     },
                     size = 40,
                     position = "right",
@@ -53,13 +53,13 @@ return {
         })
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
-          dapui.open {}
+            dapui.open {}
         end
         dap.listeners.before.event_terminated["dapui_config"] = function()
-          dapui.close {}
+            dapui.close {}
         end
         dap.listeners.before.event_exited["dapui_config"] = function()
-          dapui.close {}
+            dapui.close {}
         end
     end,
 }

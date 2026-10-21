@@ -112,7 +112,7 @@ fcn() {
 # Arch Linux package helpers (pacman / yay)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fip() {
-    fzf_args=(
+    local fzf_args=(
       --multi
       --preview 'pacman -Sii {1}'
       --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
@@ -124,17 +124,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       --color 'pointer:green,marker:green'
     )
 
-    pkg_names=$(pacman -Slq | fzf "${fzf_args[@]}")
+    local pkg_names=$(pacman -Slq | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
       # Convert newline-separated selections to space-separated for yay
-      #echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S --noconfirm
       sudo pacman -S $(echo "$pkg_names" | tr '\n' ' ')
     fi
   }
 
   fiap() {
-    fzf_args=(
+    local fzf_args=(
       --multi
       --preview 'yay -Siia {1}'
       --preview-label='alt-p: toggle description, alt-b/B: toggle PKGBUILD, alt-j/k: scroll, tab: multi-select'
@@ -148,17 +147,16 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       --color 'pointer:green,marker:green'
     )
 
-    pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
+    local pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
       # Convert newline-separated selections to space-separated for yay
-      #echo "$pkg_names" | tr '\n' ' ' | xargs yay -S --noconfirm
       yay -S $(echo "$pkg_names" | tr '\n' ' ')
     fi
   }
 
   frp() {
-    fzf_args=(
+    local fzf_args=(
       --multi
       --preview 'yay -Qi {1}'
       --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
@@ -170,11 +168,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       --color 'pointer:red,marker:red'
     )
 
-    pkg_names=$(yay -Qqe | fzf "${fzf_args[@]}")
+    local pkg_names=$(yay -Qqe | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
       # Convert newline-separated selections to space-separated for yay
-      #echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -Rns --noconfirm
       sudo pacman -Rns $(echo "$pkg_names" | tr '\n' ' ')
     fi
   }

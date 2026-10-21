@@ -2,12 +2,12 @@
 -- plugins/local.lua.
 return {
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         config = true
     },
     {
-        'williamboman/mason-lspconfig.nvim',
-        dependencies = { 'williamboman/mason.nvim' },
+        'mason-org/mason-lspconfig.nvim',
+        dependencies = { 'mason-org/mason.nvim' },
         opts = {
             -- ftplugin/java.lua starts jdtls through nvim-jdtls; auto-enabling it
             -- here too would attach a second client.

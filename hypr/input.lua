@@ -29,6 +29,6 @@ hl.config({
 -- left Option <-> left Command; right Option -> right Control.
 -- See http://wiki.hypr.land/configuring/core/devices/ for more
 hl.device({
-    name = "apple-inc.-apple-internal-keyboard-/-trackpad",
-    kb_options = "altwin:swap_lalt_lwin,ctrl:ralt_rctrl",
+  name = "apple-inc.-apple-internal-keyboard-/-trackpad",
+  kb_options = "altwin:swap_lalt_lwin,ctrl:ralt_rctrl",
 })
