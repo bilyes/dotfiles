@@ -9,7 +9,9 @@ return {
         vim.keymap.set('n', '<leader>ggp', function() vim.cmd.Git('push') end, opts('Git push'))
         vim.keymap.set('n', '<leader>gpf', function() vim.cmd.Git('push -f') end, opts('Git push force'))
         vim.keymap.set('n', '<leader>ggl', function() vim.cmd.Git('pull') end, opts('Git pull'))
-        vim.keymap.set('n', '<leader>gcob', ':G checkout -b ', opts('Git checkout new branch'))
+        -- Not silent: it leaves the command half-typed, which silent would hide until the first key
+        vim.keymap.set('n', '<leader>gcob', ':G checkout -b ',
+            vim.tbl_extend('force', opts('Git checkout new branch'), { silent = false }))
         -- Rebind fugitive's d2o/d3o (ours/theirs hunk in a merge diff) to gh/gl.
         vim.g.nremap = { d2o = 'gh', d3o = 'gl' }
 
