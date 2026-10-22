@@ -2,99 +2,83 @@
 #
 # center-wide.sh
 #
-# Resizes a 3-column horizontal tile layout to 30% / 40% / 30% proportions.
-# Windows are sorted left-to-right by their actual on-screen X position.
+# Lays out the focused workspace's 3 windows side by side, with the middle window
+# a third wider than each outer one: 30% / 40% / 30% of the width left after gaps.
+# Works from any starting arrangement (nested, stacked, floating) and with any gaps.
 #
-# Requires: aerospace, swift (bundled with Xcode CLT), python3
+# Requires: aerospace. Window positions are read with osascript (JXA), part of macOS.
 
 set -euo pipefail
 
 AEROSPACE=/opt/homebrew/bin/aerospace
 
-# ── 1. Get focused workspace's window IDs ──
-windows=$("$AEROSPACE" list-windows --workspace focused --json)
-count=$(echo "$windows" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
+# The middle window is CENTER_NUM / CENTER_DEN times as wide as each outer window.
+CENTER_NUM=4
+CENTER_DEN=3
 
-if [[ "$count" -ne 3 ]]; then
-    osascript -e "display notification \"Found $count window(s) — need exactly 3 for 30/40/30 layout.\" with title \"center-wide\"" &>/dev/null
+fail() {
+    osascript -e "display notification \"$1\" with title \"center-wide\"" &>/dev/null || true
     exit 1
-fi
-
-# Collect the aerospace window IDs on this workspace
-aerospace_ids=$(echo "$windows" | python3 -c "
-import json, sys
-for w in json.load(sys.stdin):
-    print(w['window-id'])
-")
-
-# ── 2. Sort window IDs left-to-right by actual X position via CGWindowList ──
-sorted_ids=$(swift -e "
-import AppKit
-
-let aerospaceIds: Set<Int> = Set([$(echo "$aerospace_ids" | tr '\n' ',' | sed 's/,$//')]) 
-
-let windowList = CGWindowListCopyWindowInfo(
-    [.optionOnScreenOnly, .excludeDesktopElements],
-    kCGNullWindowID
-) as! [[String: Any]]
-
-var matches: [(id: Int, x: CGFloat)] = []
-for w in windowList {
-    guard let wid = w[kCGWindowNumber as String] as? Int,
-          aerospaceIds.contains(wid),
-          let bounds = w[kCGWindowBounds as String] as? [String: CGFloat],
-          let x = bounds[\"X\"] else { continue }
-    matches.append((id: wid, x: x))
 }
 
-matches.sort { \$0.x < \$1.x }
-for m in matches { print(m.id) }
-" 2>/dev/null)
-
-sorted_count=$(echo "$sorted_ids" | wc -l | tr -d ' ')
-if [[ "$sorted_count" -ne 3 ]]; then
-    osascript -e "display notification \"Could not resolve positions for all 3 windows (got $sorted_count).\" with title \"center-wide\"" &>/dev/null
-    exit 1
-fi
-
-id_left=$(echo   "$sorted_ids" | sed -n '1p')
-id_center=$(echo "$sorted_ids" | sed -n '2p')
-id_right=$(echo  "$sorted_ids" | sed -n '3p')
-
-# ── 3. Get focused monitor's pixel width ──
-monitor_name=$("$AEROSPACE" list-monitors --focused --json | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['monitor-name'])")
-
-monitor_w=$(swift -e "
-import AppKit
-let target = \"$monitor_name\"
-for screen in NSScreen.screens {
-    if screen.localizedName == target {
-        print(Int(screen.frame.size.width))
-    }
+# Prints "<window id> <x>" (in points) for each given window that's on screen.
+window_positions() {
+    osascript -l JavaScript -e '
+        ObjC.import("CoreGraphics");
+        function run(argv) {
+            var ids = argv.map(Number);
+            // kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements, kCGNullWindowID
+            var windows = ObjC.deepUnwrap(ObjC.castRefToObject($.CGWindowListCopyWindowInfo(1 | 16, 0)));
+            return windows
+                .filter(function (w) { return ids.indexOf(w.kCGWindowNumber) !== -1; })
+                .map(function (w) { return w.kCGWindowNumber + " " + Math.round(w.kCGWindowBounds.X); })
+                .join("\n");
+        }' "$@"
 }
-" 2>/dev/null)
 
-if [[ -z "$monitor_w" ]]; then
-    osascript -e "display notification \"Could not determine monitor width for: $monitor_name\" with title \"center-wide\"" &>/dev/null
-    exit 1
+count=$("$AEROSPACE" list-windows --workspace focused --count)
+[[ $count -eq 3 ]] || fail "Found $count window(s); this layout needs exactly 3."
+
+# One row of three tiled windows with equal weights. AeroSpace's layout command
+# exits 1 when there's nothing to change, so only run it when needed.
+ids=()
+while read -r id layout; do
+    ids+=("$id")
+    if [[ $layout == floating ]]; then
+        "$AEROSPACE" layout tiling --window-id "$id"
+    fi
+done <<< "$("$AEROSPACE" list-windows --workspace focused --format '%{window-id} %{window-layout}')"
+"$AEROSPACE" flatten-workspace-tree
+layouts=$("$AEROSPACE" list-windows --workspace focused --format '%{window-layout}')
+if [[ ${layouts%%$'\n'*} != h_tiles ]]; then
+    "$AEROSPACE" layout h_tiles --window-id "${ids[0]}"
 fi
-
-# ── 4. Compute pixel widths (accounting for gaps) ──
-# inner.horizontal gap is applied between windows (2 gaps for 3 columns)
-inner_gap=$("$AEROSPACE" config --get gaps.inner.horizontal 2>/dev/null || echo 0)
-outer_left=$("$AEROSPACE" config --get gaps.outer.left 2>/dev/null || echo 0)
-outer_right=$("$AEROSPACE" config --get gaps.outer.right 2>/dev/null || echo 0)
-
-usable_w=$((monitor_w - outer_left - outer_right - 2 * inner_gap))
-
-w_side=$(( usable_w * 30 / 100 ))
-w_center=$(( usable_w - 2 * w_side ))
-
-# ── 5. Apply sizes ──
-# Reset to equal thirds first so we always start from a known baseline,
-# making subsequent absolute resizes fully deterministic regardless of
-# whatever sizes the windows had before.
 "$AEROSPACE" balance-sizes
 
-"$AEROSPACE" resize width "$w_center" --window-id "$id_center"
-"$AEROSPACE" resize width "$w_side"   --window-id "$id_left"
+# Read the positions back once two consecutive reads agree, i.e. the layout settled
+positions="" previous=""
+for _ in 1 2 3 4 5 6 7 8 9 10; do
+    positions=$(window_positions "${ids[@]}" | sort -n -k2)
+    [[ -n $positions && $positions == "$previous" ]] && break
+    previous=$positions
+    sleep 0.05
+done
+[[ $(grep -c . <<< "$positions") -eq 3 ]] \
+    || fail "Couldn't read the positions of all 3 windows (minimized or hidden?)."
+read -r _ left_x center_id center_x _ right_x <<< "$(tr '\n' ' ' <<< "$positions")"
+
+# Work from positions, not widths: an app with a minimum width can ignore the size
+# it's given, but it still sits where AeroSpace puts it. AeroSpace starts each window
+# where the previous one's weight ends, shifted by half an inner gap, then trims half
+# a gap from each outer window and a full gap from the middle one. With equal
+# weights, middle-to-right is a third of the row and left-to-middle adds half a gap.
+third=$(( right_x - center_x ))
+inner_gap=$(( 2 * (center_x - left_x - third) ))
+(( inner_gap > 0 )) || inner_gap=0
+frames_total=$(( 3 * third - 2 * inner_gap ))
+target_side_w=$(( frames_total * CENTER_DEN / (2 * CENTER_DEN + CENTER_NUM) ))
+target_center_w=$(( frames_total - 2 * target_side_w ))
+
+# The middle window's weight is its frame width plus one gap. Setting it takes the
+# difference evenly from the other two, so after balance-sizes one resize is enough.
+"$AEROSPACE" resize width $(( target_center_w + inner_gap )) --window-id "$center_id"
