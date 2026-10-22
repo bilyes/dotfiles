@@ -94,6 +94,7 @@ fgco() {
   git checkout "$branch"
 }
 
+# fcn [QUERY] - switch the current kubectl context's namespace
 fcn() {
   local IFS=$'\n'
   local namespaces=()
@@ -111,16 +112,21 @@ fcn() {
 
 # Arch Linux package helpers (pacman / yay)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # fzf options shared by the package pickers below
+  _fzf_pkg_opts=(
+    --multi
+    --preview-label-pos='bottom'
+    --preview-window 'down:65%:wrap'
+    --bind 'alt-p:toggle-preview'
+    --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+    --bind 'alt-k:preview-up,alt-j:preview-down'
+  )
+
   fip() {
     local fzf_args=(
-      --multi
+      "${_fzf_pkg_opts[@]}"
       --preview 'pacman -Sii {1}'
       --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
-      --preview-label-pos='bottom'
-      --preview-window 'down:65%:wrap'
-      --bind 'alt-p:toggle-preview'
-      --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
-      --bind 'alt-k:preview-up,alt-j:preview-down'
       --color 'pointer:green,marker:green'
     )
 
@@ -134,14 +140,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
   fiap() {
     local fzf_args=(
-      --multi
+      "${_fzf_pkg_opts[@]}"
       --preview 'yay -Siia {1}'
       --preview-label='alt-p: toggle description, alt-b/B: toggle PKGBUILD, alt-j/k: scroll, tab: multi-select'
-      --preview-label-pos='bottom'
-      --preview-window 'down:65%:wrap'
-      --bind 'alt-p:toggle-preview'
-      --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
-      --bind 'alt-k:preview-up,alt-j:preview-down'
       --bind 'alt-b:change-preview:yay -Gpa {1} | tail -n +5'
       --bind 'alt-B:change-preview:yay -Siia {1}'
       --color 'pointer:green,marker:green'
@@ -157,14 +158,9 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
   frp() {
     local fzf_args=(
-      --multi
+      "${_fzf_pkg_opts[@]}"
       --preview 'yay -Qi {1}'
       --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
-      --preview-label-pos='bottom'
-      --preview-window 'down:65%:wrap'
-      --bind 'alt-p:toggle-preview'
-      --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
-      --bind 'alt-k:preview-up,alt-j:preview-down'
       --color 'pointer:red,marker:red'
     )
 
