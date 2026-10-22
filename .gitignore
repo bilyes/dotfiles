@@ -10,3 +10,7 @@ opencode/package.json
 opencode/package-lock.json
 opencode/bun.lock
 opencode/service.json
+
+opencode/agents/
+opencode/commands/
+opencode/skills/
