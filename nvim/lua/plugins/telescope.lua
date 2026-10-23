@@ -113,7 +113,6 @@ return {
                     previewer = false,
                     mappings = {
                         i = {
-                            ["<C-h>"] = require('telescope.actions').file_split,
                             ["<a-i>"] = find_files_no_ignore,
                             ["<a-h>"] = find_files_with_hidden,
                         },
@@ -128,7 +127,9 @@ return {
                     auto_quoting = true, -- enable/disable auto-quoting
                     mappings = {         -- extend mappings
                         i = {
-                            ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                            -- Not <C-i>: terminals send it as Tab, which would replace Tab's
+                            -- multi-select in this picker
+                            ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                             ["<C-t>"] = lga_actions.quote_prompt({ postfix = " --type " }),
                             -- freeze the current list and start a fuzzy search in the frozen list
                             ["<C-space>"] = require("telescope.actions").to_fuzzy_refine,
