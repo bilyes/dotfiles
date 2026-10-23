@@ -16,7 +16,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden${_fzf_dir_excludes} --max-depth 10"
 export FZF_PREVIEW_CMD="cat {}"
 
-unset _fzf_dir_excludes _fzf_file_excludes _fzf_exclude_dirs _fzf_exclude_files
+unset _fzf_dir_excludes _fzf_file_excludes _fzf_exclude_dirs _fzf_exclude_files d f
 source <(fzf --zsh)
 
 # https://github.com/atweiden/fzf-extras/blob/master/fzf-extras.sh

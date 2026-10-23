@@ -24,8 +24,8 @@ return {
             end, { expr = true, desc = 'Previous hunk' })
 
             -- Actions
-            map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>', { desc = 'Stage hunk' })
-            map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset hunk' })
+            map({'n', 'x'}, '<leader>hs', ':Gitsigns stage_hunk<CR>', { desc = 'Stage hunk' })
+            map({'n', 'x'}, '<leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset hunk' })
             map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
             -- stage_hunk on an already staged hunk unstages it
             map('n', '<leader>hu', gs.stage_hunk, { desc = 'Unstage hunk' })

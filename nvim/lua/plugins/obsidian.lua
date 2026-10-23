@@ -12,9 +12,6 @@ return {
         --"BufReadPre path/to/my-vault/**.md",
         --"BufNewFile path/to/my-vault/**.md",
     },
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
     opts = {
         workspaces = {
             {
@@ -41,7 +38,11 @@ return {
         },
 
         note_id_func = function(title)
-            return title
+            if title and title ~= "" then
+                return title
+            end
+            -- obsidian.nvim needs a non-empty ID, e.g. for `:Obsidian new` without a title
+            return require("obsidian.builtin").zettel_id()
         end,
 
         daily_notes = {

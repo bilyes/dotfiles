@@ -1,5 +1,7 @@
 ; Read automatically as $XDG_CONFIG_HOME/git/config (~/.config/git -> here).
 ; Loaded before ~/.gitconfig, which therefore overrides anything set here.
+; `git config --global` writes to ~/.gitconfig whenever it exists (install.sh creates
+; it), so machine-specific settings such as user.email stay out of this repo.
 
 [push]
 	; Create the remote branch on first push instead of erroring. Needs git

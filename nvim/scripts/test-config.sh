@@ -34,14 +34,28 @@ print_warning() {
     WARNINGS=$((WARNINGS + 1))
 }
 
+# Headless Neovim exits 0 even when the config errors, so also check what it printed:
+# a healthy config starts silently.
+has_errors() {
+    grep -qiE 'E[0-9]+:|error|failed' <<< "$1"
+}
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$SCRIPT_DIR"
 
 print_header "Neovim Configuration Test"
 
 # Test 1: Dependency preflight
-# `timeout` is GNU coreutils and is not shipped with macOS.
+# `timeout` is GNU coreutils and is not shipped with macOS; Homebrew's coreutils installs
+# it as `gtimeout`, which works too.
 REQUIRED_COMMANDS="nvim timeout"
+
+# Prints the path of the command to run for $1.
+resolve_command() {
+    case "$1" in
+        timeout) command -v timeout || command -v gtimeout ;;
+        *)       command -v "$1" ;;
+    esac
+}
 
 dependency_purpose() {
     case "$1" in
@@ -64,8 +78,7 @@ dependency_hint() {
             if [ "$(uname -s)" = "Darwin" ]; then
                 echo "not shipped with macOS - it comes from GNU coreutils:"
                 echo "  brew install coreutils"
-                echo "That installs it as 'gtimeout'. To expose it as 'timeout':"
-                echo "  export PATH=\"\$(brew --prefix)/opt/coreutils/libexec/gnubin:\$PATH\""
+                echo "That installs it as 'gtimeout', which this script also accepts."
             else
                 echo "install GNU coreutils with your package manager"
             fi
@@ -80,8 +93,8 @@ print_header "Dependency Check"
 
 MISSING=""
 for cmd in $REQUIRED_COMMANDS; do
-    if command -v "$cmd" > /dev/null 2>&1; then
-        print_success "$cmd -> $(command -v "$cmd")"
+    if cmd_path="$(resolve_command "$cmd")"; then
+        print_success "$cmd -> $cmd_path"
     else
         print_error "$cmd not found"
         MISSING="$MISSING $cmd"
@@ -101,21 +114,34 @@ if [ -n "$MISSING" ]; then
     echo
     exit 1
 fi
+TIMEOUT="$(resolve_command timeout)"
 
+# Test this checkout's config even when it isn't the one at ~/.config/nvim (e.g. from a
+# worktree): XDG_CONFIG_HOME points at a temp dir whose nvim/ links here. Plugins still
+# come from the usual data directory.
+TEST_CONFIG_HOME="$(mktemp -d)"
+STARTUP_FILE="$(mktemp)"
+trap 'rm -rf "$TEST_CONFIG_HOME" "$STARTUP_FILE"' EXIT
+ln -s "$SCRIPT_DIR" "$TEST_CONFIG_HOME/nvim"
+export XDG_CONFIG_HOME="$TEST_CONFIG_HOME"
+
+echo "  Config under test: $SCRIPT_DIR"
 echo "  Neovim version: $(nvim --version | head -n1)"
 
 # Test 2: Config loads
 print_header "Configuration Loading"
-if timeout 5 nvim --headless -c 'lua vim.notify("Config loaded successfully")' -c 'qa' &>/dev/null; then
+# Quit with -c 'qa': startup errors are only printed when Neovim exits that way, not when
+# a Lua chunk quits it.
+LOAD_OUTPUT=$("$TIMEOUT" 5 nvim --headless -c 'qa' 2>&1) && LOAD_EXIT_CODE=0 || LOAD_EXIT_CODE=$?
+if [ $LOAD_EXIT_CODE -eq 0 ] && ! has_errors "$LOAD_OUTPUT"; then
     print_success "Configuration loads"
 else
+    echo "$LOAD_OUTPUT" | sed 's/^/    /'
     print_error "Configuration fails to load"
 fi
 
 # Test 3: Startup time
-STARTUP_FILE="$(mktemp)"
-trap 'rm -f "$STARTUP_FILE"' EXIT
-if timeout 5 nvim --headless --startuptime "$STARTUP_FILE" +q &>/dev/null; then
+if "$TIMEOUT" 5 nvim --headless --startuptime "$STARTUP_FILE" +q &>/dev/null; then
     if [ -s "$STARTUP_FILE" ]; then
         # Look for the NVIM STARTED line and extract the time
         STARTUP_TIME=$(grep "NVIM STARTED" "$STARTUP_FILE" | tail -1 | awk '{print $1}')
@@ -139,7 +165,7 @@ else
 fi
 
 # Test 4: Plugin loading (using inline lua)
-PLUGIN_TEST_RESULT=$(timeout 10 nvim --headless -c 'lua
+PLUGIN_TEST_RESULT=$("$TIMEOUT" 10 nvim --headless -c 'lua
 local ok, lazy = pcall(require, "lazy")
 if ok then
     local plugins = lazy.plugins()
@@ -167,7 +193,7 @@ fi
 # Test 5: Basic functionality
 print_header "Basic Functionality"
 
-BASIC_TEST_RESULT=$(timeout 5 nvim --headless -c 'lua
+BASIC_TEST_RESULT=$("$TIMEOUT" 5 nvim --headless -c 'lua
 -- Test leader key
 if vim.g.mapleader ~= " " then
     print("ERROR: Leader key not set")

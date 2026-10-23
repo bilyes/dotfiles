@@ -83,8 +83,8 @@ Process:
 
 **If you find yourself on main branch:**
 1. Stop immediately
-2. Create a new branch: `git checkout -b <branch-name>`
-3. Ask user to confirm branch name using @question tool
+2. Ask user to confirm branch name using @question tool
+3. Create a new branch: `git checkout -b <branch-name>`
 4. Continue work on the feature branch
 
 ### Creating Branches
