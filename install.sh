@@ -67,6 +67,12 @@ done
 for file in custom aliases functions fzf-functions; do
     ensure_link "$DOTFILES/oh-my-zsh/$file.zsh" "$ZSH_CUSTOM/$file.zsh"
 done
+# Without ~/.gitconfig, `git config --global` writes into ~/.config/git/config, which is
+# this repo's git/config. An empty ~/.gitconfig takes machine-specific settings instead.
+if [[ ! -e $HOME/.gitconfig && ! -L $HOME/.gitconfig ]]; then
+    touch "$HOME/.gitconfig"
+    echo "created $HOME/.gitconfig"
+fi
 
 # Zsh plugin and theme (~/.zshrc itself stays machine-specific)
 ensure_clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"

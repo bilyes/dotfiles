@@ -20,6 +20,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
   - yazi (file manager)
 - fzf and fd (shell functions in `oh-my-zsh/fzf-functions.zsh`)
 - kitty and these Nerd Fonts: FiraCode, Roboto Mono, JetBrains Mono
+- macOS: AeroSpace
 - Linux: Hyprland started through uwsm, and Noctalia
 
 ## Installation
@@ -33,6 +34,8 @@ git clone https://github.com/bilyes/dotfiles.git ~/.config/dotfiles
 
 - links each config into `~/.config`, moving anything already there to `<name>.bak.<timestamp>`
 - links the files in `oh-my-zsh/` into `$ZSH_CUSTOM`
+- creates an empty `~/.gitconfig` if there isn't one, so `git config --global` writes there
+  instead of into this repo's `git/config`
 - installs zsh-autosuggestions, powerlevel10k and TPM, and turns on the plugin and theme in `~/.zshrc`
 - installs the tmux and Neovim plugins
 
@@ -48,7 +51,9 @@ Afterwards:
   `*.zsh` file to `$ZSH_CUSTOM`; Oh My Zsh loads all of them.
 - Machine-specific Neovim plugin settings go in `nvim/lua/plugins/local.lua` (git-ignored).
   lazy.nvim merges it with the plugin specs in this repo.
-- `nvim/scripts/test-config.sh` checks that the Neovim config loads.
+- `nvim/scripts/test-config.sh` checks that the Neovim config in its checkout loads without errors.
+- `scripts/` is on `PATH` (see `oh-my-zsh/custom.zsh`). `tmain` opens a tmux session running btop
+  and fastfetch, which need to be installed.
 
 #### Terminal tips
 
