@@ -139,6 +139,9 @@ panel_position = "center"
 [plugins]
 enabled = [ "nightwatch75/file-search" ]
 
+[shell]
+launch_apps_custom_command = "uwsm app -- $CMD"
+
 [shell.animation]
 speed = 2.0000000298023224
 
