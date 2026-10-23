@@ -16,7 +16,7 @@ local mappings = {
             { '<leader>l',  function() vim.cmd.wincmd('l') end, desc = 'Move to right window' },
 
             -- File and directory operations
-            { '<leader>cd', ':cd %:p:h<CR> :pwd <CR>', desc = 'cd to current file directory' },
+            { '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', desc = 'cd to current file directory' },
             { '<leader>du', ':sav %:p:h/',       desc = 'Duplicate file', silent = false },
 
             -- Text editing and manipulation

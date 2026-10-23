@@ -10,5 +10,8 @@ return {
     --ft = "markdown", -- or 'event = "VeryLazy"'
     opts = {
         -- configuration here or empty for defaults
+        mappings = {
+            go_curr_heading = false, -- keep ]c for gitsigns' next hunk
+        },
     },
 }

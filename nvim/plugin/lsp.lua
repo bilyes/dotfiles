@@ -35,7 +35,12 @@ local servers = {
     'lua_ls',
     'gopls',
     'pylsp',
-    'ruby_lsp',
-    'sorbet',
 }
+-- These start through a `cmd` function, which skips vim.lsp.enable's check that the
+-- server is installed, so enable them only where it is.
+for server, executable in pairs({ ruby_lsp = 'ruby-lsp', sorbet = 'srb' }) do
+    if vim.fn.executable(executable) == 1 then
+        table.insert(servers, server)
+    end
+end
 vim.lsp.enable(servers)

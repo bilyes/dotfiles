@@ -26,8 +26,9 @@ source <(fzf --zsh)
 fe() {
   local IFS=$'\n'
   local files=()
+  # Unquoted, so the output splits on newlines (IFS) into one element per selected file
   files=(
-    "$(fzf \
+    $(fzf \
           --height=40% \
           --query="$1" \
           --multi \
@@ -39,7 +40,7 @@ fe() {
           --bind=ctrl-v:toggle-preview \
           --bind=ctrl-x:toggle-sort \
           --header='(view:ctrl-v) (sort:ctrl-x)'
-    )"
+    )
   ) || return
   "${EDITOR:-vim}" "${files[@]}"
 }
