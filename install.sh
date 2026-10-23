@@ -5,7 +5,9 @@ set -Eeuo pipefail
 trap 'echo "install.sh: line $LINENO failed: $BASH_COMMAND" >&2' ERR
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+# Oh My Zsh's custom folder: $ZSH_CUSTOM if exported, else the one inside $ZSH (which the
+# standard .zshrc exports), else the default install location.
+ZSH_CUSTOM="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}"
 
 die() {
     echo "install.sh: $*" >&2
@@ -52,7 +54,7 @@ ensure_zshrc() {
 for cmd in git zsh nvim tmux; do
     command -v "$cmd" > /dev/null || die "missing dependency: $cmd"
 done
-[[ -d $ZSH_CUSTOM ]] || die "oh-my-zsh not found at $ZSH_CUSTOM; install it first"
+[[ -d $ZSH_CUSTOM ]] || die "oh-my-zsh not found at $ZSH_CUSTOM; install it, or run ZSH_CUSTOM=/path/to/its/custom $0"
 [[ -f $HOME/.zshrc ]] || die "$HOME/.zshrc not found"
 case "$(uname -s)" in
     Darwin) os_configs=(aerospace) ;;
