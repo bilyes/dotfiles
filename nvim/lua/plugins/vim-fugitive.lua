@@ -7,7 +7,7 @@ return {
 
         vim.keymap.set('n', '<leader>gs', vim.cmd.Git, opts('Git status'))
         vim.keymap.set('n', '<leader>ggp', function() vim.cmd.Git('push') end, opts('Git push'))
-        vim.keymap.set('n', '<leader>gpf', function() vim.cmd.Git('push -f') end, opts('Git push force'))
+        vim.keymap.set('n', '<leader>gpf', function() vim.cmd.Git('push --force-with-lease') end, opts('Git push force'))
         vim.keymap.set('n', '<leader>ggl', function() vim.cmd.Git('pull') end, opts('Git pull'))
         -- Not silent: it leaves the command half-typed, which silent would hide until the first key
         vim.keymap.set('n', '<leader>gcob', ':G checkout -b ',

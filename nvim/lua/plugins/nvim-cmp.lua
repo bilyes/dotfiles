@@ -1,19 +1,12 @@
 return {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'LspAttach' },
-    dependencies = {
-        'L3MON4D3/LuaSnip',
-    },
     config = function()
         local cmp = require 'cmp'
 
+        -- No snippet engine: nvim-cmp expands snippets with Neovim's vim.snippet, and when the
+        -- menu is closed, <tab>/<S-tab> below fall back to Neovim's placeholder jumps.
         cmp.setup({
-            snippet = {
-                -- REQUIRED - you must specify a snippet engine
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
-                end,
-            },
             window = {
                 documentation = cmp.config.window.bordered(),
             },
