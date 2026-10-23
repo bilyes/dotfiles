@@ -20,11 +20,12 @@ return {
         vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg=0, fg='#61afef', bg='#31353f' })
         vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg=0, fg='#98c379', bg='#31353f' })
 
-        vim.fn.sign_define('DapBreakpoint', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-        vim.fn.sign_define('DapBreakpointCondition', { text='ﳁ', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-        vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
-        vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
-        vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+        -- Nerd Font icons, written as escapes so editors and tools can't strip them
+        vim.fn.sign_define('DapBreakpoint', { text='\u{f012f}', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+        vim.fn.sign_define('DapBreakpointCondition', { text='\u{f07c3}', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
+        vim.fn.sign_define('DapBreakpointRejected', { text='\u{f06a}', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
+        vim.fn.sign_define('DapLogPoint', { text='\u{f05a}', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
+        vim.fn.sign_define('DapStopped', { text='\u{f144}', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
 
         local dap = require('dap')
         local dapui = require('dapui')

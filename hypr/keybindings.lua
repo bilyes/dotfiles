@@ -81,7 +81,13 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = tru
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ipc .. "media previous"), { locked = true })
 
--- Zoom
-hl.bind(mainMod .. " + SHIFT + equal", hl.dsp.exec_cmd("hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float * 1.2')"), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.exec_cmd("hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '(.float * 0.8) | if . < 1 then 1 else . end')"), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.exec_cmd("hyprctl -q keyword cursor:zoom_factor 1"))
+-- Zoom. `hyprctl keyword` doesn't work with the Lua config, so set the option directly.
+local function zoom(factor)
+  return function()
+    local current = factor and hl.get_config("cursor.zoom_factor") * factor or 1
+    hl.config({ cursor = { zoom_factor = math.max(1, math.min(10, current)) } }) -- allowed: 1-10
+  end
+end
+hl.bind(mainMod .. " + SHIFT + equal", zoom(1.2), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + minus", zoom(0.8), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + 0", zoom())

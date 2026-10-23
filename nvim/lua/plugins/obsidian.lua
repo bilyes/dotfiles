@@ -78,10 +78,7 @@ return {
                     buf = note.bufnr,
                     desc = "Open yesterday's note",
                 })
-                vim.keymap.set("n", "<leader>gd", "<cmd>Obsidian follow_link<cr>", {
-                    buf = note.bufnr,
-                    desc = "Follow link under cursor",
-                })
+                -- <leader>gd (follow link) comes from plugin/lsp.lua through obsidian's LSP server
                 vim.keymap.set("n", "<leader>ch", "<cmd>Obsidian toggle_checkbox<cr>", {
                     buf = note.bufnr,
                     desc = "Toggle checkbox",

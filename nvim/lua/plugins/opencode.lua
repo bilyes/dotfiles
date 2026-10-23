@@ -5,14 +5,19 @@ return {
         "akinsho/toggleterm.nvim",
     },
     config = function()
-        -- Floating terminal running `opencode2` (OpenCode v2 with the work provider
-        -- config). Created on first use.
+        -- Floating terminal running the OpenCode TUI, created on first use. Set
+        -- vim.g.opencode_cmd (e.g. in plugins/local.lua) if the binary isn't `opencode`.
         local terminal
         local function opencode_terminal()
             terminal = terminal or require("toggleterm.terminal").Terminal:new({
-                cmd = "opencode2",
+                cmd = vim.g.opencode_cmd or "opencode",
                 direction = "float",
                 hidden = true,
+                -- toggleterm maps <C-x> in every terminal it spawns. Remove it here so
+                -- <C-x> reaches OpenCode, which uses it as its leader key.
+                on_create = function(term)
+                    pcall(vim.keymap.del, "t", "<C-x>", { buf = term.bufnr })
+                end,
             })
             return terminal
         end
@@ -21,7 +26,9 @@ return {
         vim.g.opencode_opts = {
             server = {
                 -- Called when no running OpenCode service is found; the plugin retries afterwards.
-                start = function() opencode_terminal():open() end,
+                -- Start it in the background: the prompt's @this comes from the current window
+                -- once the server answers, so the float mustn't take focus. <C-.> shows it.
+                start = function() opencode_terminal():spawn() end,
             },
         }
 
