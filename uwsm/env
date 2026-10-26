@@ -1,3 +1,4 @@
+# vim: ft=sh
 # Environment for uwsm sessions (all compositors); sourced by sh.
 # Changes apply at the next login. HYPR* and AQ_* variables go in env-hyprland.
 # See https://wiki.hypr.land/useful-utilities/uwsm/
