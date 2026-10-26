@@ -8,7 +8,7 @@ function zle-clipboard-paste {
   fi
   if [[ "$OSTYPE" == "darwin"* ]]; then
     LBUFFER+="$(pbpaste)"
-  elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  elif [[ -n "$WAYLAND_DISPLAY" ]]; then
     LBUFFER+="$(wl-paste)"
   fi
 }
@@ -29,4 +29,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#536878"
 
 export EDITOR=nvim
 
+# Keep each PATH entry once: nested shells (e.g. each tmux pane) run this file again
+typeset -U path
 path+=("$HOME/.local/bin" "$HOME/.config/dotfiles/scripts")
