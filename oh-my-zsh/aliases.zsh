@@ -13,9 +13,6 @@ alias dcd="docker compose down"
 alias dcr="docker compose run --rm"
 alias dcs="docker compose stop"
 
-# Git
-alias grm="git rebase main"
-
 alias v=nvim
 alias c=clear
 alias chmox="chmod u+x"

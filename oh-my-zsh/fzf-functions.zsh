@@ -97,18 +97,15 @@ fgco() {
 
 # fcn [QUERY] - switch the current kubectl context's namespace
 fcn() {
-  local IFS=$'\n'
-  local namespaces=()
-  namespaces=(
-    "$(kubectl get ns --no-headers -o custom-columns=name:.metadata.name | fzf \
-          --height=40% \
-          --query="$1" \
-          --select-1 \
-          --exit-0 \
-          --layout=reverse
-    )"
-  ) || return
-  kubectl config set-context --current --namespace "${namespaces[@]}"
+  local namespace
+  namespace="$(kubectl get ns --no-headers -o custom-columns=name:.metadata.name | fzf \
+        --height=40% \
+        --query="$1" \
+        --select-1 \
+        --exit-0 \
+        --layout=reverse
+  )" || return
+  kubectl config set-context --current --namespace "$namespace"
 }
 
 # Arch Linux package helpers (pacman / yay)
@@ -134,8 +131,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     local pkg_names=$(pacman -Slq | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
-      # Convert newline-separated selections to space-separated for pacman
-      sudo pacman -S $(echo "$pkg_names" | tr '\n' ' ')
+      # (f): one argument per selected line
+      sudo pacman -S ${(f)pkg_names}
     fi
   }
 
@@ -152,24 +149,24 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     local pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
-      # Convert newline-separated selections to space-separated for yay
-      yay -S $(echo "$pkg_names" | tr '\n' ' ')
+      # (f): one argument per selected line
+      yay -S ${(f)pkg_names}
     fi
   }
 
   frp() {
     local fzf_args=(
       "${_fzf_pkg_opts[@]}"
-      --preview 'yay -Qi {1}'
+      --preview 'pacman -Qi {1}'
       --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
       --color 'pointer:red,marker:red'
     )
 
-    local pkg_names=$(yay -Qqe | fzf "${fzf_args[@]}")
+    local pkg_names=$(pacman -Qqe | fzf "${fzf_args[@]}")
 
     if [[ -n "$pkg_names" ]]; then
-      # Convert newline-separated selections to space-separated for pacman
-      sudo pacman -Rns $(echo "$pkg_names" | tr '\n' ' ')
+      # (f): one argument per selected line
+      sudo pacman -Rns ${(f)pkg_names}
     fi
   }
 fi
