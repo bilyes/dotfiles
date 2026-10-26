@@ -42,8 +42,9 @@ git clone https://github.com/bilyes/dotfiles.git ~/.config/dotfiles
 Afterwards:
 
 - Open a new shell. The first one runs powerlevel10k's setup wizard.
-- On Linux, log out and back in so uwsm loads `uwsm/env`. Noctalia then writes the kitty colors to
-  `kitty/themes/noctalia.conf` (git-ignored).
+- On Linux, log out and back in so uwsm loads `uwsm/env`. Noctalia then writes the kitty and tmux
+  colors to `kitty/themes/noctalia.conf` and `tmux/themes/noctalia.conf` (git-ignored). Without
+  the tmux one, as on macOS, tmux uses Catppuccin.
 
 ## Notes
 

@@ -4,3 +4,6 @@
 enable_builtin_templates = true
 # kitty: writes kitty/themes/noctalia.conf, which kitty/kitty.conf includes.
 builtin_ids = ["kitty"]
+enable_community_templates = true
+# tmux: writes tmux/themes/noctalia.conf, which tmux/tmux.conf sources.
+community_ids = ["tmux"]

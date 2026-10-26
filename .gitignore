@@ -1,5 +1,6 @@
-# Generated on Linux by Noctalia's kitty template
+# Generated on Linux by Noctalia's kitty and tmux templates
 kitty/themes/noctalia.conf
+tmux/themes/noctalia.conf
 
 # Machine-specific Neovim plugin settings
 nvim/lua/plugins/local.lua
