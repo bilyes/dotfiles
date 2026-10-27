@@ -126,7 +126,7 @@ on-mode-changed = []
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
     # Three windows side by side, the middle one a third wider than the others (30/40/30)
-    alt-shift-equal = 'exec-and-forget ~/.config/dotfiles/aerospace/scripts/center-wide.sh'
+    alt-shift-equal = 'exec-and-forget "${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/scripts/center-wide.sh"'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     cmd-1 = 'workspace 1'

@@ -1,0 +1,30 @@
+# Shared zsh config, loaded by each machine's ~/.zshrc (see the README).
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-autosuggestions)
+source "$ZSH/oh-my-zsh.sh"
+
+# vi mode, chosen before conf.d loads: Oh My Zsh selects emacs mode, and scripts such as fzf's
+# bind keys in whichever keymap is active.
+bindkey -v
+
+# Every *.zsh file in conf.d, alphabetically, like Oh My Zsh's $ZSH_CUSTOM. A loop at the top
+# level rather than in a function, where their `typeset`s would become local.
+_zsh_dir=${${(%):-%x}:A:h}
+for _zsh_file in "$_zsh_dir"/conf.d/*.zsh(N); do
+  source "$_zsh_file"
+done
+
+source "$_zsh_dir/p10k.zsh"
+# Set after loading it, since it starts by unsetting POWERLEVEL9K_*. Makes `p10k configure`
+# write to this file instead of ~/.p10k.zsh.
+POWERLEVEL9K_CONFIG_FILE="$_zsh_dir/p10k.zsh"
+unset _zsh_dir _zsh_file
