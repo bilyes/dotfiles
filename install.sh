@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# Symlinks configs into place and installs shell, tmux and Neovim plugins.
+# Symlinks configs and scripts into place and installs shell, tmux and Neovim plugins.
 # Safe to re-run: correct links are skipped, anything else in the way is backed up.
 set -Eeuo pipefail
 trap 'echo "install.sh: line $LINENO failed: $BASH_COMMAND" >&2' ERR
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Configs and scripts go where the XDG Base Directory spec puts them, so nothing but these links
+# depends on where this repo is.
+CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 # Oh My Zsh's custom folder: $ZSH_CUSTOM if exported, else the one inside $ZSH (which the
 # standard .zshrc exports), else the default install location.
 ZSH_CUSTOM="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}"
@@ -55,8 +58,25 @@ case "$(uname -s)" in
 esac
 
 # Configs
-for dir in git nvim tmux kitty opencode "${os_configs[@]}"; do
-    ensure_link "$DOTFILES/$dir" "$HOME/.config/$dir"
+for dir in git nvim tmux kitty opencode zsh "${os_configs[@]}"; do
+    ensure_link "$DOTFILES/$dir" "$CONFIG_HOME/$dir"
+done
+# Scripts go in ~/.local/bin, the spec's place for user executables. Other tools install there
+# too, so only a missing file or a link into this repo gets replaced; anything else is skipped.
+for script in "$DOTFILES"/scripts/*; do
+    dst="$HOME/.local/bin/${script##*/}"
+    if [[ -L $dst && $(readlink "$dst") == "$DOTFILES"/* ]] || [[ ! -e $dst && ! -L $dst ]]; then
+        ensure_link "$script" "$dst"
+    else
+        echo "install.sh: skipped $dst, which isn't a link into this repo" >&2
+    fi
+done
+# Links left behind by scripts that were renamed or removed
+for link in "$HOME/.local/bin"/*; do
+    if [[ -L $link && ! -e $link && $(readlink "$link") == "$DOTFILES"/scripts/* ]]; then
+        rm "$link"
+        echo "removed $link"
+    fi
 done
 # zsh/zshrc loads the zsh files now; remove the links older installs made to them.
 for link in "$ZSH_CUSTOM"/*.zsh "$HOME/.p10k.zsh"; do
@@ -65,7 +85,7 @@ for link in "$ZSH_CUSTOM"/*.zsh "$HOME/.p10k.zsh"; do
         echo "removed $link"
     fi
 done
-# Without ~/.gitconfig, `git config --global` writes into ~/.config/git/config, which is
+# Without ~/.gitconfig, `git config --global` writes into $CONFIG_HOME/git/config, which is
 # this repo's git/config. An empty ~/.gitconfig takes machine-specific settings instead.
 if [[ ! -e $HOME/.gitconfig && ! -L $HOME/.gitconfig ]]; then
     touch "$HOME/.gitconfig"
@@ -87,14 +107,14 @@ if ! grep -qsF zsh/zshrc "$HOME/.zshrc"; then
         echo "# Shared config from the dotfiles repo; machine-specific lines go below it."
         [[ ${ZSH:-$HOME/.oh-my-zsh} == "$HOME/.oh-my-zsh" ]] || echo "export ZSH=\"$ZSH\""
         [[ $ZSH_CUSTOM == "${ZSH:-$HOME/.oh-my-zsh}/custom" ]] || echo "ZSH_CUSTOM=\"$ZSH_CUSTOM\""
-        echo "source \"$DOTFILES/zsh/zshrc\""
+        echo 'source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/zshrc"'
     } > "$HOME/.zshrc"
     echo "wrote $HOME/.zshrc$note"
 fi
 
 # tmux and Neovim plugins (no-ops when already installed)
-ensure_clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
-"$HOME/.config/tmux/plugins/tpm/bin/install_plugins"
+ensure_clone https://github.com/tmux-plugins/tpm "$CONFIG_HOME/tmux/plugins/tpm"
+"$CONFIG_HOME/tmux/plugins/tpm/bin/install_plugins"
 # Neovim installs missing plugins at their lazy-lock.json versions while starting up;
 # exit non-zero if a plugin is still missing (failed clone) or its install errored.
 nvim --headless "+lua

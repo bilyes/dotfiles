@@ -30,9 +30,15 @@ git clone https://github.com/bilyes/dotfiles.git ~/.config/dotfiles
 ~/.config/dotfiles/install.sh
 ```
 
+The clone can live anywhere: only the links `install.sh` creates point to it, so re-run it after
+moving the clone.
+
 `install.sh` can be re-run safely. It:
 
-- links each config into `~/.config`, moving anything already there to `<name>.bak.<timestamp>`
+- links each config, `zsh` included, into `$XDG_CONFIG_HOME` (`~/.config` if unset), moving
+  anything already there to `<name>.bak.<timestamp>`
+- links each script in `scripts/` into `~/.local/bin`, skipping names something else already uses
+  there
 - replaces `~/.zshrc`, unless it already loads `zsh/zshrc`, with one that does. The old
   file goes to `~/.zshrc.bak.<timestamp>`; move its machine-specific lines into the new one.
 - creates an empty `~/.gitconfig` if there isn't one, so `git config --global` writes there
@@ -71,8 +77,9 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
 - Machine-specific Neovim plugin settings go in `nvim/lua/plugins/local.lua` (git-ignored).
   lazy.nvim merges it with the plugin specs in this repo.
 - `nvim/scripts/test-config.sh` checks that the Neovim config in its checkout loads without errors.
-- `scripts/` is on `PATH` (see `zsh/conf.d/env.zsh`). `tmain` opens a tmux session running
-  btop and fastfetch, which need to be installed.
+- The scripts in `scripts/` are on `PATH` through their links in `~/.local/bin`; re-run
+  `install.sh` after adding one. `tmain` opens a tmux session running btop and fastfetch, which
+  need to be installed.
 
 #### Terminal tips
 
