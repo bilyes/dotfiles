@@ -14,6 +14,14 @@ die() {
     exit 1
 }
 
+# Moves $1 to $1.bak.<timestamp>.
+backup() {
+    local bak
+    bak="$1.bak.$(date +%Y%m%d%H%M%S)"
+    mv "$1" "$bak"
+    echo "backed up $1 to $bak"
+}
+
 # Points $2 at $1, backing up whatever is in the way.
 ensure_link() {
     local src=$1 dst=$2
@@ -21,8 +29,7 @@ ensure_link() {
         return 0
     fi
     if [[ -e $dst || -L $dst ]]; then
-        mv "$dst" "$dst.bak.$(date +%Y%m%d%H%M%S)"
-        echo "backed up $dst"
+        backup "$dst"
     fi
     mkdir -p "$(dirname "$dst")"
     ln -s "$src" "$dst"
@@ -36,26 +43,11 @@ ensure_clone() {
     fi
 }
 
-# Applies sed expression $2 to ~/.zshrc unless pattern $1 already matches, then
-# checks the edit took. Plain sed (no -i) behaves the same on macOS and Linux.
-ensure_zshrc() {
-    local pattern=$1 edit=$2 tmp
-    if grep -q "$pattern" "$HOME/.zshrc"; then
-        return 0
-    fi
-    tmp="$(mktemp)"
-    sed "$edit" "$HOME/.zshrc" > "$tmp"
-    cat "$tmp" > "$HOME/.zshrc"
-    rm -f "$tmp"
-    grep -q "$pattern" "$HOME/.zshrc" || die "couldn't update ~/.zshrc (expected: $pattern); edit it by hand"
-}
-
 # Preflight
 for cmd in git zsh nvim tmux; do
     command -v "$cmd" > /dev/null || die "missing dependency: $cmd"
 done
 [[ -d $ZSH_CUSTOM ]] || die "oh-my-zsh not found at $ZSH_CUSTOM; install it, or run ZSH_CUSTOM=/path/to/its/custom $0"
-[[ -f $HOME/.zshrc ]] || die "$HOME/.zshrc not found"
 case "$(uname -s)" in
     Darwin) os_configs=(aerospace) ;;
     Linux) os_configs=(hypr noctalia uwsm) ;;
@@ -66,8 +58,12 @@ esac
 for dir in git nvim tmux kitty opencode "${os_configs[@]}"; do
     ensure_link "$DOTFILES/$dir" "$HOME/.config/$dir"
 done
-for file in custom aliases functions fzf-functions; do
-    ensure_link "$DOTFILES/oh-my-zsh/$file.zsh" "$ZSH_CUSTOM/$file.zsh"
+# zsh/zshrc loads the zsh files now; remove the links older installs made to them.
+for link in "$ZSH_CUSTOM"/*.zsh "$HOME/.p10k.zsh"; do
+    if [[ -L $link && $(readlink "$link") == "$DOTFILES"/* ]]; then
+        rm "$link"
+        echo "removed $link"
+    fi
 done
 # Without ~/.gitconfig, `git config --global` writes into ~/.config/git/config, which is
 # this repo's git/config. An empty ~/.gitconfig takes machine-specific settings instead.
@@ -76,11 +72,25 @@ if [[ ! -e $HOME/.gitconfig && ! -L $HOME/.gitconfig ]]; then
     echo "created $HOME/.gitconfig"
 fi
 
-# Zsh plugin and theme (~/.zshrc itself stays machine-specific)
+# Zsh plugin and theme
 ensure_clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 ensure_clone https://github.com/romkatv/powerlevel10k "$ZSH_CUSTOM/themes/powerlevel10k"
-ensure_zshrc '^plugins=(.*zsh-autosuggestions' 's/^plugins=(/plugins=(zsh-autosuggestions /'
-ensure_zshrc '^ZSH_THEME="powerlevel10k/powerlevel10k"' 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|'
+# ~/.zshrc stays a machine-specific file that loads zsh/zshrc rather than a link to it:
+# installers and tools such as tec append their setup to ~/.zshrc, which would land in the repo.
+if ! grep -qsF zsh/zshrc "$HOME/.zshrc"; then
+    note=
+    if [[ -e $HOME/.zshrc || -L $HOME/.zshrc ]]; then
+        backup "$HOME/.zshrc"
+        note="; move any machine-specific lines from the backup into it"
+    fi
+    {
+        echo "# Shared config from the dotfiles repo; machine-specific lines go below it."
+        [[ ${ZSH:-$HOME/.oh-my-zsh} == "$HOME/.oh-my-zsh" ]] || echo "export ZSH=\"$ZSH\""
+        [[ $ZSH_CUSTOM == "${ZSH:-$HOME/.oh-my-zsh}/custom" ]] || echo "ZSH_CUSTOM=\"$ZSH_CUSTOM\""
+        echo "source \"$DOTFILES/zsh/zshrc\""
+    } > "$HOME/.zshrc"
+    echo "wrote $HOME/.zshrc$note"
+fi
 
 # tmux and Neovim plugins (no-ops when already installed)
 ensure_clone https://github.com/tmux-plugins/tpm "$HOME/.config/tmux/plugins/tpm"
