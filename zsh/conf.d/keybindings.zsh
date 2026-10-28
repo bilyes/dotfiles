@@ -21,6 +21,9 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 # remap Ctrl to Tab
+# These and '^I ' below make Tab a prefix, so zsh waits KEYTIMEOUT (0.4s) after Tab before
+# completing. Intentional: removing that delay breaks suggestions and completions in Neovim's
+# toggleterm.
 bindkey '^I[' vi-cmd-mode
 bindkey '^Iu' vi-kill-line
 
