@@ -71,20 +71,6 @@ for script in "$DOTFILES"/scripts/*; do
         echo "install.sh: skipped $dst, which isn't a link into this repo" >&2
     fi
 done
-# Links left behind by scripts that were renamed or removed
-for link in "$HOME/.local/bin"/*; do
-    if [[ -L $link && ! -e $link && $(readlink "$link") == "$DOTFILES"/scripts/* ]]; then
-        rm "$link"
-        echo "removed $link"
-    fi
-done
-# zsh/zshrc loads the zsh files now; remove the links older installs made to them.
-for link in "$ZSH_CUSTOM"/*.zsh "$HOME/.p10k.zsh"; do
-    if [[ -L $link && $(readlink "$link") == "$DOTFILES"/* ]]; then
-        rm "$link"
-        echo "removed $link"
-    fi
-done
 # Without ~/.gitconfig, `git config --global` writes into $CONFIG_HOME/git/config, which is
 # this repo's git/config. An empty ~/.gitconfig takes machine-specific settings instead.
 if [[ ! -e $HOME/.gitconfig && ! -L $HOME/.gitconfig ]]; then
