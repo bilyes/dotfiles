@@ -5,7 +5,7 @@ order = [ "default" ]
     background_opacity = 0.74999998323619366
     capsule = true
     capsule_opacity = 0.0
-    end = [ "media", "tray", "weather", "cpu", "temp", "notifications", "network", "volume", "battery", "session" ]
+    end = [ "media", "tray", "timer", "ocr", "weather", "cpu", "temp", "notifications", "network", "volume", "battery", "session" ]
     font_family = "JetBrainsMono Nerd Font"
     margin_ends = 1
     scale = 1.1000000089406967
@@ -137,7 +137,7 @@ panel_placement = "floating"
 panel_position = "center"
 
 [plugins]
-enabled = [ "nightwatch75/file-search" ]
+enabled = [ "nightwatch75/file-search", "noctalia/timer", "fel/ocr", "blackbartblues/keymap" ]
 
 [shell]
 launch_apps_custom_command = "uwsm app -- $CMD"
@@ -181,6 +181,13 @@ title_scroll = "on_hover"
 
 [widget.network]
 show_label = false
+
+# The OCR keybinding sends its command to this widget, so it must stay on the bar
+[widget.ocr]
+type = "fel/ocr:ocr"
+
+[widget.timer]
+type = "noctalia/timer:bar"
 
 [widget.weather]
 show_condition = false

@@ -14,3 +14,15 @@ function drmi() {
 
   docker rmi -f "${ids[@]}"
 }
+
+# t [tmux arguments] - tmux; without arguments, attach to the last session or start one
+#   - inside tmux, pick a session instead (attaching there would nest tmux)
+function t() {
+  if (( $# )); then
+    tmux "$@"
+  elif [[ -n "$TMUX" ]]; then
+    tmux choose-tree -s
+  else
+    tmux attach 2>/dev/null || tmux new-session
+  fi
+}

@@ -38,6 +38,9 @@ hl.config({
     active_opacity = 1.0,
     inactive_opacity = 1.0,
 
+    -- Dim the workspace behind the scratchpad (any special workspace) while it's open
+    dim_special = 0.6,
+
     shadow = {
       enabled = false,
       range = 4,
@@ -84,6 +87,10 @@ hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "a
 hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+-- The scratchpad drops down from the top and goes back up. The style names the edge the slide
+-- is measured from, not the direction, so "slide bottom" leaves upwards.
+hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 3, bezier = "easeOutQuint", style = "slide top" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, bezier = "easeOutQuint", style = "slide bottom" })
 
 -- Ref https://wiki.hypr.land/configuring/core/rules/workspace-rules/
 -- Default workspace per monitor
@@ -104,7 +111,7 @@ hl.config({
   master = {
     -- new_status = "slave",
     allow_small_split = true,
-    -- special_scale_factor = 0.80,
+    special_scale_factor = 0.8, -- scratchpad windows at 80%, so the dimmed workspace shows around them
     mfact = 0.4,
     orientation = "center",
     -- inherit_fullscreen = false,
