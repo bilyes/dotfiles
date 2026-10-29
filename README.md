@@ -21,7 +21,8 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 - fzf and fd (shell functions in `zsh/conf.d/fzf-functions.zsh`)
 - kitty and these Nerd Fonts: FiraCode, Roboto Mono, JetBrains Mono
 - macOS: AeroSpace
-- Linux: Hyprland started through uwsm, and Noctalia
+- Linux: Hyprland started through uwsm, and Noctalia, plus:
+  - grim, slurp, tesseract and tesseract-data-eng (Noctalia's OCR plugin)
 
 ## Installation
 
@@ -84,3 +85,9 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
 #### Terminal tips
 
 In zsh's vi normal mode, `v` opens the current command in `$EDITOR`.
+
+`t` attaches to the last tmux session or starts one; inside tmux, it opens the session picker.
+`prefix ?` lists the tmux bindings, copy mode's included.
+
+On Linux, Super + / opens the Noctalia Keymap plugin, which lists the Hyprland bindings with their
+descriptions.

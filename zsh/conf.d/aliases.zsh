@@ -30,6 +30,5 @@ else
   disable r
 fi
 
-alias t="tmux"
 alias ff="fastfetch"
 alias p="python3"
