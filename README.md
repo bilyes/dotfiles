@@ -11,14 +11,15 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 ## Requirements
 
 - git, zsh and [Oh My Zsh](https://ohmyz.sh/)
-- tmux
+- tmux 3.8+
 - Neovim 0.12+, plus:
   - make and a C compiler (telescope-fzf-native)
   - the `tree-sitter` CLI (nvim-treesitter)
   - Node.js (copilot.vim)
   - fd and ripgrep (Telescope)
   - yazi (file manager)
-- fzf and fd (shell functions in `zsh/conf.d/fzf-functions.zsh`)
+- fzf 0.60+ and fd (shell functions in `zsh/conf.d/fzf-functions.zsh`; tmux's `prefix ?` uses fzf
+  too)
 - kitty and these Nerd Fonts: FiraCode, Roboto Mono, JetBrains Mono
 - macOS: AeroSpace
 - Linux: Hyprland started through uwsm, and Noctalia, plus:
@@ -87,7 +88,8 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
 In zsh's vi normal mode, `v` opens the current command in `$EDITOR`.
 
 `t` attaches to the last tmux session or starts one; inside tmux, it opens the session picker.
-`prefix ?` lists the tmux bindings, copy mode's included.
+`prefix ?` opens a popup that fuzzy-finds the tmux bindings, copy mode's included; Enter runs the
+one picked.
 
 On Linux, Super + / opens the Noctalia Keymap plugin, which lists the Hyprland bindings with their
 descriptions.
