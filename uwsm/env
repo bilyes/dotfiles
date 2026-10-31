@@ -8,24 +8,5 @@
 export XCURSOR_THEME=Bibata-Modern-Classic
 export XCURSOR_SIZE=24
 
-# Dark theme for GTK-4 applications
+# Dark theme for GTK3 apps. GTK4/libadwaita apps use gsettings color-scheme instead.
 export GTK_THEME=Adwaita:dark
-
-# NVIDIA GPU configuration
-export LIBVA_DRIVER_NAME=nvidia
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-# export GBM_BACKEND=nvidia-drm
-
-# Hardware video acceleration
-export NVD_BACKEND=direct
-
-# VRR/G-Sync
-export __GL_GSYNC_ALLOWED=1
-export __GL_VRR_ALLOWED=1
-
-# Electron apps native Wayland
-export ELECTRON_OZONE_PLATFORM_HINT=auto
-
-# PRIME offload for running apps on NVIDIA
-# export __NV_PRIME_RENDER_OFFLOAD=1
-# export __VK_LAYER_NV_optimus=NVIDIA_only
