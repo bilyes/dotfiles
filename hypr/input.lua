@@ -11,8 +11,8 @@ hl.config({
     kb_options = "",
     kb_rules = "",
 
-    -- Key repeat: start after 200 ms, then 30 repeats per second (was `xset r rate 200 30`)
-    repeat_delay = 200,
+    -- Key repeat: start after 300 ms, then 30 repeats per second (was `xset r rate 200 30`)
+    repeat_delay = 300,
     repeat_rate = 30,
 
     follow_mouse = 1,

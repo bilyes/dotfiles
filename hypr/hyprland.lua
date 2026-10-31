@@ -14,6 +14,12 @@ hl.monitor({
   scale = "auto",
 })
 
+hl.config({
+  xwayland = {
+    force_zero_scaling = true,
+  },
+})
+
 ----------------
 --- MODULES ----
 ----------------
@@ -23,3 +29,6 @@ require("looks")
 require("input")
 require("keybindings")
 require("rules")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
