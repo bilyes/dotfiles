@@ -36,6 +36,7 @@ fzf_opts=(
     --preview 'tmux capture-pane -p -e -S -80 -t {1}'
     --preview-window 'down,40%,wrap,noinfo'
     --preview-label ' Pane content '
+    --bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'
 )
 tmux display-popup -c "$client" -E -B -w "${width}" -h 70% -- \
     sh -c 'list=$1 pick=$2; shift 2; fzf "$@" < "$list" > "$pick"' sh "$list" "$pick" "${fzf_opts[@]}" \
