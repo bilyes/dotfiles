@@ -94,8 +94,27 @@ hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, bezier =
 
 -- Ref https://wiki.hypr.land/configuring/core/rules/workspace-rules/
 -- Default workspace per monitor
-hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true })
-hl.workspace_rule({ workspace = "1", monitor = "HDMI-A-2", default = true })
+hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true, persistent = true })
+for i = 1, 9 do
+  hl.workspace_rule({
+    workspace = tostring(i),
+    monitor = "HDMI-A-2",
+    default = i == 1,
+    persistent = true,
+  })
+end
+
+-- Keep workspaces 1-9 on the external display after monitor hotplug/reconnect.
+hl.on("monitor.added", function()
+  local mon = hl.get_monitor("HDMI-A-2")
+  if not mon then return end
+  if not (mon.description or ""):lower():find("dell", 1, true) then
+    return
+  end
+  for i = 1, 9 do
+    hl.exec_cmd("hyprctl dispatch moveworkspacetomonitor " .. i .. " " .. mon.name)
+  end
+end)
 
 -- See https://wiki.hypr.land/configuring/layouts/dwindle-layout/ for more
 hl.config({
