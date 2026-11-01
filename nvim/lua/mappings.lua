@@ -1,3 +1,34 @@
+-- `cp` pastes the system clipboard inline, except in Markdown buffers that
+-- belong to a project with an `.img-clip.lua`: there, a clipboard image is
+-- saved and linked at the cursor instead.
+local function paste_clipboard()
+    if vim.bo.filetype ~= 'markdown' then
+        return false
+    end
+    local name = vim.api.nvim_buf_get_name(0)
+    if name == '' then
+        return false
+    end
+    local found = vim.fs.find('.img-clip.lua', { upward = true, path = vim.fs.dirname(name) })
+    if #found == 0 then
+        return false
+    end
+    local loaded, imgclip = pcall(require, 'img-clip')
+    if not loaded then
+        return false
+    end
+    if not require('img-clip.clipboard').content_is_image() then
+        return false
+    end
+    local ok, project = pcall(dofile, found[1])
+    if not ok or type(project) ~= 'table' then
+        vim.notify('cp: could not load ' .. found[1], vim.log.levels.ERROR)
+        return true
+    end
+    imgclip.paste_image(project)
+    return true
+end
+
 local mappings = {
     {
         mode = 'i',
@@ -26,7 +57,11 @@ local mappings = {
 
             -- Clipboard and system integration
             { 'cY',         '"+Y',  desc = 'Yank line to system clipboard' },
-            { 'cp',         '"+p',  desc = 'Paste from system clipboard' },
+            { 'cp',         function()
+                if not paste_clipboard() then
+                    vim.cmd(('normal! %d"+p'):format(vim.v.count1))
+                end
+            end, desc = 'Paste from system clipboard (images into project Markdown)' },
         }
     },
     {
