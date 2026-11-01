@@ -100,7 +100,7 @@ for i = 1, 9 do
     workspace = tostring(i),
     monitor = "HDMI-A-2",
     default = i == 1,
-    persistent = true,
+    persistent = i <= 4,
   })
 end
 
