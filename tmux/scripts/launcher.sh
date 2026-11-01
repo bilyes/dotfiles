@@ -34,7 +34,7 @@ fzf_opts=(
     --delimiter "$tab" --with-nth 2 --accept-nth 1
     --input-label ' Panes (session / window / pane) '
     --preview 'tmux capture-pane -p -e -S -80 -t {1}'
-    --preview-window 'down,80%,wrap,noinfo'
+    --preview-window 'down,70%,wrap,noinfo'
     --preview-label ' Pane content '
     --bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'
 )
