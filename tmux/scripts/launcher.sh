@@ -23,7 +23,7 @@ trap 'rm -f "$list" "$pick"' EXIT
 # the fuzzy-search text.
 tab=$'\t'
 tmux list-panes -a -F \
-    '#{pane_id}'$tab'#{session_name}  #{window_index}:#{window_name}  pane #{pane_index}  #{pane_current_command}  #{pane_title}  #{pane_current_path}' \
+    "#{pane_id}${tab}#{session_name}  #{window_index}:#{window_name}  pane #{pane_index}  #{pane_current_command}  #{pane_title}  #{pane_current_path}" \
   > "$list"
 
 fzf_opts=(
@@ -40,7 +40,7 @@ tmux display-popup -c "$client" -E -B -w 92% -h 80% -- \
   || true
 
 [[ -s $pick ]] || exit 0
-IFS=$tab read -r pane_id _rest < "$pick"
+IFS="${tab}" read -r pane_id _rest < "$pick"
 
 session=$(tmux display-message -p -t "$pane_id" '#{session_name}')
 window=$(tmux display-message -p -t "$pane_id" '#{window_id}')
