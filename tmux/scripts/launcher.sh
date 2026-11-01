@@ -29,12 +29,21 @@ tmux list-panes -a -F \
     "#{pane_id}${tab}#{session_name}  #{window_index}:#{window_name}  pane #{pane_index}  #{pane_current_command}  #{pane_title}  #{pane_current_path}" \
   > "$list"
 
+count=$(wc -l < "$list")
+
+# Keep the popup the same size; shift space from preview to list as the pane
+# count grows: 60% preview initially, -2% per pane, 20% minimum.
+preview=60
+preview=$((preview - count * 2))
+if (( preview > 60 )); then preview=60; fi
+if (( preview < 20 )); then preview=20; fi
+
 fzf_opts=(
     --layout reverse --style full
     --delimiter "$tab" --with-nth 2 --accept-nth 1
     --input-label ' Panes (session / window / pane) '
     --preview 'tmux capture-pane -p -e -S -80 -t {1}'
-    --preview-window 'down,40%,wrap,noinfo'
+    --preview-window "down,${preview}%,wrap,noinfo"
     --preview-label ' Pane content '
     --bind 'ctrl-u:preview-page-up,ctrl-d:preview-page-down'
 )
