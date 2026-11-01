@@ -15,6 +15,9 @@ set -euo pipefail
 
 client=$1
 
+read -r width < <(tmux display-message -p -c "$client" '#{window_width}')
+(( width > 100 )) && width=100
+
 list=$(mktemp)
 pick=$(mktemp)
 trap 'rm -f "$list" "$pick"' EXIT
@@ -31,11 +34,10 @@ fzf_opts=(
     --delimiter "$tab" --with-nth 2 --accept-nth 1
     --input-label ' Panes (session / window / pane) '
     --preview 'tmux capture-pane -p -e -S -80 -t {1}'
-    --preview-window 'right,60%,wrap,noinfo'
+    --preview-window 'down,40%,wrap,noinfo'
     --preview-label ' Pane content '
 )
-
-tmux display-popup -c "$client" -E -B -w 92% -h 80% -- \
+tmux display-popup -c "$client" -E -B -w "${width}" -h 70% -- \
     sh -c 'list=$1 pick=$2; shift 2; fzf "$@" < "$list" > "$pick"' sh "$list" "$pick" "${fzf_opts[@]}" \
   || true
 
