@@ -17,7 +17,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
   - the `tree-sitter` CLI (nvim-treesitter)
   - Node.js (copilot.vim)
   - fd and ripgrep (Telescope)
-  - yazi (file manager)
+  - yazi 26.8.15+ (file manager)
 - fzf 0.60+ and fd (shell functions in `zsh/conf.d/fzf-functions.zsh`; tmux's `prefix ?` uses fzf
   too)
 - kitty and these Nerd Fonts: FiraCode, Roboto Mono, JetBrains Mono
