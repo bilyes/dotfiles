@@ -66,13 +66,9 @@ hl.window_rule({
   workspace = "5",
   no_initial_focus = true,
 })
+-- Every Steam window; older Steam clients use the class "Steam"
 hl.window_rule({
-  match = { class = "steam", title = "^(Steam)$" },
-  workspace = "5",
-  no_initial_focus = true,
-})
-hl.window_rule({
-  match = { class = "Steam" },
+  match = { class = "^([Ss]team)$" },
   workspace = "5",
   no_initial_focus = true,
 })
@@ -92,7 +88,7 @@ hl.window_rule({
   float = true,
 })
 
--- Remove black borders in Picture-in-Picture windows
+-- Float Picture-in-Picture windows
 hl.window_rule({
   match = { title = "^(Picture-in-Picture)$" },
   float = true,

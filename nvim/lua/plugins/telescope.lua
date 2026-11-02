@@ -8,7 +8,7 @@ end
 
 return {
     'nvim-telescope/telescope.nvim',
-    tag = 'v0.2.1',
+    version = '*', -- latest release
     cmd = 'Telescope',
     keys = {
         { "<tab>p",     picker('find_files'),           desc = 'Find files' },

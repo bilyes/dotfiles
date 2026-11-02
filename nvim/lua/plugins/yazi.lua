@@ -1,6 +1,6 @@
 return {
     "mikavilpas/yazi.nvim",
-    version = "^v13.0.0",
+    version = "^v14.0.0", -- needs yazi 26.8.15+
     cmd = "Yazi",
     dependencies = {
         { "nvim-lua/plenary.nvim", lazy = true },

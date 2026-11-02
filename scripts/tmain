@@ -1,11 +1,28 @@
 #!/bin/sh
+# tmain - a tmux session with btop, fastfetch and two shells. Inside tmux, it switches to the new
+# session instead of nesting one.
 
-tmux new-session \; \
-  send-keys 'btop' C-m \; \
-  split-window -h \; \
-  split-window -h \; \
-  select-pane -t 1 \; \
-  split-window -v \; \
-  send-keys 'ff' C-m \; \
-  select-layout -E \; \
-  select-pane -t 3 \;
+set -eu
+
+# The session starts detached, at the size it's about to be shown at: fastfetch prints only once,
+# so it would keep tmux's 80x24 default otherwise. '-' is the current client's size.
+if [ -n "${TMUX:-}" ]; then
+  width=- height=- attach=switch-client
+else
+  width=$(tput cols) height=$(tput lines) attach=attach-session
+fi
+
+session=$(tmux new-session -d -P -F '#{session_id}' -x "$width" -y "$height")
+
+# Three even columns, the left one split into btop above fastfetch. The columns are evened out
+# before that split: `select-layout -E` after it sized them wider than the window. Each command
+# names the session: inside tmux, they'd otherwise act on the current one.
+tmux send-keys -t "$session" 'btop' C-m \; \
+  split-window -h -t "$session" \; \
+  split-window -h -t "$session" \; \
+  select-layout -t "$session" even-horizontal \; \
+  split-window -v -t "$session:.1" \; \
+  send-keys -t "$session" 'ff' C-m \; \
+  select-pane -t "$session:.3"
+
+exec tmux "$attach" -t "$session"

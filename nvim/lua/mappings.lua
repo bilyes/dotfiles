@@ -84,6 +84,6 @@ local mappings = {
 for _, section in ipairs(mappings) do
     for _, mapping in ipairs(section.mappings) do
         vim.keymap.set(section.mode, mapping[1], mapping[2],
-            { noremap = true, silent = mapping.silent ~= false, desc = mapping.desc })
+            { silent = mapping.silent ~= false, desc = mapping.desc })
     end
 end

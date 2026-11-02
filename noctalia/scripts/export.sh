@@ -5,21 +5,18 @@
 # and the plugin search folder stay in the local state layer
 # (~/.local/state/noctalia/settings.toml) and are re-created per machine.
 #
-# Usage: ~/.config/dotfiles/scripts/noctalia-export.sh
-# Result: ~/.config/dotfiles/noctalia/config.toml
+# Usage: ~/.config/noctalia/scripts/export.sh
+# Result: config.toml next to this scripts/ folder, i.e. noctalia/config.toml in the repo
 
 set -eu
 
-repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-out_dir="$repo_dir/noctalia"
-out="$out_dir/config.toml"
+config_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+out="$config_dir/config.toml"
 
 command -v noctalia >/dev/null 2>&1 || {
     echo "noctalia: command not found" >&2
     exit 1
 }
-
-mkdir -p "$out_dir"
 
 raw=$(mktemp)
 filtered=$(mktemp)
