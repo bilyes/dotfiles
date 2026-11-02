@@ -1,22 +1,29 @@
 return {
     'sindrets/diffview.nvim',
-    config = function()
-        local function opts(desc)
-            return { noremap = true, silent = true, desc = desc }
-        end
-
+    cmd = {
+        'DiffviewOpen',
+        'DiffviewClose',
+        'DiffviewToggleFiles',
+        'DiffviewFocusFiles',
+        'DiffviewRefresh',
+        'DiffviewFileHistory',
+        'DiffviewLog',
+    },
+    keys = {
         -- File history for current file
-        vim.keymap.set('n', '<leader>gh', ':DiffviewFileHistory %<CR>', opts('File history (current file)'))
+        { '<leader>gh', ':DiffviewFileHistory %<CR>', desc = 'File history (current file)', silent = true },
         -- Repo-wide file history
-        vim.keymap.set('n', '<leader>gH', ':DiffviewFileHistory<CR>', opts('File history (repo)'))
+        { '<leader>gH', ':DiffviewFileHistory<CR>',   desc = 'File history (repo)',         silent = true },
         -- Diff working tree against HEAD
-        vim.keymap.set('n', '<leader>gD', ':DiffviewOpen<CR>', opts('Diff working tree'))
+        { '<leader>gD', ':DiffviewOpen<CR>',          desc = 'Diff working tree',           silent = true },
         -- Close diffview
-        vim.keymap.set('n', '<leader>gq', ':DiffviewClose<CR>', opts('Close diffview'))
-
+        { '<leader>gq', ':DiffviewClose<CR>',         desc = 'Close diffview',              silent = true },
+    },
+    -- A function, so diffview.config is only required once diffview loads
+    opts = function()
         local actions = require('diffview.config').actions
 
-        require('diffview').setup({
+        return {
             file_panel = {
                 win_config = function()
                     if vim.o.columns < 120 then
@@ -31,6 +38,6 @@ return {
                     { "n", "<leader>gr", actions.restore_entry, { desc = "Restore file to HEAD" } },
                 },
             },
-        })
-    end
+        }
+    end,
 }

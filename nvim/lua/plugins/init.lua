@@ -5,12 +5,16 @@ return {
     -- before nvim-cmp itself is lazy-loaded on InsertEnter/LspAttach.
     'hrsh7th/cmp-nvim-lsp',
 
-    'mfussenegger/nvim-jdtls',
+    -- ftplugin/java.lua requires it, which also loads it
+    { 'mfussenegger/nvim-jdtls', ft = 'java' },
 
     'nvim-tree/nvim-web-devicons',
 
     {
         "j-hui/fidget.nvim",
+        -- Shows LSP progress, so it's needed once a server attaches. lsp/sorbet.lua requires
+        -- fidget.progress, which loads it too.
+        event = 'LspAttach',
         opts = {
             notification = {
                 window = {
