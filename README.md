@@ -81,7 +81,9 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
 - `nvim/scripts/test-config.sh` checks that the Neovim config in its checkout loads without errors.
 - The scripts in `scripts/` are on `PATH` through their links in `~/.local/bin`; re-run
   `install.sh` after adding one. `tmain` opens a tmux session running btop and fastfetch, which
-  need to be installed.
+  need to be installed. Scripts for a single config live in its own `scripts/` folder instead,
+  e.g. `noctalia/scripts/export.sh`, which copies Noctalia's current settings into
+  `noctalia/config.toml` without the machine-specific ones.
 
 #### Terminal tips
 
