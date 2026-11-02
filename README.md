@@ -24,6 +24,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 - macOS: AeroSpace
 - Linux: Hyprland started through uwsm, and Noctalia, plus:
   - grim, slurp, tesseract and tesseract-data-eng (Noctalia's OCR plugin)
+  - wl-clipboard (Ctrl-V paste in zsh)
 
 ## Installation
 
