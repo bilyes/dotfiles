@@ -1,5 +1,7 @@
 return {
     'lewis6991/gitsigns.nvim',
+    -- Needed once a file is open; on setup, gitsigns attaches to buffers already open
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
     opts = {
         on_attach = function(bufnr)
             local gs = require('gitsigns')

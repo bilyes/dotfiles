@@ -1,6 +1,38 @@
+-- Key handlers that require Telescope only when pressed, so it loads then rather than at startup
+local function picker(name)
+    return function() require('telescope.builtin')[name]() end
+end
+local function live_grep_args()
+    require('telescope').extensions.live_grep_args.live_grep_args()
+end
+
 return {
     'nvim-telescope/telescope.nvim',
     tag = 'v0.2.1',
+    cmd = 'Telescope',
+    keys = {
+        { "<tab>p",     picker('find_files'),           desc = 'Find files' },
+        { "<leader>fc", picker('commands'),             desc = 'Find commands' },
+        { "<leader>fs", live_grep_args,                 desc = 'Live grep' },
+        { "<leader>fb", picker('buffers'),              desc = 'Find buffers' },
+        { "<leader>fh", picker('help_tags'),            desc = 'Find help tags' },
+        { "<leader>fr", picker('lsp_references'),       desc = 'Find LSP references' },
+        { "<leader>fi", picker('lsp_implementations'),  desc = 'Find LSP implementations' },
+        { "<leader>ds", picker('lsp_document_symbols'), desc = 'Find document symbols' },
+        -- TODO use live_grep_args for this?
+        { "<leader>fw", picker('grep_string'),          desc = 'Grep word under cursor' },
+    },
+    init = function()
+        -- The ui-select extension makes vim.ui.select (code actions, etc.) use Telescope once
+        -- Telescope loads. Until then, the first call loads it and is passed on to its picker.
+        -- The original goes back first, so a failed load falls back to it instead of looping.
+        local select = vim.ui.select
+        vim.ui.select = function(...)
+            vim.ui.select = select
+            require('lazy').load({ plugins = { 'telescope.nvim' } })
+            return vim.ui.select(...)
+        end
+    end,
     dependencies = {
         {
             'nvim-lua/plenary.nvim',
@@ -19,24 +51,6 @@ return {
     },
     config = function()
         local builtin = require('telescope.builtin')
-        local lga = function() require('telescope').extensions.live_grep_args.live_grep_args() end
-        local mappings = {
-            { "<tab>p",     builtin.find_files,           desc = 'Find files' },
-            { "<leader>fc", builtin.commands,             desc = 'Find commands' },
-            { "<leader>fs", lga,                          desc = 'Live grep' },
-            { "<leader>fb", builtin.buffers,              desc = 'Find buffers' },
-            { "<leader>fh", builtin.help_tags,            desc = 'Find help tags' },
-            { "<leader>fr", builtin.lsp_references,       desc = 'Find LSP references' },
-            { "<leader>fi", builtin.lsp_implementations,  desc = 'Find LSP implementations' },
-            { "<leader>ds", builtin.lsp_document_symbols, desc = 'Find document symbols' },
-            -- TODO use live_grep_args for this?
-            { "<leader>fw", builtin.grep_string,          desc = 'Grep word under cursor' },
-        }
-        for _, map in ipairs(mappings) do
-            local key, func = map[1], map[2]
-            vim.keymap.set('n', key, func, { noremap = true, silent = true, desc = map.desc })
-        end
-
         local telescope = require('telescope')
         local lga_actions = require("telescope-live-grep-args.actions")
         local action_state = require("telescope.actions.state")

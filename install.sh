@@ -47,7 +47,7 @@ ensure_clone() {
 }
 
 # Preflight
-for cmd in git zsh nvim tmux; do
+for cmd in git zsh nvim tmux fzf fd; do
     command -v "$cmd" > /dev/null || die "missing dependency: $cmd"
 done
 [[ -d $ZSH_CUSTOM ]] || die "oh-my-zsh not found at $ZSH_CUSTOM; install it, or run ZSH_CUSTOM=/path/to/its/custom $0"
