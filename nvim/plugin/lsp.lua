@@ -3,7 +3,7 @@
 local on_attach = function(_, bufnr)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buf = bufnr }
+    local bufopts = { silent = true, buf = bufnr }
     local go_to_definition = function()
         local ok, telescope = pcall(require, 'telescope.builtin')
         if ok then telescope.lsp_definitions() else vim.lsp.buf.definition() end

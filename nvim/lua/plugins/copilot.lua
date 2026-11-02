@@ -20,7 +20,7 @@ return {
         }
     end,
     config = function()
-        local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+        local opts = { silent = true, expr = true, replace_keycodes = false }
         vim.keymap.set('i', '<C-a>', 'copilot#Accept("<CR>")', opts)
         vim.keymap.set('i', '<C-f>', 'copilot#Next()', opts)
         -- Back, as <C-f> is forward; leaves <C-s> to Neovim's signature help
