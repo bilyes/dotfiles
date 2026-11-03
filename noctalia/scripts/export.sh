@@ -4,9 +4,11 @@
 # Machine-specific values are stripped on purpose: location, wallpaper paths
 # and the plugin search folder stay in the local state layer
 # (~/.local/state/noctalia/settings.toml) and are re-created per machine.
+# The lock screen layout is left out too: it's in lockscreen.toml, which the
+# merged export includes.
 #
 # Usage: ~/.config/noctalia/scripts/export.sh
-# Result: config.toml next to this scripts/ folder, i.e. noctalia/config.toml in the repo
+# Result: ~/.config/noctalia/config.toml
 
 set -eu
 
@@ -24,17 +26,27 @@ trap 'rm -f "$raw" "$filtered"' EXIT
 
 noctalia config export merged > "$raw"
 
-# Drop [location], [wallpaper] (including sub-tables) and search_folder.
+# Drop [location], [wallpaper], [lockscreen_widgets] (including sub-tables) and
+# search_folder, and round float noise like 0.74999998323619366 to 0.75,
+# keeping whole numbers floats (2.0).
 awk '
     /^[[:space:]]*\[/ {
         name = $0
         sub(/^[[:space:]]*\[/, "", name)
         sub(/[."].*$/, "", name)
         sub(/\]$/, "", name)
-        drop = (name == "location" || name == "wallpaper")
+        drop = (name == "location" || name == "wallpaper" || name == "lockscreen_widgets")
     }
     drop { next }
     /^[[:space:]]*search_folder[[:space:]]*=/ { next }
+    /=[[:space:]]*-?[0-9]+\.[0-9]+[[:space:]]*$/ {
+        split($NF, parts, ".")
+        if (length(parts[2]) >= 10) {
+            rounded = sprintf("%.6g", $NF)
+            if (rounded !~ /[.e]/) rounded = rounded ".0"
+            sub(/-?[0-9]+\.[0-9]+[[:space:]]*$/, rounded)
+        }
+    }
     { print }
 ' "$raw" > "$filtered"
 

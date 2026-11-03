@@ -66,7 +66,7 @@ hl.window_rule({
   workspace = "5",
   no_initial_focus = true,
 })
--- Every Steam window; older Steam clients use the class "Steam"
+-- Older Steam clients use the class "Steam"
 hl.window_rule({
   match = { class = "^([Ss]team)$" },
   workspace = "5",

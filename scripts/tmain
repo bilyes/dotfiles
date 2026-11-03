@@ -1,11 +1,9 @@
 #!/bin/sh
-# tmain - a tmux session with btop, fastfetch and two shells. Inside tmux, it switches to the new
-# session instead of nesting one.
 
 set -eu
 
-# The session starts detached, at the size it's about to be shown at: fastfetch prints only once,
-# so it would keep tmux's 80x24 default otherwise. '-' is the current client's size.
+# Detached sessions default to 80x24 and fastfetch prints only once, so start at the size it'll
+# be shown at ('-' is the current client's)
 if [ -n "${TMUX:-}" ]; then
   width=- height=- attach=switch-client
 else
@@ -14,9 +12,8 @@ fi
 
 session=$(tmux new-session -d -P -F '#{session_id}' -x "$width" -y "$height")
 
-# Three even columns, the left one split into btop above fastfetch. The columns are evened out
-# before that split: `select-layout -E` after it sized them wider than the window. Each command
-# names the session: inside tmux, they'd otherwise act on the current one.
+# Even out the columns before splitting the left one: select-layout -E after it overflowed the
+# window. Every command names the session: inside tmux, they'd act on the current one.
 tmux send-keys -t "$session" 'btop' C-m \; \
   split-window -h -t "$session" \; \
   split-window -h -t "$session" \; \

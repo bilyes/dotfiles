@@ -1,4 +1,4 @@
--- Key handlers that require Telescope only when pressed, so it loads then rather than at startup
+-- Functions, so Telescope is only required, and loaded, on the first key press
 local function picker(name)
     return function() require('telescope.builtin')[name]() end
 end
@@ -8,7 +8,7 @@ end
 
 return {
     'nvim-telescope/telescope.nvim',
-    version = '*', -- latest release
+    version = '*',
     cmd = 'Telescope',
     keys = {
         { "<tab>p",     picker('find_files'),           desc = 'Find files' },
@@ -23,9 +23,8 @@ return {
         { "<leader>fw", picker('grep_string'),          desc = 'Grep word under cursor' },
     },
     init = function()
-        -- The ui-select extension makes vim.ui.select (code actions, etc.) use Telescope once
-        -- Telescope loads. Until then, the first call loads it and is passed on to its picker.
-        -- The original goes back first, so a failed load falls back to it instead of looping.
+        -- The first vim.ui.select call loads Telescope, whose ui-select extension replaces it.
+        -- Restoring the original first means a failed load can't recurse.
         local select = vim.ui.select
         vim.ui.select = function(...)
             vim.ui.select = select

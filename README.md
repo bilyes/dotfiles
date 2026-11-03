@@ -84,7 +84,8 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
   `install.sh` after adding one. `tmain` opens a tmux session running btop and fastfetch, which
   need to be installed. Scripts for a single config live in its own `scripts/` folder instead,
   e.g. `noctalia/scripts/export.sh`, which copies Noctalia's current settings into
-  `noctalia/config.toml` without the machine-specific ones.
+  `noctalia/config.toml` without the machine-specific ones or the lock screen layout, which
+  `noctalia/lockscreen.toml` declares.
 
 #### Terminal tips
 
