@@ -1,6 +1,3 @@
-#export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore .cache --ignore .npm --ignore .cargo --ignore .yarn --ignore .steam --ignore .electron-gyp --ignore .wine --ignore "*.otf" --ignore "*.png" --ignore "*.jpg" -f -g "" --depth 10' # requires silversearch-ag
-#export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!{.git, .cache, .npm, .cargo, .yarn, .steam, .electron-gyp, .wine, *.otf, *.png, *.jpg}" --max-depth 10' # requires ripgrep
-
 # Directories to exclude from fzf file/dir listings
 _fzf_exclude_dirs=(.git .cache .npm .cargo .yarn node_modules .steam .electron-gyp .wine .gem .vim)
 # File patterns to exclude (only applies to file listings)

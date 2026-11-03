@@ -17,10 +17,6 @@ return {
                 name = "notes",
                 path = "~/notes",
             },
-            --{
-            --name = "work",
-            --path = "~/vaults/work",
-            --},
         },
 
         frontmatter = {
