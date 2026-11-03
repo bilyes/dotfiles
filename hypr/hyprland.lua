@@ -30,9 +30,7 @@ require("input")
 require("keybindings")
 require("rules")
 
--- For Noctalia Color templates. Noctalia writes noctalia.lua (git-ignored) once it runs, and
--- Hyprland is what starts it, so the file is missing at a new machine's first start: skip it
--- then, but still report any other error from it.
+-- For Noctalia Color templates; noctalia.lua only exists once Noctalia has run
 local ok, noctalia = pcall(require, "noctalia")
 if ok then
   noctalia.apply_theme()

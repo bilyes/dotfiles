@@ -14,7 +14,6 @@ export FZF_ALT_C_COMMAND="fd --type d --hidden${_fzf_dir_excludes} --max-depth 1
 export FZF_PREVIEW_CMD="cat {}"
 
 unset _fzf_dir_excludes _fzf_file_excludes _fzf_exclude_dirs _fzf_exclude_files d f
-# Key bindings and completion; skipped without fzf, so a new shell doesn't start with an error
 if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi

@@ -1,6 +1,5 @@
 return {
     'github/copilot.vim',
-    -- Suggestions only show in Insert mode; :Copilot (setup, status) loads it too
     event = 'InsertEnter',
     cmd = 'Copilot',
     -- Set before copilot.vim loads: that's when it decides, from copilot_no_tab_map,

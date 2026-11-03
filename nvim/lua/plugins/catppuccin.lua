@@ -1,9 +1,7 @@
 return {
     'catppuccin/nvim',
-    -- Without a name, lazy.nvim would name it after the repo: "nvim"
     name = 'catppuccin',
     lazy = false,
-    -- Load before the other startup plugins, so they set up with its colors
     priority = 1000,
     config = function()
         -- latte, frappe, macchiato, mocha

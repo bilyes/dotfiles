@@ -59,8 +59,7 @@ hl.bind(mainMod .. " + BACKSLASH", hl.dsp.workspace.toggle_special("magic"), { d
 hl.bind(mainMod .. " + SHIFT + BACKSLASH", hl.dsp.window.move({ workspace = "special:magic" }), { description = "Move window to scratchpad" })
 
 -- 5. Volume and brightness
--- Noctalia shows the OSD; the keys work on the lock screen, and the level keys repeat while
--- held. Toggles don't repeat: holding one would flip it back and forth.
+-- Noctalia shows the OSD; the keys work on the lock screen, and only the level keys repeat
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"), { locked = true, repeating = true, description = "Volume up" })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"), { locked = true, repeating = true, description = "Volume down" })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"), { locked = true, description = "Mute" })
