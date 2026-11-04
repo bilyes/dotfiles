@@ -5,6 +5,28 @@
 -- See https://wiki.hypr.land/configuring/core/rules/
 -- See https://wiki.hypr.land/configuring/core/rules/workspace-rules/ for workspace rules
 
+-- The eDP-1 connector exists on the laptop whether or not a screen is plugged in. Card
+-- numbering can shift between boots, so check the first few.
+local function has_connector(name)
+  for card = 0, 3 do
+    local f = io.open(("/sys/class/drm/card%d-%s/status"):format(card, name))
+    if f then
+      f:close()
+      return true
+    end
+  end
+  return false
+end
+
+-- Workspaces 1-9 on the external display, 10 on the laptop panel. Only on that machine:
+-- elsewhere these rules would still reserve 1-10, so the monitor would start on workspace 11.
+if has_connector("eDP-1") then
+  hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true, persistent = true })
+  for i = 1, 9 do
+    hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-2", default = i == 1, persistent = i <= 4 })
+  end
+end
+
 -- Noctalia shell surfaces: no animations, translucent blur
 hl.layer_rule({
   name = "noctalia",
