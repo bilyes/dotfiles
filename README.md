@@ -25,6 +25,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 - Linux: Hyprland started through uwsm, and Noctalia, plus:
   - grim, slurp, tesseract and tesseract-data-eng (Noctalia's OCR plugin)
   - wl-clipboard (Ctrl-V paste in zsh)
+  - libnotify (notifications from tmux's scratch popup)
 
 ## Installation
 
@@ -94,6 +95,11 @@ In zsh's vi normal mode, `v` opens the current command in `$EDITOR`.
 `t` attaches to the last tmux session or starts one; inside tmux, it opens the session picker.
 `prefix ?` opens a popup that fuzzy-finds the tmux bindings, copy mode's included; Enter runs the
 one picked.
+
+`prefix S` toggles a scratch popup for one-off commands, which keep running once it's hidden. It
+opens on a new window while the last command is still running, and a failed command sends a
+desktop notification. On macOS, that notification comes from Script Editor, so allow its
+notifications in System Settings.
 
 On Linux, Super + / opens the Noctalia Keymap plugin, which lists the Hyprland bindings with their
 descriptions.
