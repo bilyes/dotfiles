@@ -92,43 +92,6 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 3, bezier = "easeOutQuint", style = "slide top" })
 hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, bezier = "easeOutQuint", style = "slide bottom" })
 
--- Ref https://wiki.hypr.land/configuring/core/rules/workspace-rules/
--- Default workspace per monitor. These only matter on the eDP-1/HDMI-A-2
--- machine; on LVDS-1 they are inert.
-local function apply_dashboard_workspace_rules()
-  local edp = hl.get_monitor("eDP-1")
-  local hdmi = hl.get_monitor("HDMI-A-2")
-  if not (edp or hdmi) then return end
-  if edp then
-    hl.workspace_rule({ workspace = "10", monitor = "eDP-1", default = true, persistent = true })
-  end
-  if hdmi then
-    for i = 1, 9 do
-      hl.workspace_rule({
-        workspace = tostring(i),
-        monitor = "HDMI-A-2",
-        default = i == 1,
-        persistent = i <= 4,
-      })
-    end
-  end
-end
-hl.on("hyprland.start", apply_dashboard_workspace_rules)
-
--- Apply dashboard rules when a monitor arrives, and relocate existing
--- external workspaces on the DELL HDMI port.
-hl.on("monitor.added", function()
-  apply_dashboard_workspace_rules()
-  local mon = hl.get_monitor("HDMI-A-2")
-  if not mon then return end
-  if not (mon.description or ""):lower():find("dell", 1, true) then
-    return
-  end
-  for i = 1, 9 do
-    hl.exec_cmd("hyprctl dispatch moveworkspacetomonitor " .. i .. " " .. mon.name)
-  end
-end)
-
 -- See https://wiki.hypr.land/configuring/layouts/dwindle-layout/ for more
 hl.config({
   dwindle = {
