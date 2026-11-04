@@ -30,10 +30,6 @@ require("input")
 require("keybindings")
 require("rules")
 
--- For Noctalia Color templates; noctalia.lua only exists once Noctalia has run
-local ok, noctalia = pcall(require, "noctalia")
-if ok then
-  noctalia.apply_theme()
-elseif not tostring(noctalia):find("module 'noctalia' not found", 1, true) then
-  error(noctalia, 0)
-end
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
