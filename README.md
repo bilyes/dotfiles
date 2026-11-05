@@ -21,7 +21,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 - fzf 0.60+ and fd (shell functions in `zsh/conf.d/fzf-functions.zsh`; tmux's `prefix ?` uses fzf
   too)
 - kitty and these Nerd Fonts: FiraCode, Roboto Mono, JetBrains Mono
-- macOS: AeroSpace
+- macOS: AeroSpace, plus optionally macmon (CPU temperature in tmux's status bar)
 - Linux: Hyprland started through uwsm, and Noctalia, plus:
   - grim, slurp, tesseract and tesseract-data-eng (Noctalia's OCR plugin)
   - wl-clipboard (Ctrl-V paste in zsh)
@@ -100,6 +100,9 @@ one picked.
 opens on a new window while the last command is still running, and a failed command sends a
 desktop notification. On macOS, that notification comes from Script Editor, so allow its
 notifications in System Settings.
+
+On macOS, tmux's status bar shows CPU, RAM and GPU usage, plus the CPU temperature once macmon is
+installed. A reading turns red from 80%, or 90°C for the temperature.
 
 On Linux, Super + / opens the Noctalia Keymap plugin, which lists the Hyprland bindings with their
 descriptions.
