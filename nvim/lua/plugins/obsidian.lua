@@ -1,6 +1,40 @@
+local diary_folder = "main/diary"
+local diary_entry_pattern = "^%d%d%d%d%-%d%d%-%d%d%.md$"
+
+-- Opens the diary entry `step` entries away from the current one (negative goes back),
+-- skipping days without an entry, or the farthest one if there are fewer. Unlike
+-- `:Obsidian yesterday`, it never creates a note.
+local function goto_diary_entry(step)
+    local path = vim.api.nvim_buf_get_name(0)
+    local dir, current = vim.fs.dirname(path), vim.fs.basename(path)
+    -- Entries in the direction of travel, nearest first; YYYY-MM-DD names sort by date
+    local entries = {}
+    for name, type in vim.fs.dir(dir) do
+        if type == "file" and name:match(diary_entry_pattern)
+            and ((step < 0 and name < current) or (step > 0 and name > current)) then
+            table.insert(entries, name)
+        end
+    end
+    table.sort(entries, function(a, b)
+        if step < 0 then
+            return a > b
+        end
+        return a < b
+    end)
+    if #entries == 0 then
+        vim.notify(("No %s diary entry"):format(step < 0 and "older" or "newer"))
+        return
+    end
+    vim.cmd.edit(vim.fs.joinpath(dir, entries[math.min(math.abs(step), #entries)]))
+end
+
 return {
     "obsidian-nvim/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
+    -- obsidian.nvim picks its picker on first use, from what's on the runtimepath, and
+    -- keeps that choice; Telescope is lazy-loaded, so load it first or obsidian falls
+    -- back to its built-in picker.
+    dependencies = { "nvim-telescope/telescope.nvim" },
     --ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     event = {
@@ -41,7 +75,11 @@ return {
         end,
 
         daily_notes = {
-            folder = "main/diary",
+            folder = diary_folder,
+        },
+
+        picker = {
+            name = "telescope.nvim",
         },
 
         link = {
@@ -79,6 +117,20 @@ return {
                     buf = note.bufnr,
                     desc = "Toggle checkbox",
                 })
+
+                local path = tostring(note.path)
+                local diary_dir = vim.fs.joinpath(tostring(Obsidian.workspace.root), diary_folder)
+                if vim.fs.normalize(vim.fs.dirname(path)) == vim.fs.normalize(diary_dir)
+                    and vim.fs.basename(path):match(diary_entry_pattern) then
+                    vim.keymap.set("n", "[j", function() goto_diary_entry(-vim.v.count1) end, {
+                        buf = note.bufnr,
+                        desc = "Previous diary entry",
+                    })
+                    vim.keymap.set("n", "]j", function() goto_diary_entry(vim.v.count1) end, {
+                        buf = note.bufnr,
+                        desc = "Next diary entry",
+                    })
+                end
             end,
         },
     },
