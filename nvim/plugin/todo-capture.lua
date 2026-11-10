@@ -2,8 +2,8 @@
 -- each non-empty line to `todo_file` as an unchecked checkbox, newest first, below the heading on
 -- its first line. :q! cancels. A bare :w empties the window for the next todo instead of closing it.
 --
--- `:TodoCapture here` uses the current window instead of a floating one: tmux's prefix t runs it
--- in a popup, which draws its own border.
+-- `:TodoCapture here` uses the current window instead of a floating one, without a statusline:
+-- tmux's prefix t runs it in a Neovim of its own, in a popup that draws its own border and title.
 
 local todo_file = "~/notes/todo.md"
 local capture_name = "todo://capture"
@@ -152,6 +152,12 @@ local function open(here)
         vim.wo[win].relativenumber = false
         vim.wo[win].signcolumn = "no"
         vim.wo[win].colorcolumn = ""
+        -- No ~ past the last line, as in the floating window
+        vim.wo[win].fillchars = "eob: "
+        -- Global, as this Neovim only runs the capture. Without a statusline, the ruler would
+        -- show in the command line instead.
+        vim.o.laststatus = 0
+        vim.o.ruler = false
     else
         win = open_float(buf)
     end
