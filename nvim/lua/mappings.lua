@@ -55,6 +55,9 @@ local mappings = {
             { 'OO',         'O<Esc>j',           desc = 'Add blank line above' },
             { '<leader>sr', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', desc = 'Search and replace word under cursor', silent = false },
 
+            -- Notes
+            { '<leader>nt', function() vim.cmd.TodoCapture() end, desc = 'Capture todos' },
+
             -- Clipboard and system integration
             { 'cY',         '"+Y',  desc = 'Yank line to system clipboard' },
             { 'cp',         function()

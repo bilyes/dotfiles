@@ -101,6 +101,10 @@ opens on a new window while the last command is still running, and a failed comm
 desktop notification. On macOS, that notification comes from Script Editor, so allow its
 notifications in System Settings.
 
+`prefix t`, or `<leader>nt` in Neovim, opens a box to type todos in. `:wq` adds each line to the top
+of the todo file (`todo_file` in `nvim/plugin/todo-capture.lua`) as a checkbox, below its heading;
+`:q!` cancels.
+
 On macOS, tmux's status bar shows CPU, RAM and GPU usage, plus the CPU temperature once macmon is
 installed. A reading turns red from 80%, or 90°C for the temperature.
 
