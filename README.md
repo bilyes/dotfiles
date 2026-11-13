@@ -24,7 +24,7 @@ Configs for macOS (AeroSpace) and Arch Linux (Hyprland + Noctalia).
 - macOS: AeroSpace, plus optionally macmon (CPU temperature in tmux's status bar)
 - Linux: Hyprland started through uwsm, and Noctalia, plus:
   - grim, slurp, tesseract and tesseract-data-eng (Noctalia's OCR plugin)
-  - wl-clipboard (Ctrl-V paste in zsh)
+  - wl-clipboard (Ctrl-V paste and the `C` global alias in zsh)
   - libnotify (notifications from tmux's scratch popup)
 
 ## Installation
