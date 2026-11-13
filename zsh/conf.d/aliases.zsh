@@ -17,14 +17,29 @@ alias v=nvim
 alias c=clear
 alias chmox="chmod u+x"
 
+# Global aliases expand anywhere in a command, e.g. `git log L` runs `git log | less`
 alias -g G='| grep'
+alias -g L='| less'
+alias -g H='| head'
+alias -g J='| jq'
+alias -g NE='2>/dev/null'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias -g C='| pbcopy'
+else
+  alias -g C='| wl-copy'
+fi
 
-# pacman (Arch Linux only)
+# GitHub CLI
+alias ghpc="gh pr create"
+alias ghpm="gh pr create && gh pr merge --squash --delete-branch"
+
+# Packages: pacman on Arch Linux, Homebrew on macOS
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias i="sudo pacman -S"
   alias r="sudo pacman -Rns"
   alias up="sudo pacman -Syu"
 else
+  alias up="brew upgrade"
   # Without the alias above, `r` would fall back to zsh's builtin, which
   # re-runs the previous command.
   disable r

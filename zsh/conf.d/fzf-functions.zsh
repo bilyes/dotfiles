@@ -94,6 +94,55 @@ fgco() {
   git checkout "$branch"
 }
 
+# _git_worktrees [linked] - the current repo's worktrees, one "path<Tab>branch" line each
+#   - skips a bare repository; with "linked", also the main worktree, which git lists first
+#   - from the porcelain format, so paths with spaces stay whole
+_git_worktrees() {
+  git worktree list --porcelain | awk -v linked="$1" '
+    /^worktree / { n++; dir = substr($0, 10); branch = "(detached)"; bare = 0 }
+    /^branch / { branch = substr($0, 19) }
+    /^bare$/ { bare = 1 }
+    /^$/ { if (!bare && !(linked != "" && n == 1)) print dir "\t" branch }
+  '
+}
+
+# fwt [QUERY] - cd into one of the current repo's worktrees
+fwt() {
+  local dir
+  dir="$(_git_worktrees | fzf \
+        --height=40% \
+        --query="$1" \
+        --select-1 \
+        --exit-0 \
+        --layout=reverse \
+        --delimiter='\t' \
+        --accept-nth=1
+  )" || return
+  cd "$dir"
+}
+
+# fwtrm - remove the picked worktrees of the current repo (Tab picks several)
+#   - git refuses the ones with changes that aren't committed
+fwtrm() {
+  local list main dirs dir
+  list="$(git worktree list --porcelain)" || return
+  main=${${list%%$'\n'*}#worktree }
+  dirs=(${(f)"$(_git_worktrees linked | fzf \
+        --height=40% \
+        --multi \
+        --exit-0 \
+        --layout=reverse \
+        --delimiter='\t' \
+        --accept-nth=1
+  )"}) || return
+
+  # From the main worktree, so git keeps working after removing the one the shell is in
+  for dir in "${dirs[@]}"; do
+    git -C "$main" worktree remove "$dir"
+  done
+  [[ -d $PWD ]] || cd "$main"
+}
+
 # fcn [QUERY] - switch the current kubectl context's namespace
 fcn() {
   local namespace
@@ -105,6 +154,31 @@ fcn() {
         --layout=reverse
   )" || return
   kubectl config set-context --current --namespace "$namespace"
+}
+
+# fal [QUERY] - search aliases; the picked one goes on the next command line
+fal() {
+  local pick
+  pick="$(alias | fzf \
+        --height=40% \
+        --query="$1" \
+        --exit-0 \
+        --layout=reverse
+  )" || return
+  print -z -- "${pick%%=*} "
+}
+
+# fkill [QUERY] - send TERM to the picked processes of yours (Tab picks several)
+fkill() {
+  local pids
+  pids=(${(f)"$(ps -u "$USER" -o pid=,command= | fzf \
+        --height=40% \
+        --query="$1" \
+        --multi \
+        --layout=reverse \
+        --accept-nth=1
+  )"}) || return
+  kill "${pids[@]}"
 }
 
 # Arch Linux package helpers (pacman / yay)
