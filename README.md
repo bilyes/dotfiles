@@ -87,6 +87,12 @@ exec zsh  # powerlevel10k doesn't support `source ~/.zshrc` after an update
   e.g. `noctalia/scripts/export.sh`, which copies Noctalia's current settings into
   `noctalia/config.toml` without the machine-specific ones or the lock screen layout, which
   `noctalia/lockscreen.toml` declares.
+- tmux's status bar is drawn by `tmux/status/bar.conf` in the colors of a palette from
+  `tmux/status/palettes/`, which maps a theming system's colors to the bar's roles (Noctalia's so
+  far); without one, Catppuccin draws it. To take the colors from another system, have it write
+  them to a tmux file as user options, source that file in `tmux/tmux.conf`, and add a palette for
+  it to the list there. When leaving Noctalia, delete `tmux/themes/noctalia.conf`, which its
+  template leaves in place, and restart the tmux server, which keeps Noctalia's colors until then.
 
 #### Terminal tips
 
