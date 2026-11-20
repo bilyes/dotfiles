@@ -1,4 +1,5 @@
-# Desktop notification when a command fails in tmux's scratch popup (tmux/scripts/scratch.sh).
+# Desktop notification when a command fails in tmux's scratch popup (tmux/scripts/scratch.sh)
+# out of sight: while the popup is hidden, or shows another of the session's windows.
 # Its shells run on the tmux server whose socket is named "scratch", which $TMUX starts with.
 # On macOS, the notification comes from Script Editor, which needs notifications allowed.
 [[ $TMUX == */scratch,* ]] || return 0
@@ -14,6 +15,10 @@ function _scratch_precmd() {
   [[ -n $cmd ]] || return 0
   # 130 and 148: interrupted with Ctrl-C or suspended with Ctrl-Z
   (( code != 0 && code != 130 && code != 148 )) || return 0
+  # Hiding the popup detaches its client, so the failure is on screen when a client is attached
+  # and this pane's window is the one it shows
+  [[ $(tmux display-message -p -t "$TMUX_PANE" \
+    '#{&&:#{session_attached},#{window_active}}') != 1 ]] || return 0
 
   cmd=${cmd//$'\n'/ }
   (( ${#cmd} <= 100 )) || cmd="${cmd[1,99]}…"
