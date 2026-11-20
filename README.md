@@ -103,9 +103,9 @@ In zsh's vi normal mode, `v` opens the current command in `$EDITOR`.
 one picked.
 
 `prefix S` toggles a scratch popup for one-off commands, which keep running once it's hidden. It
-opens on a new window while the last command is still running, and a failed command sends a
-desktop notification. On macOS, that notification comes from Script Editor, so allow its
-notifications in System Settings.
+opens on a new window while the last command is still running, and a command that fails while
+the popup is hidden, or shows another of its windows, sends a desktop notification. On macOS, that
+notification comes from Script Editor, so allow its notifications in System Settings.
 
 `prefix t`, or `<leader>nt` in Neovim, opens a box to type todos in. `:wq` adds each line to the top
 of the todo file (`todo_file` in `nvim/plugin/todo-capture.lua`) as a checkbox, below its heading;

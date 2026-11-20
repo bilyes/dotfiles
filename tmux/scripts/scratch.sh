@@ -10,7 +10,7 @@
 # The session lives on its own tmux server (socket "scratch"), which keeps it out of session
 # cycling and the prefix f launcher. That server loads the same tmux.conf, where the binding that
 # runs this script detaches instead, closing the popup. zsh/conf.d/tmux-scratch.zsh sends a
-# desktop notification when a command there fails.
+# desktop notification when a command there fails out of sight.
 #
 # The popup is a modal floating pane rather than a display-popup, since only a pane can be moved
 # once it's open. Like a display-popup, it keeps every key, the prefix included, for itself.
